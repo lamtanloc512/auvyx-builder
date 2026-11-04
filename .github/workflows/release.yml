@@ -1,0 +1,63 @@
+# Publishing a GitHub release builds the plugin zip and attaches it to the release.
+# The tag is the plugin version (1.2.0 or v1.2.0); it must match the plugin header's Version and the readme's Stable tag.
+# Run it by hand from the Actions tab to build a zip as a workflow artifact without a release.
+name: Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: bun install --frozen-lockfile
+
+      - name: Tag matches the plugin version
+        if: github.event_name == 'release'
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          version="${TAG#v}"
+          header=$(grep -m1 -E '^ \* Version:' products/builder/auvyx-builder.php | awk '{print $NF}')
+          stable=$(grep -m1 -E '^Stable tag:' products/builder/readme.txt | awk '{print $NF}')
+          echo "tag $version, plugin header $header, readme Stable tag $stable"
+          if [ "$version" != "$header" ] || [ "$version" != "$stable" ]; then
+            echo "::error::Release tag $TAG does not match Version ($header) in auvyx-builder.php and Stable tag ($stable) in readme.txt"
+            exit 1
+          fi
+
+      - run: bun run lint
+      - run: bun run typecheck
+      - run: bun run test
+      - run: bun run zip
+
+      - name: Name the zip
+        id: zip
+        run: |
+          version=$(grep -m1 -E '^ \* Version:' products/builder/auvyx-builder.php | awk '{print $NF}')
+          cp dist/auvyx-builder.zip "dist/auvyx-builder-$version.zip"
+          echo "versioned=dist/auvyx-builder-$version.zip" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: auvyx-builder
+          path: dist/auvyx-builder.zip
+
+      - name: Attach to the release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" dist/auvyx-builder.zip "${{ steps.zip.outputs.versioned }}" --clobber --repo "$GITHUB_REPOSITORY"

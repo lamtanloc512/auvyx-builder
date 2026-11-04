@@ -53,6 +53,14 @@ bun run check         # all of the above, plus the zip and a smoke install
 
 `bun run dev` starts WordPress Playground on http://127.0.0.1:9400 with the plugin mounted and rebuilt on change.
 
+## Release
+
+Set the new version in `products/builder/auvyx-builder.php` (`Version:`) and `products/builder/readme.txt`
+(`Stable tag:`), push, then publish a GitHub release tagged with that version (`1.2.0` or `v1.2.0`). The Release
+workflow checks the tag against both, runs lint, typecheck and the tests, builds the zip and attaches
+`auvyx-builder.zip` and `auvyx-builder-<version>.zip` to the release. Running the workflow by hand from the Actions tab
+builds the zip as a workflow artifact without a release.
+
 ## License
 
 Auvyx Builder is free software, licensed under the GNU General Public License, version 2 or (at your option) any later
