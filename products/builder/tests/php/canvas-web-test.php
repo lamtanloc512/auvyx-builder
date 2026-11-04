@@ -163,3 +163,36 @@ auvyx_test(
 		wp_set_current_user( 0 );
 	}
 );
+
+auvyx_test(
+	'canvas web: a core block drawn by a later render brings the theme\'s styles for it (theme.json styles.blocks)',
+	static function () {
+		$theme = static function ( $data ) {
+			return $data->update_with(
+				array(
+					'version' => 3,
+					'styles'  => array(
+						'blocks' => array(
+							'core/search' => array(
+								'css'    => '& .wp-block-search__input{border-radius:31.25rem}',
+								'border' => array( 'radius' => '31.25rem' ),
+							),
+						),
+					),
+				)
+			);
+		};
+		add_filter( 'wp_theme_json_data_theme', $theme );
+		WP_Theme_JSON_Resolver::clean_cached_data();
+		try {
+			$css = \Auvyx\Builder\Modules\Studio\Studio::theme_block_css( array( 'wp-block-search' ) );
+			auvyx_assert_contains( '.wp-block-search', $css );
+			auvyx_assert_contains( '31.25rem', $css );
+			auvyx_assert_not_contains( '31.25rem', \Auvyx\Builder\Modules\Studio\Studio::theme_block_css( array( 'wp-block-paragraph', 'auvyx-builder-blocks' ) ), 'only the blocks rendered' );
+			auvyx_assert_same( '', \Auvyx\Builder\Modules\Studio\Studio::theme_block_css( array() ) );
+		} finally {
+			remove_filter( 'wp_theme_json_data_theme', $theme );
+			WP_Theme_JSON_Resolver::clean_cached_data();
+		}
+	}
+);
