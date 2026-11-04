@@ -57,12 +57,46 @@
   }
   var loaded = {};
   var reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Studio Live (docs/studio-live-sandbox.md): an opaque-origin document loads libraries in CORS mode, through the site's
+  // asset route, and tells the Studio what its code reports, by message since it cannot reach the Studio's window.
+  var liveView = window.auvyxCodeLive && typeof window.auvyxCodeLive.assets === "string" ? window.auvyxCodeLive : null;
+  function tellStudio(message) {
+    if (!liveView || window.parent === window) return;
+    message.auvyxLive = 1;
+    try { window.parent.postMessage(message, liveView.studio); } catch { /* the Studio is gone */ }
+  }
+  // The middle button grabs the Studio's board, as it does on the edit canvas: the Studio's cover takes the drag from here.
+  if (liveView) {
+    document.addEventListener("mousedown", function (e) { if (e.button === 1) e.preventDefault(); }, true);
+    var grabbing = false;
+    var cursor = "";
+    document.addEventListener("pointerdown", function (e) {
+      if (e.button !== 1) return;
+      e.preventDefault();
+      grabbing = true;
+      cursor = document.documentElement.style.cursor;
+      document.documentElement.style.cursor = "grabbing";
+      tellStudio({ type: "grab", x: e.screenX, y: e.screenY });
+    }, true);
+    document.addEventListener("pointermove", function (e) { if (grabbing) tellStudio({ type: "grab", x: e.screenX, y: e.screenY }); }, true);
+    document.addEventListener("pointerup", function () {
+      if (!grabbing) return;
+      grabbing = false;
+      document.documentElement.style.cursor = cursor;
+      tellStudio({ type: "grab-end" });
+    }, true);
+  }
+  if (liveView && !window.auvyxCodePrint) {
+    window.auvyxCodePrint = function (id, level, args) {
+      tellStudio({ type: "print", id: String(id), level: String(level), args: args.map(function (a) { try { return typeof a === "string" ? a : JSON.stringify(a); } catch { return String(a); } }) });
+    };
+  }
 
   function library(name) {
     var spec = LIBS[name];
     if (!spec) return Promise.reject(new Error("Unknown library " + name));
     if (!loaded[name]) {
-      var url = /^https?:/.test(spec[0]) ? spec[0] : new URL(spec[0], base).href;
+      var url = /^https?:/.test(spec[0]) ? spec[0] : liveView ? liveView.assets + spec[0] : new URL(spec[0], base).href;
       loaded[name] = import(url).then(function (mod) {
         return spec[1] === "*" ? mod : (mod[spec[1]] || mod.default || mod);
       });
@@ -128,6 +162,7 @@
     if (el.getAttribute("data-auvyx-code-state") !== "csp") state(el, "error");
     console.error("[Auvyx code]", el.getAttribute("data-auvyx-id") || el.id || el, error);
     el.dispatchEvent(new CustomEvent("auvyx-code-error", { bubbles: true, detail: { message: String(error && error.message || error) } }));
+    tellStudio({ type: "error", id: el.getAttribute("data-auvyx-id") || "", message: String(error && error.message || error) });
   }
 
   // ---- instances ------------------------------------------------------------------------------------------------------------

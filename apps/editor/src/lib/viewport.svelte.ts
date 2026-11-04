@@ -11,7 +11,8 @@ const HEIGHTS: Record<string, number> = { base: 900, tablet: 1024, mobile: 844 }
 export const frameWidth = (bp: string) => screens.width(bp) ?? WIDTHS[bp] ?? 1440;
 export const viewportHeight = (bp: string) => HEIGHTS[bp] ?? 900;
 
-export const GAP = 24;
+/** Room between the page and the panel's edges at the start position: none, the page sits flush under the Edit | Live bar. */
+export const GAP = 0;
 const KEEP = 96;
 export const MIN_ZOOM = 0.1;
 export const MAX_ZOOM = 4;

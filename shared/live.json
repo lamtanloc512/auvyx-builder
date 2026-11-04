@@ -1,0 +1,37 @@
+{
+  "$comment": "Studio Live (docs/studio-live-sandbox.md): the open document rendered for a visitor and shown in an opaque-origin frame, where its code runs without the canvas's Run. One source for WordPress (PHP, generated) and the Studio (Scala, generated). \"sandbox\" is both the iframe's attribute and the CSP directive; \"csp\" fills {site-origin} and {data}; \"assets\" are the files the Live document may fetch in CORS mode (fonts, code libraries), served by auvyx/v1/live-asset with Access-Control-Allow-Origin: *.",
+  "queryVar": "auvyx_live",
+  "sandbox": [
+    "allow-scripts"
+  ],
+  "csp": {
+    "connect-src": [
+      "{data}"
+    ],
+    "form-action": [
+      "'none'"
+    ],
+    "base-uri": [
+      "'none'"
+    ],
+    "frame-ancestors": [
+      "{site-origin}"
+    ]
+  },
+  "headers": {
+    "Cache-Control": "no-store",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "no-referrer"
+  },
+  "assets": {
+    "woff2": "font/woff2",
+    "woff": "font/woff",
+    "ttf": "font/ttf",
+    "otf": "font/otf",
+    "js": "text/javascript"
+  },
+  "limits": {
+    "seconds": 300,
+    "markupBytes": 524288
+  }
+}

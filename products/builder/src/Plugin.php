@@ -88,6 +88,7 @@ final class Plugin {
 			new \Auvyx\Builder\Modules\VideoAutoplay\VideoAutoplay(),
 			new \Auvyx\Builder\Modules\LoopMore\LoopMore(),
 			new \Auvyx\Builder\Modules\CanvasWeb\CanvasWeb(),
+			new \Auvyx\Builder\Modules\Live\Live(),
 			new \Auvyx\Builder\Modules\MediaImport\MediaImport(),
 			new \Auvyx\Builder\Modules\BlankPage\BlankPage(),
 			new \Auvyx\Builder\Modules\Mcp\Mcp(),
