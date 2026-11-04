@@ -14,6 +14,7 @@ const sources: Record<string, string> = {
   "design-system": "shared/defaults/design-system.json",
   icons: "shared/icons.json",
   play: "shared/play.json",
+  live: "shared/live.json",
   "code-libraries": "shared/code-libraries.json",
   editions: "shared/editions.json",
 };

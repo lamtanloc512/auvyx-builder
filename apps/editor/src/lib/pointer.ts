@@ -28,10 +28,17 @@ export function toPage(x: number, y: number): [number, number] | null {
 
 export function drag(cursor: string, move: (p: P) => void, end: (p: P) => void, onCancel: () => void = () => {}): () => void {
   const docs = [document, canvasFrame()?.contentDocument].filter(Boolean) as Document[];
+  // The cursor is forced only once the pointer has really moved: the rule restyles every element of the editor (some
+  // thousands), and most presses are clicks that select and never drag.
   const style = document.createElement("style");
   style.textContent = `*{cursor:${cursor}!important}`;
-  document.head.appendChild(style);
-  const onMove = (e: PointerEvent) => move(toEditor(e));
+  let from: P | null = null;
+  const onMove = (e: PointerEvent) => {
+    const p = toEditor(e);
+    if (!from) from = p;
+    else if (!style.isConnected && !done && Math.abs(p.x - from.x) + Math.abs(p.y - from.y) > 3) document.head.appendChild(style);
+    move(p);
+  };
   const onUp = (e: PointerEvent) => { stop(); end(toEditor(e)); };
   const onLost = () => { stop(); onCancel(); };
   // A press in the canvas frame moves the focus into it, which blurs this window: that is not a lost pointer.

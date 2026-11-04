@@ -9,6 +9,12 @@
  * @package Auvyx\Builder
  */
 
+// Studio Live's fonts and libraries are fetched with no cookie (from an opaque origin), and Playground's auto-login answers
+// a request without its cookie with a redirect, which a CORS fetch cannot follow. This file loads before auto-login runs.
+if ( false !== strpos( (string) ( $_SERVER['REQUEST_URI'] ?? '' ), 'auvyx/v1/live-asset/' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- compared, never output.
+	$_COOKIE['playground_auto_login_already_happened'] = '1';
+}
+
 add_action(
 	'enqueue_block_editor_assets',
 	static function () {

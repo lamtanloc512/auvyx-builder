@@ -24,7 +24,7 @@ define( 'AUVYX_BUILDER_URL', plugin_dir_url( __FILE__ ) );
 
 // a checkout built before a shared file was added lacks it: say so instead of a fatal error on the screen that reads it
 $auvyx_builder_built = file_exists( AUVYX_BUILDER_DIR . 'build/editor.asset.php' );
-foreach ( array( 'design-system', 'css-properties', 'icons', 'play', 'code-libraries', 'editions', 'anatomy-markers' ) as $auvyx_builder_data ) {
+foreach ( array( 'design-system', 'css-properties', 'icons', 'play', 'live', 'code-libraries', 'editions', 'anatomy-markers' ) as $auvyx_builder_data ) {
 	$auvyx_builder_built = $auvyx_builder_built && file_exists( AUVYX_BUILDER_DIR . 'generated/' . $auvyx_builder_data . '.php' );
 }
 if ( ! $auvyx_builder_built ) {

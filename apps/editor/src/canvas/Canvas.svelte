@@ -5,7 +5,7 @@
   import { config } from "../lib/config";
   import { canvasWeb } from "../lib/canvasWeb.svelte";
   import { store } from "../lib/store.svelte";
-  import { viewport, GAP } from "../lib/viewport.svelte";
+  import { viewport } from "../lib/viewport.svelte";
   import { arrow } from "../lib/cursors";
   import CanvasBar from "./CanvasBar.svelte";
   import Overlay from "./Overlay.svelte";
@@ -16,6 +16,9 @@
   import { mountFrame } from "./runCode.svelte";
   import * as VectorEdit from "../lib/vectorEdit.svelte";
   import VectorEditLayer from "./vector/VectorEdit.svelte";
+  import LiveMode from "./LiveMode.svelte";
+  import LiveFrame from "./LiveFrame.svelte";
+  import { liveAvailable, liveMode } from "../lib/live.svelte";
 
   // the click that ends a marquee neither selects nor deselects (Marquee.takeClick, after Dnd.takeClick)
   const takeDrop = canvasWeb.takeClick;
@@ -28,7 +31,13 @@
     mountFrame(d);
     decorateParts(d);
     if (d.defaultView) listenAlt(d.defaultView);
+    // the middle button grabs the board, as on the board itself; mousedown is the one that starts autoscroll, and the
+    // frame keeps the drag's moves until the button is let go
+    d.addEventListener("mousedown", (e) => { if (middle(e)) e.preventDefault(); }, true);
+    d.addEventListener("pointermove", (e) => { if (grab?.from === "frame") grabAt("frame", e.screenX, e.screenY); }, true);
+    d.addEventListener("pointerup", () => grabEnd("frame"), true);
     d.addEventListener("pointerdown", (e) => {
+      if (middle(e)) { e.preventDefault(); e.stopPropagation(); grab = null; grabAt("frame", e.screenX, e.screenY); return; }
       if (canvasWeb.interact || store.editing) return;
       const t = e.target as Element | null;
       const el = t?.nodeType === 1 ? t.closest("[data-auvyx-id]") : null;
@@ -53,6 +62,21 @@
     el.addEventListener("pointermove", move);
     el.addEventListener("pointerup", up);
   }
+
+  /** The middle button held down: the board follows the pointer until it is let go. Moves come only from where the press
+   * began: a frame keeps a press's moves until the button is let go (the Live frame reports them by message), and the
+   * cover takes them only for a press on the board; two sources would interleave and the page would shake. Screen
+   * coordinates, since the frames move under the pointer while panning. */
+  type GrabFrom = "board" | "frame" | "live";
+  let grab = $state<{ from: GrabFrom; x: number; y: number } | null>(null);
+  function grabAt(from: GrabFrom, x: number, y: number) {
+    if (!grab) { grab = { from, x, y }; return; }
+    if (grab.from !== from) return;
+    viewport.panBy(grab.x - x, grab.y - y);
+    grab = { from, x, y };
+  }
+  function grabEnd(from: GrabFrom) { if (grab?.from === from) grab = null; }
+  const middle = (e: MouseEvent) => e.button === 1;
 
   let scroller: HTMLDivElement;
   let card: HTMLDivElement;
@@ -84,6 +108,7 @@
 </script>
 
 <div class="relative flex min-h-0 min-w-0 flex-1 flex-col">
+  {#if liveAvailable}<LiveMode />{/if}
   <div class="relative min-h-0 min-w-0 flex-1">
     {#if empty}
       <div class="pointer-events-none absolute inset-0 z-[25] flex items-center justify-center" data-empty-page="1">
@@ -95,7 +120,8 @@
     {/if}
     <div bind:this={scroller} class="absolute inset-0 overflow-auto bg-shell select-none" style:cursor={arrow} style:scrollbar-width="none"
       role="presentation" onclick={(e) => { if (onBoard(e) && Marquee.takeClick() && !store.editing) { store.selected = null; store.extra = new Set(); } }}
-      onpointerdown={(e) => { if (onBoard(e)) Marquee.start(e); }}>
+      onmousedown={(e) => { if (middle(e)) e.preventDefault(); }}
+      onpointerdown={(e) => { if (middle(e)) { e.preventDefault(); grab = null; grabAt("board", e.screenX, e.screenY); } else if (onBoard(e)) Marquee.start(e); }}>
       <div class="box-content w-max" data-auvyx-board="1" style:padding="{sy}px {sx}px">
         <div bind:this={card} class="relative bg-white shadow-sm ring-1 ring-black/5"
           style:width="{viewport.width * viewport.zoom}px" style:height="{viewport.pageHeight * viewport.zoom}px"
@@ -104,8 +130,9 @@
             style:transform={viewport.zoom === 1 ? "none" : `scale(${viewport.zoom})`}>
             <iframe class="block size-full border-0" data-auvyx-canvas="1" title="Page" src={config.webCanvasUrl}
               onload={(e) => { const d = (e.currentTarget as HTMLIFrameElement).contentDocument; if (d) frameLoaded(d); }}></iframe>
+            <LiveFrame onGrab={(x, y, end) => (end ? grabEnd("live") : grabAt("live", x, y))} />
           </div>
-          <Overlay />
+          {#if !liveMode.url}<Overlay />{/if}
           {#if canvasWeb.frameError}
             <div class="absolute inset-x-6 top-6 z-30 rounded-lg border border-destructive/30 bg-background p-4 text-xs text-destructive shadow-sm">{canvasWeb.frameError}</div>
           {/if}
@@ -115,7 +142,9 @@
     <!-- a vector's points while they are edited (U/Overlay.scala VectorEdit()) -->
     <VectorEditLayer />
     <!-- Space + drag pans (covers the frame so it gets no pointer events meanwhile) -->
-    <div class="absolute inset-0 z-30 cursor-grab active:cursor-grabbing" style:display={pan.on ? "block" : "none"} role="presentation" onpointerdown={panDown}></div>
+    <div class="absolute inset-0 z-30 cursor-grab active:cursor-grabbing" style:display={pan.on || grab?.from === "board" ? "block" : "none"} style:cursor={grab ? "grabbing" : undefined}
+      role="presentation" onpointerdown={panDown} onpointermove={(e) => { if (grab?.from === "board") grabAt("board", e.screenX, e.screenY); }}
+      onpointerup={() => grabEnd("board")}></div>
     <!-- Preview: the page only; a cover takes every pointer event -->
     <div class="absolute inset-0 z-50" style:display={store.preview ? "block" : "none"}></div>
   </div>

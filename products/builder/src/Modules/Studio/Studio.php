@@ -884,6 +884,10 @@ final class Studio implements Module {
 			ob_start();
 			$styles->do_items( $new );
 			$css = (string) ob_get_clean();
+			$own = self::theme_block_css( $new );
+			if ( '' !== $own ) {
+				$css .= '<style class="auvyx-theme-blocks">' . $own . '</style>';
+			}
 		}
 		// Block style variations (an outline button…): WordPress registers their CSS but enqueues it only for a page.
 		$variations = array_slice( $inline(), $was );
@@ -899,6 +903,41 @@ final class Studio implements Module {
 			}
 		}
 		return array( $result, $css );
+	}
+
+	/**
+	 * The theme's styles for the core blocks whose sheets `$handles` enqueue (theme.json `styles.blocks`: Twenty
+	 * Twenty-Five's rounded search field and button…). A block theme loads block assets on demand, so a page gets these
+	 * only for the core blocks it renders (wp_add_global_styles_for_blocks()); a block first drawn by a later render (the
+	 * canvas, a REST answer) needs them with its sheet, or it looks unstyled until the page is reloaded.
+	 *
+	 * @param array<int, string> $handles Style handles the render enqueued.
+	 */
+	public static function theme_block_css( array $handles ): string {
+		if ( ! class_exists( 'WP_Theme_JSON_Resolver' ) || ! function_exists( 'wp_get_block_name_from_theme_json_path' ) ) {
+			return '';
+		}
+		$blocks = array();
+		foreach ( $handles as $handle ) {
+			if ( is_string( $handle ) && 0 === strpos( $handle, 'wp-block-' ) ) {
+				$blocks[ 'core/' . substr( $handle, 9 ) ] = true;
+			}
+		}
+		if ( ! $blocks ) {
+			return '';
+		}
+		$tree = \WP_Theme_JSON_Resolver::get_merged_data();
+		if ( method_exists( 'WP_Theme_JSON_Resolver', 'resolve_theme_file_uris' ) ) {
+			$tree = \WP_Theme_JSON_Resolver::resolve_theme_file_uris( $tree );
+		}
+		$css = '';
+		foreach ( $tree->get_styles_block_nodes() as $metadata ) {
+			$name = $metadata['name'] ?? ( empty( $metadata['path'] ) ? '' : wp_get_block_name_from_theme_json_path( $metadata['path'] ) );
+			if ( is_string( $name ) && isset( $blocks[ $name ] ) ) {
+				$css .= $tree->get_styles_for_block( $metadata );
+			}
+		}
+		return $css;
 	}
 
 	/** Whether the Studio may autosave this document through WordPress's autosaves (a post type with revisions in REST). */

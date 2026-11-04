@@ -1,4 +1,3 @@
-.github/workflows/release.yml
 .gitignore
 .oxlintrc.json
 LICENSE
@@ -19,6 +18,8 @@ apps/editor/src/app.css
 apps/editor/src/canvas/Canvas.svelte
 apps/editor/src/canvas/CanvasBar.svelte
 apps/editor/src/canvas/ContextBar.svelte
+apps/editor/src/canvas/LiveFrame.svelte
+apps/editor/src/canvas/LiveMode.svelte
 apps/editor/src/canvas/Overlay.svelte
 apps/editor/src/canvas/RichToolbar.svelte
 apps/editor/src/canvas/TransformHandles.svelte
@@ -70,6 +71,7 @@ apps/editor/src/lib/import/htmlImport.ts
 apps/editor/src/lib/insertPlus.svelte.ts
 apps/editor/src/lib/labels.ts
 apps/editor/src/lib/library.svelte.ts
+apps/editor/src/lib/live.svelte.ts
 apps/editor/src/lib/marquee.svelte.ts
 apps/editor/src/lib/measure.svelte.ts
 apps/editor/src/lib/parts.ts
@@ -652,6 +654,7 @@ products/builder/src/Modules/Editor/Editor.php
 products/builder/src/Modules/Forms/Forms.php
 products/builder/src/Modules/Gallery/Gallery.php
 products/builder/src/Modules/Header/Header.php
+products/builder/src/Modules/Live/Live.php
 products/builder/src/Modules/LoopMore/LoopMore.php
 products/builder/src/Modules/Mcp/Mcp.php
 products/builder/src/Modules/Mcp/Pending.php
@@ -721,6 +724,7 @@ products/builder/tests/php/demo-catalog-test.php
 products/builder/tests/php/editions-test.php
 products/builder/tests/php/forms-test.php
 products/builder/tests/php/isolated-cascade-css.php
+products/builder/tests/php/live-test.php
 products/builder/tests/php/loop-more-test.php
 products/builder/tests/php/mcp-access-test.php
 products/builder/tests/php/mcp-test.php
@@ -796,6 +800,7 @@ shared/fixtures/storefront/pages/track.html
 shared/fixtures/storefront/track.json
 shared/fixtures/style-engine/cases.json
 shared/icons.json
+shared/live.json
 shared/package.json
 shared/play.json
 shared/skills/arcade-3d/SKILL.md
