@@ -1,0 +1,141 @@
+{
+  "$comment": "Parity fixtures for content types: run by the Studio (ContentModel.scala, JVM and JS) AND products/builder/tests/php (ContentTypes.php). validate: which definitions are kept (normalized) or refused (errors in order); values: what a sent value becomes (kept, empty or refused); display: how a kept value reads.",
+  "validate": [
+    {
+      "name": "a property type with typed fields and a taxonomy; defaults filled in",
+      "input": {
+        "types": [
+          {
+            "key": "property",
+            "label": "Properties",
+            "singular": "Property",
+            "fields": [
+              { "key": "price", "label": "Price", "type": "money", "min": 0 },
+              { "key": "area", "label": "Area", "type": "number", "required": true },
+              { "key": "kind", "label": "Kind", "type": "select", "options": ["House", "Flat", " Flat ", ""] },
+              { "key": "photos", "type": "gallery" },
+              { "key": "agent", "label": "Agent", "type": "relation", "to": "agent" },
+              { "key": "rooms", "label": "Rooms", "type": "repeater", "fields": [ { "key": "name", "label": "Name" }, { "key": "size", "label": "Size", "type": "number" } ] }
+            ]
+          },
+          { "key": "agent", "label": "Agents", "supports": ["title", "thumbnail"] }
+        ],
+        "taxonomies": [ { "key": "district", "label": "Districts", "types": ["property"] } ]
+      },
+      "expected": {
+        "schema": "auvyx-content/1",
+        "types": [
+          {
+            "key": "property", "label": "Properties", "singular": "Property", "slug": "property", "public": true, "archive": true,
+            "supports": ["title", "editor", "thumbnail", "excerpt"],
+            "fields": [
+              { "key": "price", "label": "Price", "type": "money", "min": 0 },
+              { "key": "area", "label": "Area", "type": "number", "required": true },
+              { "key": "kind", "label": "Kind", "type": "select", "options": ["House", "Flat"] },
+              { "key": "photos", "label": "photos", "type": "gallery" },
+              { "key": "agent", "label": "Agent", "type": "relation", "to": "agent" },
+              { "key": "rooms", "label": "Rooms", "type": "repeater", "fields": [ { "key": "name", "label": "Name", "type": "text" }, { "key": "size", "label": "Size", "type": "number" } ] }
+            ]
+          },
+          { "key": "agent", "label": "Agents", "singular": "Agents", "slug": "agent", "public": true, "archive": true, "supports": ["title", "thumbnail"], "fields": [] }
+        ],
+        "taxonomies": [ { "key": "district", "label": "Districts", "singular": "Districts", "slug": "district", "hierarchical": true, "types": ["property"] } ]
+      }
+    },
+    {
+      "name": "an underscore in a key becomes a hyphen in the slug",
+      "input": { "types": [ { "key": "real_estate", "label": "Real estate" } ] },
+      "expected": { "schema": "auvyx-content/1", "types": [ { "key": "real_estate", "label": "Real estate", "singular": "Real estate", "slug": "real-estate", "public": true, "archive": true, "supports": ["title", "editor", "thumbnail", "excerpt"], "fields": [] } ], "taxonomies": [] }
+    },
+    {
+      "name": "reserved names and bad keys are refused, all errors at once",
+      "input": {
+        "types": [
+          { "key": "product" },
+          { "key": "Course", "fields": [ { "key": "title" }, { "key": "_secret" }, { "key": "x", "type": "wysiwyg" } ] }
+        ],
+        "taxonomies": [ { "key": "category" } ]
+      },
+      "errors": [
+        "types[0].key: reserved",
+        "types[1].key: lower-case letters, digits and _ (start with a letter, at most 20)",
+        "types[1].slug: lower-case letters, digits and - (at most 40)",
+        "types[1].fields[0].key: reserved",
+        "types[1].fields[1].key: lower-case letters, digits and _ (start with a letter, at most 40)",
+        "types[1].fields[2].type: unknown type \"wysiwyg\"",
+        "taxonomies[0].key: reserved"
+      ]
+    },
+    {
+      "name": "a choice without options, rows inside rows, a link to nothing",
+      "input": {
+        "types": [
+          {
+            "key": "course",
+            "fields": [
+              { "key": "level", "type": "select" },
+              { "key": "parts", "type": "repeater", "fields": [ { "key": "inner", "type": "repeater", "fields": [ { "key": "a" } ] } ] },
+              { "key": "teacher", "type": "relation", "to": "teacher" },
+              { "key": "price", "type": "money", "min": 10, "max": 5 }
+            ]
+          }
+        ]
+      },
+      "errors": [
+        "types[0].fields[0].options: a choice needs options",
+        "types[0].fields[1].fields[0].type: rows cannot hold rows",
+        "types[0].fields[3].min: greater than max",
+        "types[0].fields.teacher.to: no content type \"teacher\""
+      ]
+    },
+    {
+      "name": "two types with the same key, a taxonomy on a type that does not exist",
+      "input": { "types": [ { "key": "room" }, { "key": "room", "slug": "rooms" } ], "taxonomies": [ { "key": "floor", "types": ["suite"] } ] },
+      "errors": [ "types: two types with the same key", "taxonomies[0].types: no content type \"suite\"" ]
+    },
+    {
+      "name": "not an object",
+      "input": [1, 2],
+      "errors": [ "definition: not an object" ]
+    }
+  ],
+  "values": [
+    { "name": "text is trimmed, control characters dropped", "field": { "key": "a", "label": "A" }, "value": "  Hi\u0007 there  ", "kept": "Hi there" },
+    { "name": "long text keeps its lines", "field": { "key": "a", "label": "A", "type": "textarea" }, "value": "One\r\nTwo\tthree", "kept": "One\nTwo\tthree" },
+    { "name": "empty text is empty", "field": { "key": "a", "label": "A" }, "value": "   ", "empty": true },
+    { "name": "empty and required is refused", "field": { "key": "a", "label": "Name", "required": true }, "value": "", "error": "Name is required" },
+    { "name": "a number from text", "field": { "key": "n", "label": "Area", "type": "number" }, "value": "120.5", "kept": 120.5 },
+    { "name": "a number below min", "field": { "key": "n", "label": "Area", "type": "number", "min": 10 }, "value": 5, "error": "Area: at least 10" },
+    { "name": "a price is rounded to cents", "field": { "key": "p", "label": "Price", "type": "money" }, "value": 19.999, "kept": 20 },
+    { "name": "not a number", "field": { "key": "n", "label": "Area", "type": "number" }, "value": "12 m2", "error": "Area: not a valid number" },
+    { "name": "a real day", "field": { "key": "d", "label": "Day", "type": "date" }, "value": "2024-02-29", "kept": "2024-02-29" },
+    { "name": "a day that does not exist", "field": { "key": "d", "label": "Day", "type": "date" }, "value": "2023-02-29", "error": "Day: not a valid date" },
+    { "name": "a time", "field": { "key": "t", "label": "Opens", "type": "time" }, "value": "09:30", "kept": "09:30" },
+    { "name": "a moment", "field": { "key": "t", "label": "Starts", "type": "datetime" }, "value": "2026-10-12T18:05", "kept": "2026-10-12T18:05" },
+    { "name": "an email is lower-cased", "field": { "key": "e", "label": "Email", "type": "email" }, "value": " Ann@Example.COM ", "kept": "ann@example.com" },
+    { "name": "a link must be http(s) or a site path", "field": { "key": "u", "label": "Site", "type": "url" }, "value": "javascript:alert(1)", "error": "Site: not a valid link" },
+    { "name": "a site path is a link", "field": { "key": "u", "label": "Site", "type": "url" }, "value": "/contact", "kept": "/contact" },
+    { "name": "a colour", "field": { "key": "c", "label": "Colour", "type": "color" }, "value": "#FF8800", "kept": "#ff8800" },
+    { "name": "yes from a form", "field": { "key": "b", "label": "Pets", "type": "checkbox" }, "value": "on", "kept": true },
+    { "name": "no", "field": { "key": "b", "label": "Pets", "type": "checkbox" }, "value": false, "kept": false },
+    { "name": "one of the options", "field": { "key": "s", "label": "Kind", "type": "select", "options": ["House", "Flat"] }, "value": "Flat", "kept": "Flat" },
+    { "name": "not one of the options", "field": { "key": "s", "label": "Kind", "type": "select", "options": ["House", "Flat"] }, "value": "Castle", "error": "Kind: not a valid choice" },
+    { "name": "several options when multiple", "field": { "key": "s", "label": "Kind", "type": "select", "options": ["A", "B", "C"], "multiple": true }, "value": ["C", "A", "A"], "kept": ["C", "A"] },
+    { "name": "an image id from text", "field": { "key": "i", "label": "Photo", "type": "image" }, "value": "42", "kept": 42 },
+    { "name": "an image that is not an id", "field": { "key": "i", "label": "Photo", "type": "image" }, "value": "https://x.test/a.jpg", "error": "Photo: not a valid image" },
+    { "name": "a gallery without repeats", "field": { "key": "g", "label": "Photos", "type": "gallery" }, "value": [3, "4", 3], "kept": [3, 4] },
+    { "name": "one linked entry", "field": { "key": "r", "label": "Agent", "type": "relation", "to": "agent" }, "value": 7, "kept": 7 },
+    { "name": "rows keep their own fields only", "field": { "key": "rows", "label": "Rooms", "type": "repeater", "fields": [ { "key": "name", "label": "Name", "required": true }, { "key": "size", "label": "Size", "type": "number" } ] }, "value": [ { "name": " Hall ", "size": "12", "hack": "<b>" }, { "name": "Bed" } ], "kept": [ { "name": "Hall", "size": 12 }, { "name": "Bed" } ] },
+    { "name": "a row that misses a required field", "field": { "key": "rows", "label": "Rooms", "type": "repeater", "fields": [ { "key": "name", "label": "Name", "required": true } ] }, "value": [ { "name": "Hall" }, { "name": "" } ], "error": "Rooms, row 2: Name is required" }
+  ],
+  "display": [
+    { "name": "a price", "field": { "key": "p", "label": "Price", "type": "money" }, "value": 1234567.5, "text": "1,234,567.50" },
+    { "name": "a whole number", "field": { "key": "n", "label": "Area", "type": "number" }, "value": 120, "text": "120" },
+    { "name": "a fraction", "field": { "key": "n", "label": "Area", "type": "number" }, "value": 0.25, "text": "0.25" },
+    { "name": "a day", "field": { "key": "d", "label": "Day", "type": "date" }, "value": "2026-10-12", "text": "12/10/2026" },
+    { "name": "a moment", "field": { "key": "d", "label": "Starts", "type": "datetime" }, "value": "2026-10-12T18:05", "text": "12/10/2026 18:05" },
+    { "name": "yes", "field": { "key": "b", "label": "Pets", "type": "checkbox" }, "value": true, "text": "Yes" },
+    { "name": "several choices", "field": { "key": "s", "label": "Kind", "type": "select", "options": ["A", "B"], "multiple": true }, "value": ["A", "B"], "text": "A, B" },
+    { "name": "rows", "field": { "key": "r", "label": "Rooms", "type": "repeater", "fields": [ { "key": "a", "label": "A" } ] }, "value": [ { "a": "x" }, { "a": "y" } ], "text": "2 rows" }
+  ]
+}

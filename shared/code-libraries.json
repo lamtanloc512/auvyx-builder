@@ -1,0 +1,12 @@
+{
+  "$comment": "The libraries a code element or a game may name. file: shipped beside code.js (products/builder/assets/lib). pro: not shipped (the vendor's licence); Auvyx Builder Pro gives its address (the vendor's CDN) through auvyx_builder_code_library_urls, and without Pro a page does not load it. export: what of the module the code gets (\"*\" = the module). sandbox: whether a game in Auvyx Play may use it (delivered as source text by the page; a CDN bundle that imports more files cannot be).",
+  "libraries": [
+    { "name": "motion", "file": "lib/motion.js", "export": "*", "sandbox": true, "about": "Motion (motion.dev): animate, scroll, inView, stagger, spring, timeline" },
+    { "name": "lenis", "file": "lib/lenis.js", "export": "default", "sandbox": false, "about": "Lenis: smooth scrolling (new Lenis({ autoRaf: true }))" },
+    { "name": "three", "file": "lib/three.js", "export": "*", "sandbox": true, "about": "Three.js: 3D scenes, WebGL, shaders" },
+    { "name": "lottie", "file": "lib/lottie.js", "export": "default", "sandbox": true, "about": "Lottie: After Effects animations (lottie.loadAnimation({ container, path }))" },
+    { "name": "splitting", "file": "lib/splitting.js", "export": "default", "sandbox": false, "about": "Splitting: split text into words and letters for reveals" },
+    { "name": "gsap", "pro": true, "export": "gsap", "sandbox": false, "about": "GSAP (Auvyx Builder Pro; loaded from GSAP's own CDN, GSAP's licence): gsap.to, timelines" },
+    { "name": "gsap-scrolltrigger", "pro": true, "export": "ScrollTrigger", "sandbox": false, "about": "GSAP ScrollTrigger (Auvyx Builder Pro, with gsap): scroll scenes; register with gsap.registerPlugin" }
+  ]
+}

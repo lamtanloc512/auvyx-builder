@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/carousel",
+  "title": "Auvyx Carousel",
+  "category": "auvyx-builder",
+  "description": "A banner strip. Slides are content of the component, scrolled with native scroll-snap. No JavaScript.",
+  "keywords": ["slider", "carousel", "banner", "slides"],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "query": {
+      "type": "object",
+      "default": {
+        "layout": "banner",
+        "size": "full",
+        "height": "480",
+        "arrows": "on",
+        "gap": "0",
+        "slides": ""
+      }
+    },
+    "auvyx": { "type": "object" }
+  },
+  "supports": {
+    "anchor": true,
+    "align": ["wide", "full"],
+    "html": false
+  },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks",
+  "render": "file:./render.php"
+}

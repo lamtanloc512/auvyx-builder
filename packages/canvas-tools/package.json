@@ -1,0 +1,11 @@
+{
+  "name": "@auvyx/canvas-tools",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Figma-style direct manipulation on the editor canvas: drag handles for padding, margin, gap, size and radius. Reused by Visual Mode later.",
+  "exports": {
+    ".": "./src/index.tsx"
+  },
+  "dependencies": {}
+}

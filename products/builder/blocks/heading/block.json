@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/heading",
+  "title": "Auvyx Heading",
+  "category": "auvyx-builder",
+  "description": "Heading (h1–h6) with responsive styles.",
+  "keywords": ["title", "headline"],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "content": {
+      "type": "rich-text",
+      "source": "rich-text",
+      "selector": "h1,h2,h3,h4,h5,h6",
+      "role": "content"
+    },
+    "level": { "type": "number", "default": 2 },
+    "auvyx": { "type": "object" }
+  },
+  "usesContext": ["postId", "postType", "auvyx/item"],
+  "supports": {
+    "anchor": true,
+    "html": false
+  },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks"
+}

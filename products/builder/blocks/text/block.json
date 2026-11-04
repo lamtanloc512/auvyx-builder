@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/text",
+  "title": "Auvyx Text",
+  "category": "auvyx-builder",
+  "description": "Paragraph with responsive styles.",
+  "keywords": ["paragraph", "copy"],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "content": {
+      "type": "rich-text",
+      "source": "rich-text",
+      "selector": "p",
+      "role": "content"
+    },
+    "auvyx": { "type": "object" }
+  },
+  "usesContext": ["postId", "postType", "auvyx/item"],
+  "supports": {
+    "anchor": true,
+    "html": false
+  },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks"
+}

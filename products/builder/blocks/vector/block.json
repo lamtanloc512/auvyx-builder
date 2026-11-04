@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/vector",
+  "title": "Auvyx Vector",
+  "category": "auvyx-builder",
+  "description": "A vector shape (SVG path) drawn with the pen in Auvyx Studio. Color it with fill and stroke.",
+  "keywords": ["svg", "shape", "path", "pen"],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "path": { "type": "string", "default": "" },
+    "viewBox": { "type": "string", "default": "0 0 100 100" },
+    "auvyx": { "type": "object" }
+  },
+  "supports": { "anchor": true, "html": false },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks",
+  "render": "file:./render.php"
+}

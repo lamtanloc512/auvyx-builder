@@ -1,0 +1,1576 @@
+/*
+ * Base styles for Auvyx blocks, loaded only on pages that render them.
+ * Per-block styles (.auvyx-<hash>) are printed after this file and win on order.
+ */
+/* Sizes set in Auvyx Studio are the visible box (padding and border included), like Figma. */
+.wp-block-auvyx-section,
+.wp-block-auvyx-heading,
+.wp-block-auvyx-text,
+.wp-block-auvyx-button,
+.wp-block-auvyx-image,
+.wp-block-auvyx-icon,
+.wp-block-auvyx-video,
+.wp-block-auvyx-accordion,
+.wp-block-auvyx-vector {
+  box-sizing: border-box;
+}
+
+/* A heading bound to a link (a product's name in a card) reads as the heading: its colour, no underline until hovered. */
+:where(.auvyx-heading-link) {
+  color: inherit;
+  text-decoration: none;
+}
+
+:where(.auvyx-heading-link):hover,
+:where(.auvyx-heading-link):focus-visible {
+  text-decoration: underline;
+}
+
+/* Vectors stretch to their box; the stroke keeps its width (vector-effect on the path). */
+.wp-block-auvyx-vector {
+  display: block;
+  fill: color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.wp-block-auvyx-vector svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Layout of an Auvyx button; its look (colors, padding, corners, type) defaults below at zero specificity and is replaced
+   by the theme's button styles when it has some (Blocks::theme_button_css), then by the button's own Studio styles. */
+.wp-block-auvyx-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  text-decoration: none;
+  transition-property: background-color, background-image, border-color, color, box-shadow, filter, transform;
+  transition-duration: var(--auvyx-ix-dur);
+  transition-timing-function: var(--auvyx-ix-ease);
+}
+
+:where(.wp-block-auvyx-button) {
+  padding: 0.8em 1.6em;
+  border-radius: var(--wp--custom--radius--md, 0.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Kadence and other classic themes zero out :where() backgrounds. A ghost button opts out with auvyx-btn-ghost.
+   A button with its own color or fill (has-text-color / has-background, added at render) keeps it. A button converted
+   from core's (Convert.php: it keeps wp-block-button__link) is drawn by core's and the theme's button styles instead.
+   These strong rules hold the button AT REST only. While it is hovered, focused or pressed the same defaults
+   come from the low-specificity rules below them, so an element's own hover/focus/active colours (.auvyx-<hash>:hover,
+   which has no has-* class to opt out with) win, as an author expects. */
+body a.wp-block-auvyx-button:not(.auvyx-btn-ghost):not(.has-background):not(.wp-block-button__link):not(:hover, :focus-visible, :active),
+body .wp-block-auvyx-button:not(.auvyx-btn-ghost):not(.has-background):not(.wp-block-button__link):not(:hover, :focus-visible, :active) {
+  background-color: var(--wp--preset--color--auvyx-primary, #2563eb);
+}
+
+body a.wp-block-auvyx-button:not(.auvyx-btn-ghost):not(.has-text-color):not(.wp-block-button__link):not(:hover, :focus-visible, :active),
+body .wp-block-auvyx-button:not(.auvyx-btn-ghost):not(.has-text-color):not(.wp-block-button__link):not(:hover, :focus-visible, :active) {
+  color: var(--wp--preset--color--auvyx-on-primary, var(--wp--preset--color--auvyx-inverse, #fff));
+}
+
+body a.wp-block-auvyx-button.auvyx-btn-ghost:not(.has-background):not(:hover, :focus-visible, :active),
+body .wp-block-auvyx-button.auvyx-btn-ghost:not(.has-background):not(:hover, :focus-visible, :active) {
+  background-color: transparent;
+}
+
+body a.wp-block-auvyx-button.auvyx-btn-ghost:not(.has-text-color):not(:hover, :focus-visible, :active),
+body .wp-block-auvyx-button.auvyx-btn-ghost:not(.has-text-color):not(:hover, :focus-visible, :active) {
+  color: inherit;
+}
+
+/* The same defaults during a state, at (0,1,1): above a theme's element rules, below the element's own (0,2,0). */
+body :where(.wp-block-auvyx-button:not(.auvyx-btn-ghost):not(.has-background):not(.wp-block-button__link)):is(:hover, :focus-visible, :active) {
+  background-color: var(--wp--preset--color--auvyx-primary, #2563eb);
+}
+body :where(.wp-block-auvyx-button:not(.auvyx-btn-ghost):not(.has-text-color):not(.wp-block-button__link)):is(:hover, :focus-visible, :active) {
+  color: var(--wp--preset--color--auvyx-on-primary, var(--wp--preset--color--auvyx-inverse, #fff));
+}
+body :where(.wp-block-auvyx-button.auvyx-btn-ghost:not(.has-background)):is(:hover, :focus-visible, :active) {
+  background-color: transparent;
+}
+body :where(.wp-block-auvyx-button.auvyx-btn-ghost:not(.has-text-color)):is(:hover, :focus-visible, :active) {
+  color: inherit;
+}
+
+/* (0,0,2): beats a theme's element rule, and the button's own Studio border (0,1,0) still wins. */
+body :is(a, button, span, div):where(.wp-block-auvyx-button.auvyx-btn-ghost) {
+  border-width: 1px;
+  border-style: solid;
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+/* Section colours (the four rules below) stay off where the theme draws its own (`auvyx-own-colors` on the body: the
+   theme declares add_theme_support( 'auvyx-builder-own-colors' ), a port of a template with its own stylesheet). Under
+   :where(), so the rules keep their strength everywhere else.
+   Top-level sections without their own fill follow the page token. Nested layout sections stay transparent
+   so a colored band (a call to action) is not covered by the page color. Held under :where() so a section's own
+   fill (a hex colour printed boosted by the Styles module, which carries no has-background class) still wins. */
+:where(body:not(.auvyx-own-colors)) :where(.entry-content, .wp-block-post-content) > .wp-block-auvyx-section:not(.has-background) {
+  background-color: var(--wp--preset--color--auvyx-base);
+}
+
+/* (0,1,0): stronger than a theme's element rules, never stronger than the section's own colour (its class, printed
+   after this sheet), whatever wraps the content (an Elementor Canvas template has no .entry-content to boost under). */
+:where(body:not(.auvyx-own-colors)) :where(.wp-block-auvyx-section):not(.has-text-color) {
+  color: var(--wp--preset--color--auvyx-text);
+}
+
+/* A section inside another takes its color from it, as CSS does: a row of links in a dark top bar stayed dark on dark.
+   As strong as the rule above (a section's own color, printed boosted by the Styles module, still wins). */
+:where(body:not(.auvyx-own-colors)) :where(.wp-block-auvyx-section) .wp-block-auvyx-section:not(.has-text-color) {
+  color: inherit;
+}
+
+body:where(:not(.auvyx-own-colors)) .wp-block-auvyx-section :is(h1, h2, h3, h4, h5, h6, p, li, summary):not(.has-text-color) {
+  color: inherit;
+}
+
+/* Themes recolour links with a:where(:not(.wp-element-button)) (0,0,1). Keep button text readable: (0,0,2) beats
+   that, and a button's own Studio class (0,1,0) still wins. */
+body a:where(.wp-block-auvyx-button) {
+  color: var(--wp--preset--color--auvyx-on-primary, var(--wp--preset--color--auvyx-inverse, #fff));
+}
+
+/* ---- Interaction recipes (InteractionRecipes.scala; docs/plans/interaction-recipes.md) -------------------------------
+   The feedback a native block gives without anyone authoring it. Every look sits at low specificity (:where), so an
+   element's own per-state styles (.auvyx-<hash>:hover) and its scoped CSS win. Markers: auvyx-ix-<recipe> (button, link,
+   card, control, disclosure, none) and auvyx-ix-v-<variant> (subtle, expressive); none means "auto" for the kind.
+   Selectors name the element itself, never an ancestor's variant, so a subtle card does not quiet the button inside it.
+   States come from what the page already says (aria-*, [open], :disabled); a recipe never adds behaviour. */
+:root {
+  --auvyx-ix-dur: var(--auvyx-sf-dur-fast, 120ms);
+  --auvyx-ix-dur-slow: var(--auvyx-sf-dur, 200ms);
+  --auvyx-ix-ease: var(--auvyx-sf-ease, cubic-bezier(0.2, 0.8, 0.2, 1));
+  --auvyx-ix-ring: var(--auvyx-sf-ring-color, var(--wp--preset--color--auvyx-primary, #2563eb));
+  --auvyx-ix-press: var(--auvyx-sf-press, 0.97);
+  --auvyx-ix-shadow: var(--auvyx-sf-shadow-float, 0 2px 6px rgb(18 18 18 / 0.05), 0 12px 32px rgb(18 18 18 / 0.1));
+  --auvyx-ix-shadow-strong: var(--auvyx-sf-shadow-pop, 0 18px 50px rgb(18 18 18 / 0.14));
+  --auvyx-ix-alert: var(--auvyx-sf-sale, var(--wp--preset--color--auvyx-sale, #dc2626));
+}
+
+/* Button (the automatic recipe of a button). Filled: a little brighter; outlined/ghost or "link" buttons: a tint of
+   their own colour laid over (a background-image, so a theme's or the author's background colour is never fought). */
+@media (hover: hover) {
+  :where(.wp-block-auvyx-button:not(.auvyx-ix-none, .auvyx-ix-link, .auvyx-btn-ghost)):hover { filter: brightness(1.08); }
+  :where(.wp-block-auvyx-button.auvyx-btn-ghost:not(.auvyx-ix-none, .auvyx-ix-link)):hover {
+    background-image: linear-gradient(color-mix(in srgb, currentColor 8%, transparent) 0 0);
+  }
+  :where(.wp-block-auvyx-button.auvyx-ix-v-subtle:not(.auvyx-ix-none, .auvyx-ix-link, .auvyx-btn-ghost)):hover { filter: brightness(1.04); }
+  :where(.wp-block-auvyx-button.auvyx-ix-v-expressive:not(.auvyx-ix-none, .auvyx-ix-link)):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--auvyx-ix-shadow);
+  }
+  :where(.wp-block-auvyx-button.auvyx-ix-link):hover {
+    text-decoration: underline;
+    text-decoration-thickness: from-font;
+    text-underline-offset: 0.2em;
+  }
+}
+:where(.wp-block-auvyx-button:not(.auvyx-ix-none, .auvyx-ix-link)):active { transform: scale(var(--auvyx-ix-press)); filter: brightness(0.96); }
+:where(.wp-block-auvyx-button.auvyx-ix-v-subtle:not(.auvyx-ix-none, .auvyx-ix-link)):active { transform: none; }
+:where(.wp-block-auvyx-button.auvyx-ix-v-expressive:not(.auvyx-ix-none, .auvyx-ix-link)):active { transform: scale(0.95); box-shadow: none; }
+/* Keyboard focus: every button, "none" included (a recipe never removes it). */
+:where(.wp-block-auvyx-button):focus-visible {
+  outline: 2px solid var(--auvyx-ix-ring);
+  outline-offset: 2px;
+}
+/* Selected (a toggle, the current page, a chosen option), as the markup says it. */
+:where(.wp-block-auvyx-button:not(.auvyx-ix-none)):is([aria-pressed="true"], [aria-selected="true"], [aria-current]:not([aria-current="false"])) {
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, currentColor 55%, transparent);
+}
+:where(.wp-block-auvyx-button):is(:disabled, [aria-disabled="true"]) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: none;
+  transform: none;
+  box-shadow: none;
+}
+:where(.wp-block-auvyx-button)[aria-busy="true"] {
+  cursor: progress;
+  opacity: 0.8;
+}
+
+/* Link: text links in text and headings, linked pictures and icons. */
+:where(.wp-block-auvyx-text:not(.auvyx-ix-none), .wp-block-auvyx-heading:not(.auvyx-ix-none)) a {
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  transition: color var(--auvyx-ix-dur) var(--auvyx-ix-ease), text-decoration-color var(--auvyx-ix-dur) var(--auvyx-ix-ease);
+}
+:where(a.wp-block-auvyx-image, a.wp-block-auvyx-icon) {
+  transition: filter var(--auvyx-ix-dur-slow) var(--auvyx-ix-ease), opacity var(--auvyx-ix-dur) var(--auvyx-ix-ease),
+    transform var(--auvyx-ix-dur-slow) var(--auvyx-ix-ease), box-shadow var(--auvyx-ix-dur-slow) var(--auvyx-ix-ease);
+}
+:where(a.wp-block-auvyx-image) > img { transition: transform var(--auvyx-ix-dur-slow) var(--auvyx-ix-ease); }
+@media (hover: hover) {
+  :where(.wp-block-auvyx-text:not(.auvyx-ix-none), .wp-block-auvyx-heading:not(.auvyx-ix-none)) a:hover { text-decoration-color: currentColor; }
+  :where(a.wp-block-auvyx-image:not(.auvyx-ix-none, .auvyx-ix-card)):hover { filter: brightness(1.05); }
+  :where(a.wp-block-auvyx-image.auvyx-ix-v-expressive:not(.auvyx-ix-none, .auvyx-ix-card)) { overflow: hidden; }
+  :where(a.wp-block-auvyx-image.auvyx-ix-v-expressive:not(.auvyx-ix-none, .auvyx-ix-card)):hover > img { transform: scale(1.04); }
+  :where(a.wp-block-auvyx-icon:not(.auvyx-ix-none)):hover { opacity: 0.78; }
+  :where(a.wp-block-auvyx-icon.auvyx-ix-v-expressive:not(.auvyx-ix-none)):hover { opacity: 1; transform: scale(1.1); }
+}
+:where(a.wp-block-auvyx-image, a.wp-block-auvyx-icon):focus-visible {
+  outline: 2px solid var(--auvyx-ix-ring);
+  outline-offset: 2px;
+}
+
+/* Card: a box (or a linked picture) people point at as one thing. Opt-in: most boxes are layout, not targets. */
+:where(.wp-block-auvyx-section.auvyx-ix-card, a.wp-block-auvyx-image.auvyx-ix-card) {
+  transition: transform var(--auvyx-ix-dur-slow) var(--auvyx-ix-ease), box-shadow var(--auvyx-ix-dur-slow) var(--auvyx-ix-ease),
+    border-color var(--auvyx-ix-dur) var(--auvyx-ix-ease), background-color var(--auvyx-ix-dur) var(--auvyx-ix-ease);
+}
+@media (hover: hover) {
+  :where(.wp-block-auvyx-section.auvyx-ix-card, a.wp-block-auvyx-image.auvyx-ix-card):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--auvyx-ix-shadow);
+  }
+  :where(.wp-block-auvyx-section.auvyx-ix-card.auvyx-ix-v-subtle, a.wp-block-auvyx-image.auvyx-ix-card.auvyx-ix-v-subtle):hover {
+    transform: none;
+    box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 22%, transparent);
+  }
+  :where(.wp-block-auvyx-section.auvyx-ix-card.auvyx-ix-v-expressive, a.wp-block-auvyx-image.auvyx-ix-card.auvyx-ix-v-expressive):hover {
+    transform: translateY(-4px);
+    box-shadow: var(--auvyx-ix-shadow-strong);
+  }
+}
+/* Keyboard focus inside a card shows the card the way the pointer does; the focused element keeps its own ring. */
+:where(.wp-block-auvyx-section.auvyx-ix-card):has(:focus-visible) { box-shadow: var(--auvyx-ix-shadow); }
+:where(.wp-block-auvyx-section.auvyx-ix-card.auvyx-ix-v-subtle):has(:focus-visible) { box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 22%, transparent); }
+:where(.wp-block-auvyx-section.auvyx-ix-card, a.wp-block-auvyx-image.auvyx-ix-card):active { transform: scale(0.99); }
+:where(.wp-block-auvyx-section.auvyx-ix-card.auvyx-ix-v-subtle, a.wp-block-auvyx-image.auvyx-ix-card.auvyx-ix-v-subtle):active { transform: none; }
+
+/* Control: the browser's own fields inside a box marked "control" (Auvyx Form fields have it built in, below). */
+:where(.auvyx-ix-control) :is(input:not([type="checkbox"], [type="radio"], [type="hidden"], [type="submit"], [type="button"], [type="range"], [type="color"]), select, textarea) {
+  border: 1px solid var(--wp--preset--color--auvyx-border, color-mix(in srgb, currentColor 20%, transparent));
+  border-radius: var(--wp--custom--radius--md, 8px);
+  transition: border-color var(--auvyx-ix-dur) var(--auvyx-ix-ease), box-shadow var(--auvyx-ix-dur) var(--auvyx-ix-ease);
+}
+@media (hover: hover) {
+  :where(.auvyx-ix-control) :is(input, select, textarea):not(:disabled, :focus):hover { border-color: color-mix(in srgb, currentColor 45%, transparent); }
+}
+:where(.auvyx-ix-control) :is(input, select, textarea):focus-visible {
+  outline: 2px solid var(--auvyx-ix-ring);
+  outline-offset: 1px;
+}
+:where(.auvyx-ix-control) :is(input, select, textarea)[aria-invalid="true"] { border-color: var(--auvyx-ix-alert); }
+:where(.auvyx-ix-control) :is(input, select, textarea, button):disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* Disclosure: an accordion's header (its automatic recipe). */
+:where(.wp-block-auvyx-accordion) > summary {
+  border-radius: var(--wp--custom--radius--sm, 4px);
+  transition: opacity var(--auvyx-ix-dur) var(--auvyx-ix-ease), color var(--auvyx-ix-dur) var(--auvyx-ix-ease);
+}
+@media (hover: hover) {
+  :where(.wp-block-auvyx-accordion:not(.auvyx-ix-none)) > summary:hover { opacity: 0.78; }
+  :where(.wp-block-auvyx-accordion.auvyx-ix-v-subtle:not(.auvyx-ix-none)) > summary:hover { opacity: 0.88; }
+  :where(.wp-block-auvyx-accordion.auvyx-ix-v-expressive:not(.auvyx-ix-none):not([open])) > summary:hover::after { transform: translateY(2px); }
+}
+:where(.wp-block-auvyx-accordion) > summary:focus-visible {
+  outline: 2px solid var(--auvyx-ix-ring);
+  outline-offset: 2px;
+}
+
+/* Less motion asked for: the same feedback, no movement and no transitions (colours change at once). */
+@media (prefers-reduced-motion: reduce) {
+  .wp-block-auvyx-button,
+  a.wp-block-auvyx-image,
+  a.wp-block-auvyx-image > img,
+  a.wp-block-auvyx-icon,
+  .auvyx-ix-card,
+  .auvyx-ix-control :is(input, select, textarea),
+  .wp-block-auvyx-text a,
+  .wp-block-auvyx-heading a,
+  .wp-block-auvyx-accordion > summary,
+  .wp-block-auvyx-accordion > summary::after,
+  .auvyx-form__control,
+  .auvyx-form__submit {
+    transition-duration: 0.01ms;
+  }
+  .wp-block-auvyx-button:is(:hover, :active),
+  a.wp-block-auvyx-icon:is(:hover, :active),
+  a.wp-block-auvyx-image:is(:hover, :active),
+  a.wp-block-auvyx-image:hover > img,
+  .auvyx-ix-card:is(:hover, :active),
+  .auvyx-form__submit:is(:hover, :active),
+  .wp-block-auvyx-accordion > summary:hover::after {
+    transform: none;
+  }
+}
+
+/* Forced colours: fills and shadows vanish, so focus and selection are system outlines. */
+@media (forced-colors: active) {
+  .wp-block-auvyx-button:focus-visible,
+  a.wp-block-auvyx-image:focus-visible,
+  a.wp-block-auvyx-icon:focus-visible,
+  .wp-block-auvyx-accordion > summary:focus-visible,
+  .auvyx-ix-control :is(input, select, textarea):focus-visible,
+  .auvyx-form__control:focus {
+    outline: 2px solid Highlight;
+  }
+  .wp-block-auvyx-button:is([aria-pressed="true"], [aria-selected="true"], [aria-current]:not([aria-current="false"])),
+  .auvyx-ix-card:has(:focus-visible) {
+    outline: 2px solid Highlight;
+  }
+}
+
+.wp-block-auvyx-image {
+  display: block;
+  /* In a row, shrink to the column instead of the picture's own width (which wraps it under its neighbours). */
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
+}
+
+.wp-block-auvyx-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1.5em;
+  height: 1.5em;
+  color: var(--wp--preset--color--auvyx-primary, #2563eb);
+}
+
+a:where(.wp-block-auvyx-icon) {
+  text-decoration: none;
+}
+
+/* (0,0,1), so the image's own display (hidden on a breakpoint) still wins. */
+a:where(.wp-block-auvyx-image) {
+  display: block;
+}
+
+a.wp-block-auvyx-image > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* the link holds the image's size; a maximum height there (no height) would leave 100% unresolved */
+  max-height: inherit;
+  object-fit: inherit;
+  border-radius: inherit;
+}
+
+.wp-block-auvyx-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: var(--auvyx-icon-stroke, 2);
+}
+
+.wp-block-auvyx-divider {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+}
+
+.wp-block-auvyx-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--wp--custom--radius--lg, 0.5rem);
+  background: #000;
+}
+
+.wp-block-auvyx-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.wp-block-auvyx-accordion {
+  border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+}
+
+.wp-block-auvyx-accordion > summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.wp-block-auvyx-accordion > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* A line chevron (the same Lucide line as every icon), turning when open. */
+.wp-block-auvyx-accordion > summary::after {
+  content: "";
+  flex: none;
+  width: 1.125em;
+  height: 1.125em;
+  align-self: center;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform 0.2s ease;
+}
+
+.wp-block-auvyx-accordion[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+.wp-block-auvyx-accordion > :not(summary) {
+  margin-block-start: 0;
+  padding-bottom: 1rem;
+}
+
+/* Auvyx Navigation (blocks/nav): a bar of links; a menu button (<details>) below the toggle breakpoint. */
+.wp-block-auvyx-nav {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 24px;
+	position: relative;
+}
+.wp-block-auvyx-nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.auvyx-nav__list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: inherit;
+}
+.auvyx-nav__list li {
+	position: relative;
+}
+.auvyx-nav__parent > a::after {
+	content: "";
+	display: inline-block;
+	width: 0.4em;
+	height: 0.4em;
+	margin-inline-start: 0.4em;
+	border: solid currentColor;
+	border-width: 0 1.5px 1.5px 0;
+	transform: translateY(-0.2em) rotate(45deg);
+}
+/* above a department menu pinned open beside it (auvyx-nav-dept-home, z-index 100 in the same header): a hovered menu is on top */
+.auvyx-nav__list .auvyx-nav__sub {
+	position: absolute;
+	z-index: 101;
+	top: 100%;
+	inset-inline-start: -12px;
+	display: none;
+	min-width: 200px;
+	padding: 8px;
+	background: var(--wp--preset--color--base, #fff);
+	color: var(--wp--preset--color--contrast, #0f172a);
+	border: 1px solid var(--wp--preset--color--border, #e2e8f0);
+	border-radius: var(--wp--custom--radius--md, 0);
+}
+.auvyx-nav__list .auvyx-nav__parent:hover > .auvyx-nav__sub,
+.auvyx-nav__list .auvyx-nav__parent:focus-within > .auvyx-nav__sub {
+	display: block;
+}
+.auvyx-nav__sub a {
+	display: block;
+	padding: 8px 12px;
+	white-space: nowrap;
+}
+.auvyx-nav__panel .auvyx-nav__sub {
+	padding-inline-start: 12px;
+}
+/* Third level: under its item, indented (a dropdown); a mega menu's columns (below). */
+.auvyx-nav__subsub {
+	padding-inline-start: 12px;
+}
+.auvyx-nav__group > a {
+	font-weight: 600;
+}
+.auvyx-nav__list .auvyx-nav__mega {
+	position: static;
+}
+.auvyx-nav__list .auvyx-nav__mega > .auvyx-nav__sub {
+	inset-inline: 0;
+	grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+	gap: 8px 24px;
+	padding: 20px 24px;
+}
+.auvyx-nav__list .auvyx-nav__mega:hover > .auvyx-nav__sub,
+.auvyx-nav__list .auvyx-nav__mega:focus-within > .auvyx-nav__sub {
+	display: grid;
+}
+.auvyx-nav__mega .auvyx-nav__subsub {
+	padding-inline-start: 0;
+}
+.auvyx-nav__mega .auvyx-nav__subsub a {
+	padding-block: 4px;
+	opacity: 0.8;
+}
+.wp-block-auvyx-nav a {
+	color: inherit;
+	text-decoration: none;
+}
+.wp-block-auvyx-nav a:hover,
+.wp-block-auvyx-nav a[aria-current="page"] {
+	text-decoration: underline;
+	text-underline-offset: 6px;
+}
+.auvyx-nav__menu {
+	display: none;
+}
+.auvyx-nav__toggle {
+	display: grid;
+	place-items: center;
+	width: 44px;
+	height: 44px;
+	list-style: none;
+	cursor: pointer;
+}
+.auvyx-nav__toggle::-webkit-details-marker {
+	display: none;
+}
+.auvyx-nav__toggle span,
+.auvyx-nav__toggle span::before,
+.auvyx-nav__toggle span::after {
+	display: block;
+	width: 20px;
+	height: 2px;
+	background: currentColor;
+	content: "";
+}
+.auvyx-nav__toggle span {
+	position: relative;
+}
+.auvyx-nav__toggle span::before {
+	position: absolute;
+	top: -6px;
+}
+.auvyx-nav__toggle span::after {
+	position: absolute;
+	top: 6px;
+}
+.auvyx-nav__menu[open] .auvyx-nav__toggle span {
+	background: transparent;
+}
+.auvyx-nav__menu[open] .auvyx-nav__toggle span::before {
+	top: 0;
+	transform: rotate(45deg);
+}
+.auvyx-nav__menu[open] .auvyx-nav__toggle span::after {
+	top: 0;
+	transform: rotate(-45deg);
+}
+.auvyx-nav__panel {
+	position: absolute;
+	z-index: 100;
+	inset-inline-end: 0;
+	top: 100%;
+	display: flex;
+	flex-direction: column;
+	min-width: 220px;
+	padding: 8px;
+	background: var(--wp--preset--color--base, #fff);
+	color: var(--wp--preset--color--contrast, #0f172a);
+	border: 1px solid var(--wp--preset--color--border, #e2e8f0);
+}
+.auvyx-nav__panel a {
+	display: block;
+	padding: 10px 12px;
+}
+/* Department menu (NavDept: auvyx-nav-dept), the Cartify pattern: an outlined button over a panel of the same width, joined to it by one 2px
+   border; a group of quick links in capitals, a rule, then a row per category (a line icon, the name, a chevron). The panel is a normal
+   dropdown away from the home page; pinned on it (auvyx-nav-dept-home, drawer.js) it stands beside the hero and reaches its bottom edge. */
+html .wp-block-auvyx-nav.auvyx-nav-dept { position: relative; gap: 0; }
+.wp-block-auvyx-nav.auvyx-nav-dept > .auvyx-nav__list { display: none; }
+html .wp-block-auvyx-nav.auvyx-nav-dept > .auvyx-nav__menu { display: block; position: relative; }
+.auvyx-nav-dept .auvyx-nav__toggle.auvyx-nav__dept {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 10px;
+	box-sizing: border-box;
+	width: var(--auvyx-dept-w, 284px);
+	height: auto;
+	min-height: 48px;
+	padding: 0 16px 0 20px;
+	border: 2px solid currentColor;
+	border-radius: 0;
+	background: var(--wp--preset--color--auvyx-base, #fff);
+	color: inherit;
+	font-size: var(--auvyx-sf-step-sm, 0.8125rem);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+.auvyx-nav-dept .auvyx-nav__toggle.auvyx-nav__dept::after {
+	content: "";
+	flex: none;
+	margin-inline-start: auto;
+	width: 0.5em;
+	height: 0.5em;
+	border: solid currentColor;
+	border-width: 0 2px 2px 0;
+	transform: translateY(-0.15em) rotate(45deg);
+	transition: transform 0.2s ease;
+}
+.auvyx-nav-dept .auvyx-nav__menu[open] > .auvyx-nav__dept::after { transform: translateY(0.15em) rotate(-135deg); }
+html .wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__menu > .auvyx-nav__panel {
+	inset-inline: 0 auto;
+	top: 100%;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	width: var(--auvyx-dept-w, 284px);
+	min-width: 0;
+	margin: 0;
+	padding: 6px 0;
+	border: 2px solid currentColor;
+	border-block-start: 0;
+	border-radius: 0;
+	background: var(--wp--preset--color--auvyx-base, #fff);
+	box-shadow: none;
+	font-weight: 500;
+	text-transform: none;
+	letter-spacing: 0;
+}
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li { position: relative; display: flex; flex-direction: column; justify-content: center; }
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li > a {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	min-height: 44px;
+	padding: 0 20px;
+	border-radius: 0;
+	font-size: var(--auvyx-sf-step-md, 0.9375rem);
+}
+/* quick links: capitals, letter-spaced, no icon; a rule closes the group */
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li > a[href^="/shop?"] {
+	font-size: var(--auvyx-sf-step-sm, 0.8125rem);
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li:has(> a[href^="/shop?"]) + li:not(:has(> a[href^="/shop?"])) {
+	margin-block-start: 6px;
+	padding-block-start: 6px;
+	border-block-start: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+}
+/* a category's line icon (by its address; any other gets the grid) and a chevron: both drawn in the text colour */
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li > a[href*="/product-categories/"]::before {
+	content: "";
+	flex: none;
+	width: 20px;
+	height: 20px;
+	background: currentColor;
+	-webkit-mask: var(--auvyx-dept-icon, url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect width=%227%22 height=%227%22 x=%223%22 y=%223%22 rx=%221%22/%3E%3Crect width=%227%22 height=%227%22 x=%2214%22 y=%223%22 rx=%221%22/%3E%3Crect width=%227%22 height=%227%22 x=%2214%22 y=%2214%22 rx=%221%22/%3E%3Crect width=%227%22 height=%227%22 x=%223%22 y=%2214%22 rx=%221%22/%3E%3C/svg%3E")) center / contain no-repeat;
+	mask: var(--auvyx-dept-icon, url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect width=%227%22 height=%227%22 x=%223%22 y=%223%22 rx=%221%22/%3E%3Crect width=%227%22 height=%227%22 x=%2214%22 y=%223%22 rx=%221%22/%3E%3Crect width=%227%22 height=%227%22 x=%2214%22 y=%2214%22 rx=%221%22/%3E%3Crect width=%227%22 height=%227%22 x=%223%22 y=%2214%22 rx=%221%22/%3E%3C/svg%3E")) center / contain no-repeat;
+}
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li:not(.auvyx-nav__parent) > a[href*="/product-categories/"]::after {
+	content: "";
+	flex: none;
+	margin-inline-start: auto;
+	width: 16px;
+	height: 16px;
+	background: currentColor;
+	opacity: 0.55;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m9 18 6-6-6-6%22/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m9 18 6-6-6-6%22/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li > a[href$="/phones"] { --auvyx-dept-icon: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect width=%2214%22 height=%2220%22 x=%225%22 y=%222%22 rx=%222%22 ry=%222%22/%3E%3Cpath d=%22M12 18h.01%22/%3E%3C/svg%3E"); }
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li > a[href$="/laptops"] { --auvyx-dept-icon: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16%22/%3E%3C/svg%3E"); }
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li > a[href$="/tablets"] { --auvyx-dept-icon: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect width=%2216%22 height=%2220%22 x=%224%22 y=%222%22 rx=%222%22 ry=%222%22/%3E%3Cpath d=%22M12 18h.01%22/%3E%3C/svg%3E"); }
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li > a[href$="/audio"] { --auvyx-dept-icon: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3%22/%3E%3C/svg%3E"); }
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li > a[href$="/wearables"] { --auvyx-dept-icon: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%226%22/%3E%3Cpath d=%22M12 10v2l1 1%22/%3E%3Cpath d=%22m16.13 7.66-.81-4.05a2 2 0 0 0-2-1.61h-2.68a2 2 0 0 0-2 1.61l-.78 4.05%22/%3E%3Cpath d=%22m7.88 16.36.8 4a2 2 0 0 0 2 1.64h2.7a2 2 0 0 0 2-1.64l.81-4.05%22/%3E%3C/svg%3E"); }
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li > a[href$="/cameras"] { --auvyx-dept-icon: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z%22/%3E%3Ccircle cx=%2212%22 cy=%2213%22 r=%223%22/%3E%3C/svg%3E"); }
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li > a[href$="/gaming"] { --auvyx-dept-icon: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M6 11h4M8 9v4M15 12h.01M18 10h.01%22/%3E%3Cpath d=%22M17.32 5H6.68a4 4 0 0 0-3.978 3.59C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258A4 4 0 0 0 17.32 5z%22/%3E%3C/svg%3E"); }
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel > li > a[href$="/smart-home"] { --auvyx-dept-icon: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8%22/%3E%3Cpath d=%22M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z%22/%3E%3C/svg%3E"); }
+/* pinned beside the hero: the category rows share the height drawer.js gives the panel (the hero's), so the list ends where the hero does */
+.auvyx-nav-dept .auvyx-nav__menu[data-auvyx-pinned] > .auvyx-nav__panel > li:has(> a[href*="/product-categories/"]) { flex: 1 1 44px; }
+.auvyx-nav-dept .auvyx-nav__panel > .auvyx-nav__parent > a::after { transform: rotate(-45deg); margin-inline-start: auto; }
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel .auvyx-nav__sub {
+	position: absolute;
+	z-index: 1;
+	top: -12px;
+	inset-inline-start: 100%;
+	display: none;
+	min-width: 220px;
+	padding: 12px 0;
+	background: var(--wp--preset--color--base, #fff);
+	color: var(--wp--preset--color--contrast, #0f172a);
+	border: 1.5px solid currentColor;
+	box-shadow: 0 16px 40px rgb(0 0 0 / 0.08);
+}
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel .auvyx-nav__parent:hover > .auvyx-nav__sub,
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__panel .auvyx-nav__parent:focus-within > .auvyx-nav__sub { display: block; }
+.wp-block-auvyx-nav.auvyx-nav-dept .auvyx-nav__sub a { padding: 9px 20px; border-radius: 0; }
+/* Menu drawers (NavDrawer: auvyx-drawer-left|right|full|sheet, -w-narrow|wide, -bg-blur|none, -fold). The menu button opens
+   them with <details> (no script needed); drawer.js adds closing on the backdrop, Escape and a link, a still page behind,
+   and folding submenus. Colours, corners and type are the design tokens. */
+[class*="auvyx-drawer-"] .auvyx-nav__menu[open]::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	background: color-mix(in srgb, var(--wp--preset--color--contrast, #0f172a) 45%, transparent);
+	animation: auvyx-drawer-fade .2s ease both;
+}
+.auvyx-drawer-bg-blur .auvyx-nav__menu[open]::before {
+	background: color-mix(in srgb, var(--wp--preset--color--contrast, #0f172a) 25%, transparent);
+	backdrop-filter: blur(8px);
+}
+.auvyx-drawer-bg-none .auvyx-nav__menu[open]::before {
+	background: transparent;
+}
+/* Open, the menu button becomes the drawer's close button, in its corner, on the drawer's own colours. */
+[class*="auvyx-drawer-"] .auvyx-nav__menu[open] > .auvyx-nav__toggle {
+	position: fixed;
+	z-index: 1002;
+	top: 12px;
+	inset-inline-end: 12px;
+	border-radius: var(--wp--custom--radius--full, 9999px);
+	background: var(--wp--preset--color--base, #fff);
+	color: var(--wp--preset--color--contrast, #0f172a);
+}
+.auvyx-drawer-left .auvyx-nav__menu[open] > .auvyx-nav__toggle {
+	inset-inline: calc(min(var(--auvyx-drawer-w, 320px), 88vw) - 52px) auto;
+}
+
+[class*="auvyx-drawer-"] .auvyx-nav__panel {
+	position: fixed;
+	z-index: 1001;
+	top: 0;
+	bottom: 0;
+	gap: 2px;
+	width: min(var(--auvyx-drawer-w, 320px), 88vw);
+	min-width: 0;
+	max-height: none;
+	margin: 0;
+	padding: 72px 20px 32px;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	border: 0;
+	box-shadow: 0 0 40px rgb(0 0 0 / 0.18);
+	font-size: var(--wp--preset--font-size--medium, 1rem);
+}
+[class*="auvyx-drawer-"] .auvyx-nav__panel a {
+	padding: 12px 8px;
+	border-radius: var(--wp--custom--radius--sm, 0);
+}
+[class*="auvyx-drawer-"] .auvyx-nav__panel > li + li {
+	border-top: 1px solid var(--wp--preset--color--border, #e2e8f0);
+}
+.auvyx-drawer-w-narrow { --auvyx-drawer-w: 260px; }
+.auvyx-drawer-w-wide { --auvyx-drawer-w: 420px; }
+.auvyx-drawer-left .auvyx-nav__panel {
+	inset-inline: 0 auto;
+	animation: auvyx-drawer-left .28s cubic-bezier(.2, .7, .2, 1) both;
+}
+.auvyx-drawer-right .auvyx-nav__panel {
+	inset-inline: auto 0;
+	animation: auvyx-drawer-right .28s cubic-bezier(.2, .7, .2, 1) both;
+}
+.auvyx-drawer-full .auvyx-nav__panel {
+	inset: 0;
+	width: auto;
+	justify-content: center;
+	align-items: center;
+	padding: 96px 24px;
+	box-shadow: none;
+	font-size: var(--wp--preset--font-size--x-large, 1.75rem);
+	animation: auvyx-drawer-fade .22s ease both;
+}
+.auvyx-drawer-full .auvyx-nav__panel > li + li {
+	border-top: 0;
+}
+.auvyx-drawer-full .auvyx-nav__panel .auvyx-nav__sub {
+	font-size: var(--wp--preset--font-size--medium, 1rem);
+	text-align: center;
+}
+.auvyx-drawer-sheet .auvyx-nav__panel {
+	top: auto;
+	inset-inline: 0;
+	width: auto;
+	max-height: 82vh;
+	padding: 36px 20px 28px;
+	border-radius: var(--wp--custom--radius--lg, 0) var(--wp--custom--radius--lg, 0) 0 0;
+	animation: auvyx-drawer-up .3s cubic-bezier(.2, .7, .2, 1) both;
+}
+.auvyx-drawer-sheet .auvyx-nav__panel::before {
+	content: "";
+	position: absolute;
+	top: 12px;
+	left: 50%;
+	width: 40px;
+	height: 4px;
+	margin-left: -20px;
+	border-radius: 2px;
+	background: var(--wp--preset--color--border, #e2e8f0);
+}
+.auvyx-drawer-fold .auvyx-nav__panel .auvyx-nav__parent {
+	position: relative;
+}
+.auvyx-drawer-fold .auvyx-nav__panel .auvyx-nav__parent > .auvyx-nav__sub {
+	display: none;
+}
+.auvyx-drawer-fold .auvyx-nav__panel .auvyx-nav__parent.is-open > .auvyx-nav__sub {
+	display: block;
+}
+.auvyx-drawer__more {
+	position: absolute;
+	top: 4px;
+	inset-inline-end: 0;
+	width: 40px;
+	height: 40px;
+	border: 0;
+	background: none;
+	color: inherit;
+	cursor: pointer;
+	font: inherit;
+}
+.auvyx-drawer__more::before {
+	content: "";
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: translateY(-2px) rotate(45deg);
+	transition: transform .2s ease;
+}
+.is-open > .auvyx-drawer__more::before {
+	transform: translateY(2px) rotate(-135deg);
+}
+html.auvyx-drawer-lock {
+	overflow: hidden;
+}
+/* While a drawer is open, an ancestor that would hold it inside its box (a blurred or transformed sticky header) lets go. */
+.auvyx-drawer-host {
+	backdrop-filter: none !important;
+	transform: none !important;
+	filter: none !important;
+	contain: none !important;
+}
+.auvyx-drawer-lift {
+	z-index: 1000 !important;
+}
+[class*="auvyx-drawer-"] .auvyx-nav__panel:focus {
+	outline: none;
+}
+@keyframes auvyx-drawer-fade { from { opacity: 0; } }
+@keyframes auvyx-drawer-left { from { transform: translateX(-100%); } }
+@keyframes auvyx-drawer-right { from { transform: translateX(100%); } }
+@keyframes auvyx-drawer-up { from { transform: translateY(100%); } }
+@media (prefers-reduced-motion: reduce) {
+	[class*="auvyx-drawer-"] .auvyx-nav__panel,
+	[class*="auvyx-drawer-"] .auvyx-nav__menu[open]::before {
+		animation: none;
+	}
+}
+
+/* The menu-button breakpoints come from the design system (Blocks::nav_breakpoints). */
+
+/* Carousel: native scroll-snap. Arrows exist only in the editor. */
+.auvyx-carousel__track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.auvyx-carousel__track::-webkit-scrollbar{display:none}
+.auvyx-carousel__slide{box-sizing:border-box;position:relative;overflow:hidden}
+.auvyx-carousel__img,.auvyx-carousel__imglink{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(var(--auvyx-scale,1)) translateY(var(--auvyx-shift,0));transition:transform .45s ease,filter .45s ease}
+.auvyx-carousel__imglink{display:block}
+.auvyx-carousel__slide:hover .auvyx-carousel__img{transform:scale(var(--auvyx-scale-hover,var(--auvyx-scale,1))) translateY(var(--auvyx-shift,0))}
+.auvyx-carousel__slide:hover .auvyx-carousel__img--darken{filter:brightness(.72)}
+.auvyx-carousel__slide:hover .auvyx-carousel__img--zoom{transform:scale(calc(var(--auvyx-scale-hover,1) * 1.06)) translateY(var(--auvyx-shift,0))}
+.auvyx-carousel__slide--split .auvyx-carousel__img,.auvyx-carousel__slide--split .auvyx-carousel__imglink{left:48%;width:52%}
+.auvyx-carousel__copy{position:relative;z-index:1;display:flex;flex-direction:column;gap:16px}
+.auvyx-anim-fade{animation:auvyx-fade .6s both}
+.auvyx-anim-left{animation:auvyx-left .7s both}
+.auvyx-anim-right{animation:auvyx-right .7s both}
+.auvyx-anim-up{animation:auvyx-up .7s both}
+@keyframes auvyx-fade{from{opacity:0}to{opacity:1}}
+@keyframes auvyx-left{from{opacity:0;transform:translateX(-32px)}to{opacity:1;transform:none}}
+@keyframes auvyx-right{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:none}}
+@keyframes auvyx-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* Posts loop pagination */
+.auvyx-loop__pages {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 8px;
+	margin-block-start: 32px;
+}
+.auvyx-loop__pages .page-numbers {
+	min-width: 36px;
+	padding: 6px 10px;
+	text-align: center;
+	border: 1px solid var(--wp--preset--color--border, #e2e8f0);
+	border-radius: var(--wp--custom--radius--md, 0);
+	color: inherit;
+	text-decoration: none;
+}
+.auvyx-loop__pages .page-numbers.current {
+	background: var(--wp--preset--color--contrast, #0f172a);
+	color: var(--wp--preset--color--base, #fff);
+	border-color: var(--wp--preset--color--contrast, #0f172a);
+}
+/* Load more / infinite scroll (assets/loop-more.js): the button replaces the numbers once the script runs. */
+.auvyx-more {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	margin-block-start: 40px;
+}
+.auvyx-more__button {
+	min-width: 200px;
+	padding: 12px 28px;
+	border: 1px solid currentColor;
+	border-radius: var(--wp--custom--radius--md, 0);
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	font-size: 0.875rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.15s ease, color 0.15s ease;
+}
+.auvyx-more__button:hover {
+	background: var(--wp--preset--color--contrast, #0f172a);
+	color: var(--wp--preset--color--base, #fff);
+}
+.auvyx-more__button:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 3px;
+}
+.auvyx-more.is-loading .auvyx-more__button {
+	opacity: 0.55;
+	cursor: progress;
+}
+.auvyx-more--scroll .auvyx-more__button:not(:disabled) {
+	opacity: 0.85;
+}
+.auvyx-more__status {
+	min-height: 1.2em;
+	margin: 0;
+	font-size: 0.8125rem;
+	opacity: 0.7;
+}
+
+/* Auvyx Form: fields in a column, the trap out of sight, the messages shown by the address the visitor is sent back to. */
+.auvyx-form {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	width: 100%;
+}
+.auvyx-form__field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+.auvyx-form__field--check {
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+}
+.auvyx-form__label {
+	font-size: 0.875rem;
+	font-weight: 500;
+}
+.auvyx-form__field--choices {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	min-width: 0;
+}
+.auvyx-form__field--choices > .auvyx-form__label {
+	padding: 0;
+	margin-block-end: 2px;
+}
+.auvyx-form__choice {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 0.9375rem;
+	cursor: pointer;
+}
+.auvyx-form__req {
+	margin-inline-start: 2px;
+	color: var(--wp--preset--color--auvyx-primary, #2563eb);
+}
+.auvyx-form__control {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px 12px;
+	font: inherit;
+	color: inherit;
+	background: var(--wp--preset--color--auvyx-base, #fff);
+	/* The field's edge at 3:1 or more against the page (WCAG 1.4.11): the text colour, half strength. */
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--auvyx-text, #0f172a) 50%, transparent);
+	border-radius: var(--wp--custom--radius--md, 8px);
+	min-height: 48px;
+	transition: border-color var(--auvyx-ix-dur) var(--auvyx-ix-ease), box-shadow var(--auvyx-ix-dur) var(--auvyx-ix-ease);
+}
+/* An Auvyx Form's fields carry the "control" recipe: hover, focus, invalid and disabled. */
+@media (hover: hover) {
+	.auvyx-form__control:not(:disabled, :focus):hover {
+		border-color: color-mix(in srgb, currentColor 45%, transparent);
+	}
+}
+.auvyx-form__control:focus {
+	outline: 2px solid var(--auvyx-ix-ring);
+	outline-offset: 1px;
+}
+.auvyx-form__control[aria-invalid="true"],
+.auvyx-form__control:user-invalid {
+	border-color: var(--auvyx-ix-alert);
+}
+.auvyx-form__control:disabled {
+	opacity: 0.55;
+	cursor: not-allowed;
+}
+textarea.auvyx-form__control {
+	min-height: 120px;
+	resize: vertical;
+}
+.auvyx-form__submit {
+	align-self: flex-start;
+	padding: 12px 22px;
+	font: inherit;
+	font-weight: 600;
+	color: var(--wp--preset--color--auvyx-on-primary, var(--wp--preset--color--auvyx-inverse, #fff));
+	background: var(--wp--preset--color--auvyx-primary, #2563eb);
+	border: 0;
+	border-radius: var(--wp--custom--radius--md, 8px);
+	cursor: pointer;
+	transition: filter var(--auvyx-ix-dur) var(--auvyx-ix-ease), transform var(--auvyx-ix-dur) var(--auvyx-ix-ease);
+}
+@media (hover: hover) {
+	.auvyx-form__submit:not([disabled]):hover {
+		filter: brightness(1.08);
+	}
+}
+.auvyx-form__submit:not([disabled]):active {
+	transform: scale(var(--auvyx-ix-press));
+}
+.auvyx-form__submit:focus-visible {
+	outline: 2px solid var(--auvyx-ix-ring);
+	outline-offset: 2px;
+}
+.auvyx-form__submit[disabled] {
+	cursor: default;
+	opacity: 0.55;
+}
+.auvyx-form__trap {
+	position: absolute !important;
+	left: -10000px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+.auvyx-form__sent,
+.auvyx-form__error {
+	display: none;
+	margin: 0;
+	padding: 12px 14px;
+	border-radius: var(--wp--custom--radius--md, 8px);
+}
+.auvyx-form__sent:target {
+	display: block;
+	background: color-mix(in srgb, #16a34a 12%, transparent);
+	color: #166534;
+}
+.auvyx-form__error:target {
+	display: block;
+	background: color-mix(in srgb, #dc2626 12%, transparent);
+	color: #991b1b;
+}
+
+/* Banner slider controls (assets/slider.js adds them only where a section scroll-snaps horizontally). */
+.auvyx-slider-wrap {
+  position: relative;
+  min-width: 0;
+}
+.auvyx-slider-arrow {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, #fff 85%, transparent);
+  color: #111;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
+}
+.auvyx-slider-arrow svg,
+.auvyx-lightbox button svg { display: block; }
+/* The track can be narrower than its wrapper (a slider with a Section width): slider.js gives the gaps on each side
+   (--auvyx-track-l / --auvyx-track-r), so the arrows and dots sit on the slides, not at the wrapper's edges. */
+.auvyx-slider-prev { left: calc(var(--auvyx-track-l, 0px) + 0.75rem); }
+.auvyx-slider-next { right: calc(var(--auvyx-track-r, 0px) + 0.75rem); }
+.auvyx-slider-dots {
+  position: absolute;
+  left: calc(50% + (var(--auvyx-track-l, 0px) - var(--auvyx-track-r, 0px)) / 2);
+  bottom: 0.25rem;
+  translate: -50% 0;
+  z-index: 2;
+  display: flex;
+}
+/* Fade transition (slider.js adds auvyx-slider--fade for a auvyx-fade slider; without JS it stays a swipeable strip). */
+.auvyx-slider--fade { display: grid !important; overflow: hidden !important; }
+.auvyx-slider--fade > * { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity 0.6s ease, visibility 0s linear 0.6s; }
+.auvyx-slider--fade > .is-active { opacity: 1; visibility: visible; transition: opacity 0.6s ease; }
+@media (prefers-reduced-motion: reduce) { .auvyx-slider--fade > * { transition: none; } }
+/* 24px targets (WCAG 2.5.8) around a 10px dot. */
+.auvyx-slider-dot {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.auvyx-slider-dot::before {
+  content: "";
+  width: 0.625rem;
+  height: 0.625rem;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.25);
+  box-sizing: border-box;
+}
+.auvyx-slider-dot[aria-current="true"]::before { background: #fff; }
+/* Slider styles (Studio: Content → Slider). The wrapper gets the track's auvyx-arrows-*, auvyx-dots-*, auvyx-nav-* tokens. */
+.auvyx-slider-arrow:disabled { opacity: 0.35; cursor: default; }
+.auvyx-slider-static > .auvyx-slider-arrow, .auvyx-slider-static > .auvyx-slider-dots { display: none; }
+.auvyx-arrows-simple .auvyx-slider-arrow { background: transparent; color: #fff; box-shadow: none; filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.5)); }
+.auvyx-arrows-simple .auvyx-slider-arrow svg { width: 32px; height: 32px; }
+.auvyx-nav-dark .auvyx-slider-arrow { background: color-mix(in srgb, #111 85%, transparent); color: #fff; }
+.auvyx-nav-dark.auvyx-arrows-simple .auvyx-slider-arrow { background: transparent; color: #111; filter: none; }
+.auvyx-nav-dark .auvyx-slider-dot::before { border-color: #111; box-shadow: 0 0 0 1px rgb(255 255 255 / 0.4); }
+.auvyx-nav-dark .auvyx-slider-dot[aria-current="true"]::before { background: #111; }
+.auvyx-dots-dashes .auvyx-slider-dot { width: 2rem; }
+.auvyx-dots-dashes .auvyx-slider-dot::before { width: 1.5rem; height: 0.25rem; border: 0; border-radius: 2px; background: rgb(255 255 255 / 0.5); }
+.auvyx-dots-dashes .auvyx-slider-dot[aria-current="true"]::before { background: #fff; }
+.auvyx-nav-dark.auvyx-dots-dashes .auvyx-slider-dot::before { background: rgb(17 17 17 / 0.3); }
+.auvyx-nav-dark.auvyx-dots-dashes .auvyx-slider-dot[aria-current="true"]::before { background: #111; }
+/* Outside: arrows beside the slides (inside on narrow screens and full-width sliders, which have no room), dots under them. */
+.auvyx-nav-outside .auvyx-slider-dots { position: static; translate: none; justify-content: center; margin-top: 0.5rem; }
+.auvyx-nav-outside .auvyx-slider-dot::before { border-color: currentColor; box-shadow: none; }
+.auvyx-nav-outside .auvyx-slider-dot[aria-current="true"]::before { background: currentColor; }
+.auvyx-nav-outside.auvyx-dots-dashes .auvyx-slider-dot::before { background: color-mix(in srgb, currentColor 30%, transparent); }
+.auvyx-nav-outside.auvyx-dots-dashes .auvyx-slider-dot[aria-current="true"]::before { background: currentColor; }
+@media (min-width: 900px) {
+  .auvyx-nav-outside:not(:has(> .alignfull)) .auvyx-slider-prev { left: calc(var(--auvyx-track-l, 0px) - 3.25rem); }
+  .auvyx-nav-outside:not(:has(> .alignfull)) .auvyx-slider-next { right: calc(var(--auvyx-track-r, 0px) - 3.25rem); }
+}
+/* Gallery: a strip of thumbnails under the slides. */
+.auvyx-slider-thumbs { display: flex; gap: 0.5rem; margin-top: 0.5rem; overflow-x: auto; scrollbar-width: thin; }
+.auvyx-slider-thumb { flex: 0 0 4.5rem; aspect-ratio: 4 / 3; padding: 0; border: 2px solid transparent; border-radius: 6px; background: #e5e5e5 center / cover no-repeat; font: inherit; font-weight: 600; color: #555; cursor: pointer; opacity: 0.6; transition: opacity 0.2s ease, border-color 0.2s ease; }
+.auvyx-slider-thumb:hover { opacity: 0.9; }
+.auvyx-slider-thumb[aria-current="true"] { border-color: currentColor; opacity: 1; }
+.auvyx-slider-thumb:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+/* Focus: the centred slide at full strength, its neighbours dimmed (the slider keeps 10% free each side, slides snap to the centre). */
+.auvyx-slider-ready .auvyx-slider-focus > * { transition: opacity 0.4s ease, transform 0.4s ease; }
+.auvyx-slider-ready .auvyx-slider-focus > :not(.is-active) { opacity: 0.45; transform: scale(0.94); }
+/* Entrance: the active slide's content comes in (replays every time a slide becomes active); content in a text box
+   comes in one item after another. Never without the script or with reduced motion. */
+.auvyx-enter-fade { --auvyx-enter: auvyx-fade; }
+.auvyx-enter-up { --auvyx-enter: auvyx-up; }
+.auvyx-enter-left { --auvyx-enter: auvyx-left; }
+.auvyx-enter-right { --auvyx-enter: auvyx-right; }
+.auvyx-enter-zoom { --auvyx-enter: auvyx-zoom; }
+.auvyx-enter-blur { --auvyx-enter: auvyx-blur; }
+@media (prefers-reduced-motion: no-preference) {
+  /* Text of slides not in view waits hidden, so it never shows and then jumps back to the animation's start. */
+  .auvyx-slider-ready:not(.auvyx-slider-multi) [class*="auvyx-enter-"] > :not(.is-active):not(.is-leaving) > :not(.auvyx-bg-video) { opacity: 0; }
+  .auvyx-slider-ready:not(.auvyx-slider-multi) [class*="auvyx-enter-"] > .is-active > :not(.auvyx-bg-video):not(:has(> *)),
+  .auvyx-slider-ready:not(.auvyx-slider-multi) [class*="auvyx-enter-"] > .is-active > :not(.auvyx-bg-video) > * { animation: var(--auvyx-enter) 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) var(--auvyx-enter-delay, 0s) both; }
+  .auvyx-slider-ready:not(.auvyx-slider-multi) [class*="auvyx-enter-"] > .is-active > * > :nth-child(2) { animation-delay: calc(var(--auvyx-enter-delay, 0s) + 0.12s); }
+  .auvyx-slider-ready:not(.auvyx-slider-multi) [class*="auvyx-enter-"] > .is-active > * > :nth-child(3) { animation-delay: calc(var(--auvyx-enter-delay, 0s) + 0.24s); }
+  .auvyx-slider-ready:not(.auvyx-slider-multi) [class*="auvyx-enter-"] > .is-active > * > :nth-child(n+4) { animation-delay: calc(var(--auvyx-enter-delay, 0s) + 0.36s); }
+}
+@keyframes auvyx-zoom { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: none; } }
+@keyframes auvyx-blur { from { opacity: 0; filter: blur(12px); } to { opacity: 1; filter: none; } }
+.auvyx-slider-arrow:focus-visible,
+.auvyx-slider-dot:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px #111;
+}
+
+/* Tabs (assets/tabs.js builds the list; until then the panels stack with their headings). */
+.auvyx-tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--wp--preset--color--auvyx-border, #e5e5e5);
+}
+.auvyx-tabs__tab {
+  padding: 0.625rem 1rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.auvyx-tabs__tab[aria-selected="true"] {
+  border-bottom-color: currentColor;
+  opacity: 1;
+}
+.auvyx-tabs__tab:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.auvyx-tabs--ready .auvyx-tabs__heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* A panel's Auvyx layout (display:flex/grid) would otherwise beat the [hidden] attribute. */
+.auvyx-tabs--ready > [role="tabpanel"][hidden] { display: none !important; }
+
+/* card-hover: generated from shared/CardHover.scala (AUVYX_UPDATE_SNAPSHOTS=1 sbt sharedJVM/test) */
+:is(.auvyx-hover-zoom > :not(.auvyx-loop__pages)){overflow:hidden}:is(.auvyx-hover-zoom > :not(.auvyx-loop__pages)) :is(img.wp-block-auvyx-image,.wp-block-auvyx-image img){transition:transform .5s ease}:is(.auvyx-hover-zoom > :not(.auvyx-loop__pages)):hover :is(img.wp-block-auvyx-image,.wp-block-auvyx-image img){transform:scale(1.06)}
+:is(.auvyx-hover-fade > :not(.auvyx-loop__pages)) :is(img.wp-block-auvyx-image,.wp-block-auvyx-image img){transition:opacity .3s ease}:is(.auvyx-hover-fade > :not(.auvyx-loop__pages)):hover :is(img.wp-block-auvyx-image,.wp-block-auvyx-image img){opacity:.8}
+:is(.auvyx-hover-gray > :not(.auvyx-loop__pages)) :is(img.wp-block-auvyx-image,.wp-block-auvyx-image img){filter:grayscale(1);transition:filter .3s ease}:is(.auvyx-hover-gray > :not(.auvyx-loop__pages)):hover :is(img.wp-block-auvyx-image,.wp-block-auvyx-image img){filter:none}
+:is(.auvyx-hover-lift > :not(.auvyx-loop__pages)){transition:transform .25s ease,box-shadow .25s ease}:is(.auvyx-hover-lift > :not(.auvyx-loop__pages)):hover{transform:translateY(-4px);box-shadow:0 12px 28px rgb(0 0 0/.12)}
+@media (prefers-reduced-motion:reduce){:is(.auvyx-hover-zoom > :not(.auvyx-loop__pages)):hover :is(img.wp-block-auvyx-image,.wp-block-auvyx-image img),:is(.auvyx-hover-lift > :not(.auvyx-loop__pages)):hover{transform:none}}
+.auvyx-card__tile img{mix-blend-mode:multiply}
+.auvyx-card .auvyx-card__row:not(:has(*)){display:none}
+.auvyx-card .auvyx-card__media > .auvyx-card__alt{opacity:0;transition:opacity .35s ease}
+.auvyx-card:hover .auvyx-card__media > .auvyx-card__alt{opacity:1}
+.auvyx-card .auvyx-card-reveal{transition:opacity .2s ease,transform .2s ease}
+.auvyx-card .auvyx-card-slide{transition:transform .25s ease}
+@media (hover:hover){.auvyx-card:not(:hover):not(:focus-within) .auvyx-card-reveal{opacity:0;transform:translateX(8px)}.auvyx-card:not(:hover):not(:focus-within) .auvyx-card-slide{transform:translateY(105%)}}
+@media (hover:none){.auvyx-card .auvyx-card__media > .auvyx-card-slide{position:relative;transform:none}.auvyx-card .auvyx-card__media > .auvyx-card__alt{display:none}}
+.auvyx-view-list .auvyx-shop-loop.auvyx-shop-loop{grid-template-columns:minmax(0,1fr)}
+.auvyx-view-list .auvyx-shop-loop > .auvyx-card{flex-direction:row;align-items:center;gap:24px}
+.auvyx-view-list .auvyx-shop-loop > .auvyx-card > .auvyx-card__media{flex:0 0 min(34%,260px)}
+.auvyx-view-list .auvyx-shop-loop > .auvyx-card > :not(.auvyx-card__media){flex:1 1 0}
+@media (prefers-reduced-motion:reduce){.auvyx-card .auvyx-card__alt,.auvyx-card .auvyx-card-reveal,.auvyx-card .auvyx-card-slide{transition:none}}
+/* card-hover: end */
+
+/* Gallery lightbox (assets/gallery.js). */
+.auvyx-lightbox {
+  max-width: none;
+  max-height: none;
+  width: 100vw;
+  height: 100dvh;
+  margin: 0;
+  padding: 3rem;
+  border: 0;
+  background: transparent;
+  box-sizing: border-box;
+}
+.auvyx-lightbox[open] { display: grid; place-items: center; }
+.auvyx-lightbox::backdrop { background: rgb(0 0 0 / 0.85); }
+.auvyx-lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.auvyx-lightbox button {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.9);
+  color: #111;
+  cursor: pointer;
+}
+.auvyx-lightbox__prev { left: 1rem; top: 50%; translate: 0 -50%; }
+.auvyx-lightbox__next { right: 1rem; top: 50%; translate: 0 -50%; }
+.auvyx-lightbox__close { right: 1rem; top: 1rem; }
+.auvyx-lightbox button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* box-effects: generated from shared/BoxEffects.scala (AUVYX_UPDATE_SNAPSHOTS=1 sbt sharedJVM/test) */
+.auvyx-stretch-link{position:relative}.auvyx-stretch-link a.wp-block-auvyx-button::after{content:"";position:absolute;inset:0;z-index:1}
+.auvyx-stretch-link a.wp-block-auvyx-button:focus-visible{outline-offset:4px}
+.auvyx-bg-zoom{position:relative;overflow:hidden;isolation:isolate}.auvyx-bg-zoom::before{content:"";position:absolute;inset:0;z-index:-1;background:inherit;transition:transform .6s ease}.auvyx-bg-zoom:hover::before{transform:scale(1.06)}
+@media (prefers-reduced-motion:reduce){.auvyx-bg-zoom::before{transition:none}.auvyx-bg-zoom:hover::before{transform:none}}
+.auvyx-has-bg-video{position:relative;overflow:hidden;isolation:isolate}
+.wp-block-auvyx-video.auvyx-bg-video{position:absolute;inset:0;z-index:-1;width:auto;margin:0;aspect-ratio:auto;border-radius:0;background:transparent;pointer-events:none;container-type:size}
+.auvyx-bg-video iframe{position:absolute;inset:auto;top:50%;left:50%;width:max(100cqw,177.78cqh);height:max(100cqh,56.25cqw);translate:-50% -50%;border:0}
+.auvyx-bg-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wp-block-auvyx-video.auvyx-bg-video::after{content:"";position:absolute;inset:0;background:var(--auvyx-scrim,rgb(0 0 0/.35))}
+@media (prefers-reduced-motion:reduce){.wp-block-auvyx-video.auvyx-bg-video{display:none}}
+/* box-effects: end */
+
+/* animate: generated from shared/Animate.scala (AUVYX_UPDATE_SNAPSHOTS=1 sbt sharedJVM/test) */
+.auvyx-anim [class*="auvyx-animate-"]:not(.is-in){opacity:0}
+.auvyx-anim [class*="auvyx-animate-"].is-in{animation:var(--auvyx-anim,auvyx-fade) .8s cubic-bezier(.2,.7,.2,1) var(--auvyx-anim-delay,0s) both}
+.auvyx-animate-fade{--auvyx-anim:auvyx-a-fade}.auvyx-animate-up{--auvyx-anim:auvyx-a-up}.auvyx-animate-down{--auvyx-anim:auvyx-a-down}.auvyx-animate-left{--auvyx-anim:auvyx-a-left}.auvyx-animate-right{--auvyx-anim:auvyx-a-right}.auvyx-animate-zoom{--auvyx-anim:auvyx-a-zoom}.auvyx-animate-blur{--auvyx-anim:auvyx-a-blur}.auvyx-animate-bounce{--auvyx-anim:auvyx-a-bounce}.auvyx-animate-flip-x{--auvyx-anim:auvyx-a-flip-x}.auvyx-animate-flip-y{--auvyx-anim:auvyx-a-flip-y}
+.auvyx-delay-1{--auvyx-anim-delay:0.15s}.auvyx-delay-2{--auvyx-anim-delay:0.30s}.auvyx-delay-3{--auvyx-anim-delay:0.45s}.auvyx-delay-4{--auvyx-anim-delay:0.60s}
+@keyframes auvyx-a-fade{from{opacity:0}to{opacity:1}}
+@keyframes auvyx-a-up{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
+@keyframes auvyx-a-down{from{opacity:0;transform:translateY(-32px)}to{opacity:1;transform:none}}
+@keyframes auvyx-a-left{from{opacity:0;transform:translateX(-48px)}to{opacity:1;transform:none}}
+@keyframes auvyx-a-right{from{opacity:0;transform:translateX(48px)}to{opacity:1;transform:none}}
+@keyframes auvyx-a-zoom{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
+@keyframes auvyx-a-blur{from{opacity:0;filter:blur(12px)}to{opacity:1;filter:none}}
+@keyframes auvyx-a-bounce{0%{opacity:0;transform:scale(.3)}50%{opacity:1;transform:scale(1.05)}70%{transform:scale(.95)}to{opacity:1;transform:none}}
+@keyframes auvyx-a-flip-x{from{opacity:0;transform:perspective(400px) rotateX(90deg)}to{opacity:1;transform:none}}
+@keyframes auvyx-a-flip-y{from{opacity:0;transform:perspective(400px) rotateY(90deg)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.auvyx-anim [class*="auvyx-animate-"]{opacity:1!important;animation:none!important}}
+/* animate: end */
+
+/* hotspot: generated from shared/Hotspot.scala (AUVYX_UPDATE_SNAPSHOTS=1 sbt sharedJVM/test) */
+.auvyx-hotspot{z-index:2}
+.auvyx-hotspot>.wp-block-auvyx-button:first-child{position:relative}
+.auvyx-hotspot>.wp-block-auvyx-button:first-child::after{content:"";position:absolute;inset:-6px;border-radius:inherit;border:2px solid currentColor;opacity:0;animation:auvyx-hotspot-pulse 2s ease-out infinite;pointer-events:none}
+@keyframes auvyx-hotspot-pulse{0%{opacity:.6;transform:scale(.8)}100%{opacity:0;transform:scale(1.5)}}
+.auvyx-hotspot__tip{position:absolute;left:50%;bottom:calc(100% + 12px);translate:-50% 0;z-index:3;opacity:0;visibility:hidden;transition:opacity .2s ease,visibility 0s linear .2s}
+.auvyx-hotspot--below>.auvyx-hotspot__tip{bottom:auto;top:calc(100% + 12px)}
+.auvyx-hotspot--left>.auvyx-hotspot__tip{left:auto;right:calc(100% + 12px);bottom:auto;top:50%;translate:0 -50%}
+.auvyx-hotspot--right>.auvyx-hotspot__tip{left:calc(100% + 12px);bottom:auto;top:50%;translate:0 -50%}
+.auvyx-hotspot:hover>.auvyx-hotspot__tip,.auvyx-hotspot:focus-within>.auvyx-hotspot__tip,.auvyx-hotspot.auvyx-open>.auvyx-hotspot__tip{opacity:1;visibility:visible;transition:opacity .2s ease}
+@media (prefers-reduced-motion:reduce){.auvyx-hotspot>.wp-block-auvyx-button:first-child::after{animation:none}}
+/* hotspot: end */
+
+/* header: generated from shared/HeaderOptions.scala (AUVYX_UPDATE_SNAPSHOTS=1 sbt sharedJVM/test) */
+:is(.wp-block-template-part,.auvyx-fragment):has(>.auvyx-header-sticky){position:sticky;top:var(--wp-admin--admin-bar--height,0px);z-index:100}
+:where(.auvyx-header-sticky){background-color:var(--wp--preset--color--auvyx-base,var(--wp--preset--color--base,#fff));transition:box-shadow .2s ease,padding .2s ease}
+:is(.wp-block-template-part,.auvyx-fragment).is-stuck>.auvyx-header-sticky{box-shadow:0 2px 16px rgb(0 0 0/.08)}
+:is(.wp-block-template-part,.auvyx-fragment).is-stuck>.auvyx-header-shrink .auvyx-header-topbar{display:none}
+:is(.wp-block-template-part,.auvyx-fragment).is-stuck>.auvyx-header-shrink>*{padding-block:8px!important}
+:is(.wp-block-template-part,.auvyx-fragment).is-stuck>.auvyx-header-shrink:not(:has(>*>*)){padding-block:8px!important}
+.auvyx-header-shrink>*{transition:padding .2s ease}
+.auvyx-header-shrink :is(img,.custom-logo){transition:max-height .2s ease}
+:is(.wp-block-template-part,.auvyx-fragment).is-stuck>.auvyx-header-shrink :is(img,.custom-logo){max-height:36px;width:auto}
+body.home :is(.wp-block-template-part,.auvyx-fragment):has(>.auvyx-header-overlay){position:absolute;inset-inline:0;top:var(--wp-admin--admin-bar--height,0px);z-index:100}
+body.home :is(.wp-block-template-part,.auvyx-fragment):has(>.auvyx-header-overlay.auvyx-header-sticky){position:fixed}
+body.home :is(.wp-block-template-part,.auvyx-fragment):not(.is-stuck)>.auvyx-header-overlay{background:transparent!important;color:#fff;box-shadow:none}
+body.home :is(.wp-block-template-part,.auvyx-fragment):not(.is-stuck)>.auvyx-header-overlay :is(a,button,.wp-block-auvyx-icon){color:inherit}
+body.home :is(.wp-block-template-part,.auvyx-fragment).is-stuck>.auvyx-header-overlay{background-color:var(--wp--preset--color--auvyx-base,var(--wp--preset--color--base,#fff));color:var(--wp--preset--color--auvyx-text,var(--wp--preset--color--contrast,#111))}
+@media (prefers-reduced-motion:reduce){:where(.auvyx-header-sticky),.auvyx-header-shrink>*,.auvyx-header-shrink :is(img,.custom-logo){transition:none}}
+/* header: end */
+
+/* container: generated from shared/Container.scala (AUVYX_UPDATE_SNAPSHOTS=1 sbt sharedJVM/test) */
+:root{--auvyx-container:var(--wp--style--global--wide-size,1200px);--auvyx-gutter:24px;--auvyx-band:max(var(--auvyx-gutter),calc((100vw - var(--auvyx-container)) / 2))}
+/* container: end */
+
+/* Smooth (squircle) corners, as Figma draws them: an element whose own styles round its corners gets .auvyx-squircle at
+   render (circles, pills and square corners do not; Corners.scala, Styles.php). Where the browser has corner-shape
+   (CSS Borders 4) the curve is smooth; elsewhere the corners stay round. */
+@supports (corner-shape: squircle) {
+  .auvyx-squircle,
+  .auvyx-squircle > img,
+  .auvyx-form__control,
+  .auvyx-form__submit,
+  .auvyx-form__sent,
+  .auvyx-form__error,
+  .auvyx-nav__list .auvyx-nav__sub,
+  .auvyx-loop__pages .page-numbers,
+  .auvyx-slider-thumb { corner-shape: squircle; }
+}
+
+/* A video that starts by itself (Autoplay): the sound on/off button video.js adds (it turns the sound on as soon as
+   the browser allows; a muted start is what every browser lets a page do). */
+.wp-block-auvyx-video:not(.auvyx-bg-video) video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+/* A player in a frame of its own shape (9:16, 1:1, 4:5): it fills the frame, cropping a wide video to its middle (Embed.withFrame). */
+.wp-block-auvyx-video.auvyx-video-crop { container-type: size; }
+.wp-block-auvyx-video.auvyx-video-crop iframe { inset: auto; top: 50%; left: 50%; width: max(100cqw, 177.78cqh); height: max(100cqh, 56.25cqw); translate: -50% -50%; }
+.wp-block-auvyx-video.auvyx-video-crop video { object-fit: cover; }
+.auvyx-video__sound { position: absolute; right: 12px; bottom: 12px; z-index: 2; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 999px; background: rgb(0 0 0 / 0.6); color: #fff; cursor: pointer; }
+.auvyx-video__sound svg { width: 20px; height: 20px; }
+.auvyx-video__sound:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.auvyx-video--sound .auvyx-video__sound, .auvyx-video__sound.is-on { opacity: 0.55; }
+.auvyx-has-bg-video > .auvyx-video__sound { z-index: 3; }
+.auvyx-video--sound .auvyx-video__sound:hover, .auvyx-video--sound .auvyx-video__sound:focus-visible, .auvyx-video__sound.is-on:hover, .auvyx-video__sound.is-on:focus-visible { opacity: 1; }
+
+/* ---- Header and menus, finished (header presets, any Auvyx Navigation) -------------------------------------------- */
+/* A preset header's rows anchor what opens from their menu (a dropdown, a mega panel): the menu itself stays static so
+   a mega panel can span its row. Headers built before the rows carried it get it here. */
+.auvyx-hv > * { position: relative; }
+/* The dropdown hangs under its own menu button, whatever the header around it (a drawer is fixed to the screen). In a
+   preset header it spans the row under it instead, so it never runs off the screen whichever side the button sits on. */
+.auvyx-nav__menu { position: relative; }
+.auvyx-hv .wp-block-auvyx-nav, .auvyx-hv .auvyx-nav__menu { position: static; }
+.auvyx-hv .wp-block-auvyx-nav:not([class*="auvyx-drawer-"]) .auvyx-nav__panel { inset-inline: 12px; top: calc(100% + 6px); min-width: 0; }
+
+/* Desktop links: a quiet underline that grows in; the current page keeps it. It is an inset shadow, not a background, so the link's
+   text always sits on the header's own colour (a same-coloured background layer reads as zero contrast). */
+.auvyx-nav__list > li > a {
+	padding: 8px;
+	margin-inline: -8px;
+	box-shadow: inset 0 0 0 0 currentColor;
+	transition: box-shadow .28s cubic-bezier(.2, .7, .2, 1), opacity .2s ease;
+}
+.wp-block-auvyx-nav .auvyx-nav__list > li > a:hover,
+.wp-block-auvyx-nav .auvyx-nav__list > li > a[aria-current="page"] { text-decoration: none; box-shadow: inset 0 -2px 0 0 currentColor; }
+.wp-block-auvyx-nav .auvyx-nav__list > li > a:focus-visible { box-shadow: inset 0 -2px 0 0 currentColor; outline: 2px solid currentColor; outline-offset: -2px; border-radius: 4px; }
+
+/* Submenus and the dropdown: a floating card, rows that light up under the pointer. */
+.auvyx-nav__list .auvyx-nav__sub,
+.auvyx-nav__panel {
+	padding: 8px;
+	border-radius: var(--wp--custom--radius--lg, 12px);
+	box-shadow: 0 1px 2px rgb(0 0 0 / .06), 0 16px 40px rgb(0 0 0 / .14);
+}
+.auvyx-nav__sub a,
+.auvyx-nav__panel a {
+	border-radius: var(--wp--custom--radius--md, 8px);
+	transition: background-color .15s ease, color .15s ease;
+}
+.wp-block-auvyx-nav .auvyx-nav__sub a:hover,
+.wp-block-auvyx-nav .auvyx-nav__panel a:hover,
+.wp-block-auvyx-nav .auvyx-nav__panel a:focus-visible {
+	background-color: color-mix(in srgb, currentColor 7%, transparent);
+	text-decoration: none;
+}
+.wp-block-auvyx-nav .auvyx-nav__panel a:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+.wp-block-auvyx-nav .auvyx-nav__panel a[aria-current="page"] {
+	background-color: color-mix(in srgb, var(--wp--preset--color--auvyx-primary, currentColor) 12%, transparent);
+	color: var(--wp--preset--color--auvyx-primary, inherit);
+	text-decoration: none;
+}
+
+/* Drawers and the sheet: roomier rows without rules between them, the open edge rounded, a softer entrance, links that
+   arrive one after another, a close button that reads as one. */
+[class*="auvyx-drawer-"] .auvyx-nav__panel {
+	gap: 2px;
+	padding: 76px 14px 28px;
+	font-size: 1.0625rem;
+	box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 6%, transparent), 0 24px 64px rgb(0 0 0 / .24);
+}
+[class*="auvyx-drawer-"] .auvyx-nav__panel > li + li { border-top: 0; }
+[class*="auvyx-drawer-"] .auvyx-nav__panel a { padding: 13px 14px; font-weight: 600; }
+.auvyx-drawer-right .auvyx-nav__panel {
+	border-start-start-radius: var(--wp--custom--radius--xl, 20px);
+	border-end-start-radius: var(--wp--custom--radius--xl, 20px);
+	animation: auvyx-drawer-right .42s cubic-bezier(.16, 1, .3, 1) both;
+}
+.auvyx-drawer-left .auvyx-nav__panel {
+	border-start-end-radius: var(--wp--custom--radius--xl, 20px);
+	border-end-end-radius: var(--wp--custom--radius--xl, 20px);
+	animation: auvyx-drawer-left .42s cubic-bezier(.16, 1, .3, 1) both;
+}
+.auvyx-drawer-sheet .auvyx-nav__panel {
+	padding: 40px 14px calc(24px + env(safe-area-inset-bottom, 0px));
+	border-radius: var(--wp--custom--radius--xl, 20px) var(--wp--custom--radius--xl, 20px) 0 0;
+	animation: auvyx-drawer-up .42s cubic-bezier(.16, 1, .3, 1) both;
+}
+.auvyx-drawer-full .auvyx-nav__panel { border-radius: 0; }
+.auvyx-drawer-full .auvyx-nav__panel a { padding: 12px 20px; font-weight: 700; }
+[class*="auvyx-drawer-"] .auvyx-nav__menu[open] > .auvyx-nav__toggle {
+	top: 16px;
+	inset-inline-end: 16px;
+	box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 12%, transparent), 0 4px 14px rgb(0 0 0 / .12);
+}
+.auvyx-drawer-left .auvyx-nav__menu[open] > .auvyx-nav__toggle { inset-inline: calc(min(var(--auvyx-drawer-w, 320px), 88vw) - 56px) auto; }
+@media (prefers-reduced-motion: no-preference) {
+	[class*="auvyx-drawer-"] .auvyx-nav__menu[open] .auvyx-nav__panel > li { animation: auvyx-drawer-item .4s cubic-bezier(.16, 1, .3, 1) both; }
+	.auvyx-drawer-left .auvyx-nav__menu[open] .auvyx-nav__panel > li { animation-name: auvyx-drawer-item-left; }
+	.auvyx-drawer-sheet .auvyx-nav__menu[open] .auvyx-nav__panel > li,
+	.auvyx-drawer-full .auvyx-nav__menu[open] .auvyx-nav__panel > li { animation-name: auvyx-drawer-item-up; }
+	[class*="auvyx-drawer-"] .auvyx-nav__menu[open] .auvyx-nav__panel > li:nth-child(1) { animation-delay: .06s; }
+	[class*="auvyx-drawer-"] .auvyx-nav__menu[open] .auvyx-nav__panel > li:nth-child(2) { animation-delay: .1s; }
+	[class*="auvyx-drawer-"] .auvyx-nav__menu[open] .auvyx-nav__panel > li:nth-child(3) { animation-delay: .14s; }
+	[class*="auvyx-drawer-"] .auvyx-nav__menu[open] .auvyx-nav__panel > li:nth-child(4) { animation-delay: .18s; }
+	[class*="auvyx-drawer-"] .auvyx-nav__menu[open] .auvyx-nav__panel > li:nth-child(5) { animation-delay: .22s; }
+	[class*="auvyx-drawer-"] .auvyx-nav__menu[open] .auvyx-nav__panel > li:nth-child(n+6) { animation-delay: .26s; }
+}
+@keyframes auvyx-drawer-item { from { opacity: 0; transform: translateX(16px); } }
+@keyframes auvyx-drawer-item-left { from { opacity: 0; transform: translateX(-16px); } }
+@keyframes auvyx-drawer-item-up { from { opacity: 0; transform: translateY(12px); } }
+
+/* A stuck header turns to frosted glass over the page (drawer.js lets go of the blur while a drawer is open). */
+:is(.wp-block-template-part, .auvyx-fragment).is-stuck > .auvyx-header-sticky {
+	background-color: color-mix(in srgb, var(--wp--preset--color--auvyx-base, var(--wp--preset--color--base, #fff)) 80%, transparent);
+	-webkit-backdrop-filter: saturate(1.5) blur(14px);
+	backdrop-filter: saturate(1.5) blur(14px);
+}
+:is(.wp-block-template-part, .auvyx-fragment).is-stuck > .auvyx-header-sticky.auvyx-hv-dark {
+	background-color: color-mix(in srgb, var(--wp--preset--color--auvyx-secondary, #111) 82%, transparent);
+}
+@supports (corner-shape: squircle) {
+	.auvyx-nav__list .auvyx-nav__sub, .auvyx-nav__panel, .auvyx-nav__sub a, .auvyx-nav__panel a { corner-shape: squircle; }
+}
+
+/* Auvyx Play (docs/play-sandbox.md): a game on a page, behind its poster until the visitor presses play. */
+.auvyx-game{position:relative}
+.auvyx-play{position:relative;width:100%;height:100%;aspect-ratio:16/9;min-height:220px;overflow:hidden;background:#0b0b10;border-radius:inherit;isolation:isolate}
+.auvyx-play__poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.auvyx-play__start{position:absolute;inset:0;margin:auto;width:max-content;height:max-content;display:inline-flex;align-items:center;gap:.6em;padding:.85em 1.5em;border:0;border-radius:999px;background:rgba(255,255,255,.94);color:#111;font:600 1rem/1 inherit;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .15s ease}
+.auvyx-play__start:hover{transform:scale(1.05)}
+.auvyx-play__start:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.auvyx-play__icon{width:0;height:0;border-style:solid;border-width:.5em 0 .5em .8em;border-color:transparent transparent transparent currentColor}
+.auvyx-play.is-playing .auvyx-play__poster,.auvyx-play.is-playing .auvyx-play__start{display:none}
+.auvyx-play__frame{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#000}
+
+/* Code snippet block (auvyx/snippet) */
+.auvyx-snippet,.wp-block-auvyx-snippet{position:relative;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:15px;line-height:1.65;border-radius:16px;overflow:hidden;border:1px solid color-mix(in srgb,var(--wp--preset--color--auvyx-primary,#3dff8a) 28%,transparent)}
+.auvyx-snippet pre,.wp-block-auvyx-snippet pre{margin:0;padding:1.5rem 1.5rem 3.25rem;overflow-x:auto;background:transparent}
+.auvyx-snippet code,.wp-block-auvyx-snippet code{display:block;white-space:pre;color:inherit;background:transparent}
+body .wp-block-auvyx-snippet pre,body .wp-block-auvyx-snippet code{background:transparent !important;margin:0 !important;font-size:15px;line-height:1.65}
+.auvyx-snippet--dark:not(.has-background),.wp-block-auvyx-snippet:not(.auvyx-snippet--light):not(.has-background){background:color-mix(in srgb,var(--wp--preset--color--auvyx-secondary,#0c0f0d) 90%,#000);color:var(--wp--preset--color--auvyx-text,#e8fff1);box-shadow:0 0 0 1px color-mix(in srgb,var(--wp--preset--color--auvyx-primary,#3dff8a) 30%,transparent),0 28px 80px color-mix(in srgb,var(--wp--preset--color--auvyx-primary,#3dff8a) 16%,transparent)}
+body .auvyx-snippet--dark:not(.has-text-color),body .auvyx-snippet--dark:not(.has-text-color) code,body .wp-block-auvyx-snippet:not(.auvyx-snippet--light):not(.has-text-color),body .wp-block-auvyx-snippet:not(.auvyx-snippet--light):not(.has-text-color) code{color:var(--wp--preset--color--auvyx-text,#e8fff1)}
+.auvyx-snippet--dark .token-keyword,.wp-block-auvyx-snippet:not(.auvyx-snippet--light) .token-keyword{color:var(--wp--preset--color--auvyx-primary,#3dff8a)}
+.auvyx-snippet--dark .token-string,.wp-block-auvyx-snippet:not(.auvyx-snippet--light) .token-string{color:#d8ffe8}
+.auvyx-snippet--dark .token-comment,.wp-block-auvyx-snippet:not(.auvyx-snippet--light) .token-comment{color:var(--wp--preset--color--auvyx-muted,#9bb3a6)}
+.auvyx-snippet--light{background:var(--wp--preset--color--auvyx-surface,#f6f7f9);color:var(--wp--preset--color--auvyx-text,#111827)}
+.auvyx-snippet--light .token-keyword{color:var(--wp--preset--color--auvyx-primary,#111827)}
+.auvyx-snippet--light .token-string{color:#0f766e}
+.auvyx-snippet--light .token-comment{color:var(--wp--preset--color--auvyx-muted,#6b7280)}
+.auvyx-snippet__copy{position:absolute;right:.65rem;bottom:.55rem;padding:.35rem .65rem;border-radius:var(--wp--custom--radius--sm,6px);border:1px solid color-mix(in srgb,currentColor 25%,transparent);background:color-mix(in srgb,currentColor 8%,transparent);color:inherit;font:inherit;font-size:11px;cursor:pointer}
+.auvyx-snippet__copy:hover{background:color-mix(in srgb,currentColor 14%,transparent)}
+.auvyx-snippet__copy:focus-visible{outline:2px solid var(--wp--preset--color--auvyx-primary,currentColor);outline-offset:2px}
+
+/* ---- Widgets (shared/Widgets.scala, assets/widgets.js) -------------------------------------------------------- */
+/* Auvyx Builder Pro's widgets (flip box, before/after, marquee, table of contents, share) are styled by its pro-widgets.css. */
+/* Filled icons (a star rating): every icon inside takes its colour as fill too. */
+.auvyx-icon-fill svg {
+	fill: currentColor;
+}
+/* Map and breadcrumbs (Modules/Widgets) */
+.auvyx-map {
+	overflow: hidden;
+	border-radius: var(--wp--custom--radius--lg, 12px);
+}
+.auvyx-map iframe {
+	display: block;
+	width: 100%;
+	border: 0;
+}
+.auvyx-breadcrumbs ol {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 0.875rem;
+}
+.auvyx-breadcrumbs li {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+.auvyx-breadcrumbs a {
+	color: var(--wp--preset--color--auvyx-muted, inherit);
+	text-decoration: none;
+}
+.auvyx-breadcrumbs a:hover {
+	color: inherit;
+	text-decoration: underline;
+}
+.auvyx-breadcrumbs__sep {
+	opacity: 0.5;
+}

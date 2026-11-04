@@ -1,0 +1,61 @@
+{
+  "$comment": "Parity fixtures for data sources: run by the Studio (DataSources.scala, JVM and JS) AND products/builder/tests/php (DataSources.php). items: what an answer becomes; validate: which specs are accepted.",
+  "items": [
+    {
+      "name": "a REST list under a path, fields by path, numbers and booleans as text",
+      "spec": { "name": "shop", "label": "Shop", "url": "https://api.test/products", "list": "data.items", "fields": { "title": "name", "price": "price.amount", "image": "images.0.src", "stock": "inStock", "missing": "nope" } },
+      "answer": "{\"data\":{\"items\":[{\"name\":\"Tee\",\"price\":{\"amount\":12.5},\"images\":[{\"src\":\"https://cdn.test/t.jpg\"}],\"inStock\":true},{\"name\":\"Mug\",\"price\":{\"amount\":8},\"images\":[],\"inStock\":false}]}}",
+      "expected": { "items": [ { "data/title": "Tee", "data/price": "12.5", "data/image": "https://cdn.test/t.jpg", "data/stock": "true" }, { "data/title": "Mug", "data/price": "8", "data/stock": "false" } ] }
+    },
+    {
+      "name": "the answer itself is the list, and the limit cuts it",
+      "spec": { "name": "posts", "label": "", "url": "https://api.test/posts", "fields": { "title": "title" } },
+      "answer": "[{\"title\":\"A\"},{\"title\":\"B\"},{\"title\":\"C\"}]",
+      "limit": 2,
+      "expected": { "items": [ { "data/title": "A" }, { "data/title": "B" } ] }
+    },
+    {
+      "name": "an object where the list should be is one item; objects and lists are not values",
+      "spec": { "name": "me", "label": "", "url": "https://api.test/me", "list": "user", "fields": { "name": "name", "tags": "tags", "address": "address" } },
+      "answer": "{\"user\":{\"name\":\"Ann Việt\",\"tags\":[\"a\"],\"address\":{\"city\":\"Hà Nội\"}}}",
+      "expected": { "items": [ { "data/name": "Ann Việt" } ] }
+    },
+    {
+      "name": "a GraphQL answer with data is read; errors beside data are ignored",
+      "spec": { "name": "gql", "label": "", "url": "https://api.test/graphql", "method": "POST", "body": "{\"query\":\"{ products { name } }\"}", "list": "data.products", "fields": { "name": "name" } },
+      "answer": "{\"data\":{\"products\":[{\"name\":\"X\"}]},\"errors\":[{\"message\":\"partial\"}]}",
+      "expected": { "items": [ { "data/name": "X" } ] }
+    },
+    {
+      "name": "a GraphQL answer with only errors is an error",
+      "spec": { "name": "gql", "label": "", "url": "https://api.test/graphql", "method": "POST", "body": "{}", "list": "data.products", "fields": { "name": "name" } },
+      "answer": "{\"data\":null,\"errors\":[{\"message\":\"bad\"}]}",
+      "expected": { "error": true }
+    },
+    {
+      "name": "text that is not JSON is an error",
+      "spec": { "name": "x", "label": "", "url": "https://api.test/x", "fields": { "a": "a" } },
+      "answer": "<html>nope</html>",
+      "expected": { "error": true }
+    },
+    {
+      "name": "a path that leads nowhere lists nothing",
+      "spec": { "name": "x", "label": "", "url": "https://api.test/x", "list": "data.items.9", "fields": { "a": "a" } },
+      "answer": "{\"data\":{\"items\":[]}}",
+      "expected": { "items": [] }
+    }
+  ],
+  "validate": [
+    { "name": "a GET source", "spec": { "name": "shop", "label": "Shop", "url": "https://api.test/p", "fields": { "title": "name" } }, "valid": true },
+    { "name": "a POST with a body and a token header", "spec": { "name": "gql", "label": "", "url": "https://api.test/graphql", "method": "post", "headers": { "Authorization": "Bearer abc" }, "body": "{\"query\":\"{a}\"}", "fields": { "a": "a" }, "ttl": 60 }, "valid": true },
+    { "name": "a capital in the name", "spec": { "name": "Shop", "label": "", "url": "https://api.test/p", "fields": { "a": "a" } }, "valid": false },
+    { "name": "not http", "spec": { "name": "f", "label": "", "url": "file:///etc/passwd", "fields": { "a": "a" } }, "valid": false },
+    { "name": "a header that starts another header", "spec": { "name": "h", "label": "", "url": "https://api.test/p", "headers": { "X-A": "1\r\nX-B: 2" }, "fields": { "a": "a" } }, "valid": false },
+    { "name": "a GET with a body", "spec": { "name": "g", "label": "", "url": "https://api.test/p", "body": "{}", "fields": { "a": "a" } }, "valid": false },
+    { "name": "no fields", "spec": { "name": "n", "label": "", "url": "https://api.test/p", "fields": {} }, "valid": false },
+    { "name": "a path with a space", "spec": { "name": "p", "label": "", "url": "https://api.test/p", "fields": { "a": "a b" } }, "valid": false },
+    { "name": "kept too long", "spec": { "name": "t", "label": "", "url": "https://api.test/p", "fields": { "a": "a" }, "ttl": 100000 }, "valid": false },
+    { "name": "a public source kept a minute", "spec": { "name": "pub", "label": "", "url": "https://api.test/p", "fields": { "a": "a" }, "ttl": 60, "public": true }, "valid": true },
+    { "name": "a public source asked on every view", "spec": { "name": "pub", "label": "", "url": "https://api.test/p", "fields": { "a": "a" }, "ttl": 0, "public": true }, "valid": false }
+  ]
+}

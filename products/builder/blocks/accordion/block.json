@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/accordion",
+  "title": "Auvyx Accordion",
+  "category": "auvyx-builder",
+  "description": "Collapsible item (native <details>, no JavaScript). Stack several for an FAQ.",
+  "keywords": ["faq", "toggle", "collapse", "details"],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "title": { "type": "rich-text", "source": "rich-text", "selector": "summary", "role": "content" },
+    "auvyx": { "type": "object" }
+  },
+  "supports": { "anchor": true, "html": false },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks"
+}

@@ -1,0 +1,474 @@
+{
+ "schema": "auvyx-code-css-fixtures/1",
+ "$comment": "Per-instance scoping of a code block's own CSS (CodeCssScope). `{root}` is [data-auvyx-code-css=\"<key>\"], `{k}` the instance key. Shared with the PHP port in wave 2.",
+ "key": "auvyxc0123456789",
+ "cases": [
+  {
+   "name": "a plain rule is prefixed",
+   "css": ".a{color:red}",
+   "scoped": "{root} .a{color:red}"
+  },
+  {
+   "name": "every branch of a list is prefixed",
+   "css": ".a, .b > .c{x:y}",
+   "scoped": "{root} .a,{root} .b > .c{x:y}"
+  },
+  {
+   "name": "any property and literal value is accepted (no design-system lint)",
+   "css": ".a{color:#123456;border-radius:7px;--my-var:1.5;transform:rotate(3deg);position:fixed}",
+   "scoped": "{root} .a{color:#123456;border-radius:7px;--my-var:1.5;transform:rotate(3deg);position:fixed}"
+  },
+  {
+   "name": "& is the root",
+   "css": "&{display:grid}&:hover .x{y:z}",
+   "scoped": "{root}{display:grid}{root}:hover .x{y:z}"
+  },
+  {
+   "name": ":root is the root, never the document",
+   "css": ":root{--c:1}",
+   "scoped": "{root}{--c:1}"
+  },
+  {
+   "name": "html and body are the root",
+   "css": "html{a:b}body{c:d}",
+   "scoped": "{root}{a:b}{root}{c:d}"
+  },
+  {
+   "name": "html body chained is the root, its class kept",
+   "css": "html body.dark .x{y:z}",
+   "scoped": "{root}.dark .x{y:z}"
+  },
+  {
+   "name": "html > body is the root",
+   "css": "html > body .y{a:b}",
+   "scoped": "{root} .y{a:b}"
+  },
+  {
+   "name": "a universal selector stays inside",
+   "css": "*{box-sizing:border-box}",
+   "scoped": "{root} *{box-sizing:border-box}"
+  },
+  {
+   "name": "a child combinator at the start stays under the root",
+   "css": ">.a{x:y}",
+   "scoped": "{root} > .a{x:y}"
+  },
+  {
+   "name": "a comma inside an attribute value does not split",
+   "css": "[data-x=\"a,b\"] .y{c:d}",
+   "scoped": "{root} [data-x=\"a,b\"] .y{c:d}"
+  },
+  {
+   "name": "nested rules stay as written, relative to their scoped parent",
+   "css": ".a{color:red;&:hover{color:blue}}",
+   "scoped": "{root} .a{color:red;&:hover{color:blue}}"
+  },
+  {
+   "name": "comments are dropped",
+   "css": "/* hi */ .a{x:y} /* {bad} */",
+   "scoped": "{root} .a{x:y}"
+  },
+  {
+   "name": "media, supports and container are scoped in turn",
+   "css": "@media (max-width:600px){.a{x:y}}@supports (display:grid){& .b{x:y}}@container (min-width:400px){.c{x:y}}",
+   "scoped": "@media (max-width:600px){{root} .a{x:y}}@supports (display:grid){{root} .b{x:y}}@container (min-width:400px){{root} .c{x:y}}"
+  },
+  {
+   "name": "keyframes get a name of their own and their references follow",
+   "css": "@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}.a{animation:spin 1s linear infinite}.b{animation-name:spin}",
+   "scoped": "@keyframes {k}-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}{root} .a{animation:{k}-spin 1s linear infinite}{root} .b{animation-name:{k}-spin}"
+  },
+  {
+   "name": "an animation may be used before its keyframes",
+   "css": "@media (min-width:1px){.a{animation:pulse 2s}}@keyframes pulse{0%{opacity:0}100%{opacity:1}}",
+   "scoped": "@media (min-width:1px){{root} .a{animation:{k}-pulse 2s}}@keyframes {k}-pulse{0%{opacity:0}100%{opacity:1}}"
+  },
+  {
+   "name": "a name that only contains the keyframes name is not renamed",
+   "css": ".a{animation:spinner 1s}@keyframes spin{to{x:y}}",
+   "scoped": "{root} .a{animation:spinner 1s}@keyframes {k}-spin{to{x:y}}"
+  },
+  {
+   "name": "urls: relative, http(s) and raster data images are fine",
+   "css": ".a{background:url(a.png),url('https://x.test/b.webp'),url(\"data:image/png;base64,AAAA\")}",
+   "scoped": "{root} .a{background:url(a.png),url('https://x.test/b.webp'),url(\"data:image/png;base64,AAAA\")}"
+  },
+  {
+   "name": "the escape of < keeps a style tag from ending",
+   "css": ".a::after{content:\"</style><script>x\"}",
+   "scoped": "{root} .a::after{content:\"\\3c /style>\\3c script>x\"}"
+  },
+  {
+   "name": "an empty sheet is nothing",
+   "css": "  /* nothing */ ",
+   "scoped": ""
+  },
+  {
+   "name": "root siblings are refused",
+   "css": "& + .x{a:b}",
+   "error": {
+    "code": "root_sibling",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "a general sibling of the root is refused",
+   "css": ".a{x:y}\n&:hover ~ .b{a:b}",
+   "error": {
+    "code": "root_sibling",
+    "detail": "L2:C1"
+   }
+  },
+  {
+   "name": "a leading sibling combinator is refused",
+   "css": "+ .x{a:b}",
+   "error": {
+    "code": "root_sibling",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "body followed by a sibling is refused",
+   "css": "body + div{a:b}",
+   "error": {
+    "code": "root_sibling",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "@import is global",
+   "css": "@import url(x.css);",
+   "error": {
+    "code": "at_rule_global",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "@font-face is global",
+   "css": ".a{x:y}\n@font-face{font-family:X;src:url(x.woff2)}",
+   "error": {
+    "code": "at_rule_global",
+    "detail": "L2:C1"
+   }
+  },
+  {
+   "name": "@property is global",
+   "css": "@property --x{syntax:'<number>';inherits:false;initial-value:0}",
+   "error": {
+    "code": "at_rule_global",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "@namespace is global",
+   "css": "@namespace svg url(http://www.w3.org/2000/svg);",
+   "error": {
+    "code": "at_rule_global",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "@charset is global",
+   "css": "@charset \"utf-8\";",
+   "error": {
+    "code": "at_rule_global",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "@page is global",
+   "css": "@page{margin:0}",
+   "error": {
+    "code": "at_rule_global",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "a layer statement is global",
+   "css": "@layer a, b;",
+   "error": {
+    "code": "at_rule_global",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "an unknown at-rule is refused",
+   "css": "@frobnicate{a:b}",
+   "error": {
+    "code": "at_rule_unsupported",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "javascript: is refused",
+   "css": ".a{background:url(javascript:x)}",
+   "error": {
+    "code": "css_forbidden",
+    "detail": "L1:C19"
+   }
+  },
+  {
+   "name": "a data url that is not a raster image is refused",
+   "css": ".a{background:url(data:text/html,hi)}",
+   "error": {
+    "code": "css_url",
+    "detail": "L1:C15"
+   }
+  },
+  {
+   "name": "an ftp url is refused",
+   "css": ".a{background:url(ftp://x/y)}",
+   "error": {
+    "code": "css_url",
+    "detail": "L1:C15"
+   }
+  },
+  {
+   "name": "expression() is refused",
+   "css": ".a{width:expression(alert(1))}",
+   "error": {
+    "code": "css_forbidden",
+    "detail": "L1:C10"
+   }
+  },
+  {
+   "name": "an interpolation is not CSS",
+   "css": ".a{color:{{x}}}",
+   "error": {
+    "code": "css_forbidden",
+    "detail": "L1:C10"
+   }
+  },
+  {
+   "name": "an unclosed rule has a place",
+   "css": ".a{x:y",
+   "error": {
+    "code": "unbalanced_brace",
+    "detail": "L1:C3"
+   }
+  },
+  {
+   "name": "a stray close brace has a place",
+   "css": ".a{x:y}}",
+   "error": {
+    "code": "unbalanced_brace",
+    "detail": "L1:C8"
+   }
+  },
+  {
+   "name": "an unterminated comment has a place",
+   "css": ".a{x:y}\n/* oops",
+   "error": {
+    "code": "unterminated_comment",
+    "detail": "L2:C1"
+   }
+  },
+  {
+   "name": "an unterminated string has a place",
+   "css": ".a{content:\"x}\n.b{c:d}",
+   "error": {
+    "code": "unterminated_string",
+    "detail": "L1:C15"
+   }
+  },
+  {
+   "name": "keyframes need a plain name",
+   "css": "@keyframes \"x\"{to{a:b}}",
+   "error": {
+    "code": "keyframes_name",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "a declaration outside a rule is refused",
+   "css": "color:red;",
+   "error": {
+    "code": "declaration_outside_rule",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "an empty selector is refused",
+   "css": "{a:b}",
+   "error": {
+    "code": "empty_selector",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "javascript: with a call is a bad url",
+   "css": ".a{background:url(javascript:alert(1))}",
+   "error": {
+    "code": "css_url",
+    "detail": "L1:C15"
+   }
+  },
+  {
+   "name": "a layer block is refused (its first name orders the page's layers)",
+   "css": "@layer base{.d{x:y}}",
+   "error": {
+    "code": "at_rule_global",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "an escaped bracket is part of the identifier: no branch hides in it",
+   "css": ".a\\(, body, .b\\) { color: red }",
+   "scoped": "{root} .a\\(,{root},{root} .b\\){ color: red }"
+  },
+  {
+   "name": "an escaped square bracket is part of the identifier",
+   "css": ".a\\[, body, .b\\] { color: red }",
+   "scoped": "{root} .a\\[,{root},{root} .b\\]{ color: red }"
+  },
+  {
+   "name": "an escaped brace in a selector is part of the identifier",
+   "css": ".a\\{b, body{color:red}",
+   "scoped": "{root} .a\\{b,{root}{color:red}"
+  },
+  {
+   "name": "an escaped comma does not split a selector",
+   "css": ".a\\,b{x:y}",
+   "scoped": "{root} .a\\,b{x:y}"
+  },
+  {
+   "name": "an escaped quote in a value does not open a string",
+   "css": ".a { x: y\\\" } body { color:red }",
+   "scoped": "{root} .a{ x: y\\\" }{root}{ color:red }"
+  },
+  {
+   "name": "an escaped quote in a selector does not open a string",
+   "css": ".a\\\"b, body{x:y}",
+   "scoped": "{root} .a\\\"b,{root}{x:y}"
+  },
+  {
+   "name": "an escaped html is an element inside the root, never the document",
+   "css": "\\68 tml{x:y}",
+   "scoped": "{root} \\68 tml{x:y}"
+  },
+  {
+   "name": "a string with an escaped quote keeps its braces",
+   "css": ".a::after{content:\"x\\\"}y\"}.b{c:d}",
+   "scoped": "{root} .a::after{content:\"x\\\"}y\"}{root} .b{c:d}"
+  },
+  {
+   "name": "a backslash that escapes nothing is refused",
+   "css": ".a\\",
+   "error": {
+    "code": "bad_escape",
+    "detail": "L1:C3"
+   }
+  },
+  {
+   "name": "a backslash before a newline outside a string is refused",
+   "css": ".a\\\n{x:y}",
+   "error": {
+    "code": "bad_escape",
+    "detail": "L1:C3"
+   }
+  },
+  {
+   "name": "an escaped url function is still a url",
+   "css": ".a{background:u\\72l(javascript:x)}",
+   "error": {
+    "code": "css_forbidden",
+    "detail": "L1:C19"
+   }
+  },
+  {
+   "name": "image-set strings are addresses",
+   "css": ".a{background:image-set(\"javascript:x\" 1x)}",
+   "error": {
+    "code": "css_forbidden",
+    "detail": "L1:C26"
+   }
+  },
+  {
+   "name": "src() strings are addresses",
+   "css": ".a{background:src(\"data:text/html,x\")}",
+   "error": {
+    "code": "css_url",
+    "detail": "L1:C19"
+   }
+  },
+  {
+   "name": "a type() string inside image-set is not an address",
+   "css": ".a{background:image-set(\"a.png\" type(\"image/png\"))}",
+   "scoped": "{root} .a{background:image-set(\"a.png\" type(\"image/png\"))}"
+  },
+  {
+   "name": "a nested rule that starts with + reaches the root's sibling",
+   "css": ".a{+ .x{color:red}}",
+   "error": {
+    "code": "root_sibling",
+    "detail": "L1:C4"
+   }
+  },
+  {
+   "name": "a nested rule that starts with ~ reaches the root's sibling",
+   "css": ".a{~ .x{color:red}}",
+   "error": {
+    "code": "root_sibling",
+    "detail": "L1:C4"
+   }
+  },
+  {
+   "name": "a nested & + is the parent's sibling",
+   "css": ".a{& + .x{color:red}}",
+   "error": {
+    "code": "root_sibling",
+    "detail": "L1:C4"
+   }
+  },
+  {
+   "name": "a nested & ~ is the parent's sibling",
+   "css": ".a{& ~ .x{color:red}}",
+   "error": {
+    "code": "root_sibling",
+    "detail": "L1:C4"
+   }
+  },
+  {
+   "name": "a sibling combinator after & at any depth is refused",
+   "css": ".a{.b{& + .x{c:d}}}",
+   "error": {
+    "code": "root_sibling",
+    "detail": "L1:C7"
+   }
+  },
+  {
+   "name": "a sibling after the root deeper in a selector is refused",
+   "css": ".a & + .x{c:d}",
+   "error": {
+    "code": "root_sibling",
+    "detail": "L1:C1"
+   }
+  },
+  {
+   "name": "nested rules that stay inside are kept as written",
+   "css": ".a{> .x{c:d}& > .y{c:d}.b &{c:d}.c + .d{c:d}}",
+   "scoped": "{root} .a{> .x{c:d}& > .y{c:d}.b &{c:d}.c + .d{c:d}}"
+  },
+  {
+   "name": "a global at-rule nested in a rule is refused",
+   "css": ".a{@font-face{font-family:x}}",
+   "error": {
+    "code": "at_rule_global",
+    "detail": "L1:C4"
+   }
+  },
+  {
+   "name": "a layer nested in a rule is refused",
+   "css": ".a{@layer x{.b{c:d}}}",
+   "error": {
+    "code": "at_rule_global",
+    "detail": "L1:C4"
+   }
+  },
+  {
+   "name": "a nested media is scoped by its parent",
+   "css": ".a{@media (min-width:1px){.b{c:d}}}",
+   "scoped": "{root} .a{@media (min-width:1px){.b{c:d}}}"
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@auvyx/block-ops",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Pure, immutable operations on auvyx attributes and block trees. Shared by the style panel, Visual Mode and the AI agent.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@auvyx/style-engine": "workspace:*"
+  }
+}

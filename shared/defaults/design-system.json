@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "breakpoints": [
+    {
+      "id": "base",
+      "label": "Desktop"
+    },
+    {
+      "id": "tablet",
+      "label": "Tablet",
+      "maxWidth": 1024
+    },
+    {
+      "id": "mobile",
+      "label": "Mobile",
+      "maxWidth": 767
+    }
+  ],
+  "tokens": {
+    "color": [
+      {
+        "slug": "auvyx-primary",
+        "name": "Auvyx Primary",
+        "color": "#171717"
+      },
+      {
+        "slug": "auvyx-secondary",
+        "name": "Auvyx Secondary",
+        "color": "#0a0a0a"
+      },
+      {
+        "slug": "auvyx-accent",
+        "name": "Auvyx Accent",
+        "color": "#e7000b"
+      },
+      {
+        "slug": "auvyx-surface",
+        "name": "Auvyx Surface",
+        "color": "#f5f5f5"
+      },
+      {
+        "slug": "auvyx-text",
+        "name": "Auvyx Text",
+        "color": "#0a0a0a"
+      },
+      {
+        "slug": "auvyx-inverse",
+        "name": "Auvyx Inverse",
+        "color": "#fafafa"
+      },
+      {
+        "slug": "auvyx-on-primary",
+        "name": "Auvyx On primary",
+        "color": "#fafafa"
+      },
+      {
+        "slug": "auvyx-base",
+        "name": "Auvyx Base",
+        "color": "#ffffff"
+      },
+      {
+        "slug": "auvyx-muted",
+        "name": "Auvyx Muted",
+        "color": "#6b6b6b"
+      },
+      {
+        "slug": "auvyx-border",
+        "name": "Auvyx Border",
+        "color": "#e5e5e5"
+      }
+    ],
+    "spacing": [
+      {
+        "slug": "auvyx-xs",
+        "name": "Auvyx XS",
+        "size": "0.5rem"
+      },
+      {
+        "slug": "auvyx-sm",
+        "name": "Auvyx S",
+        "size": "1rem"
+      },
+      {
+        "slug": "auvyx-md",
+        "name": "Auvyx M",
+        "size": "1.5rem"
+      },
+      {
+        "slug": "auvyx-lg",
+        "name": "Auvyx L",
+        "size": "3rem"
+      },
+      {
+        "slug": "auvyx-xl",
+        "name": "Auvyx XL",
+        "size": "6rem"
+      }
+    ],
+    "fontSize": [
+      {
+        "slug": "auvyx-sm",
+        "name": "Auvyx Small",
+        "size": "0.875rem"
+      },
+      {
+        "slug": "auvyx-md",
+        "name": "Auvyx Medium",
+        "size": "1rem"
+      },
+      {
+        "slug": "auvyx-lg",
+        "name": "Auvyx Large",
+        "size": "clamp(1.125rem, 1rem + 0.5vw, 1.25rem)"
+      },
+      {
+        "slug": "auvyx-xl",
+        "name": "Auvyx XL",
+        "size": "clamp(1.5rem, 1.25rem + 1vw, 1.75rem)"
+      },
+      {
+        "slug": "auvyx-xxl",
+        "name": "Auvyx XXL",
+        "size": "clamp(2rem, 1.5rem + 2.5vw, 2.75rem)"
+      }
+    ],
+    "radius": [
+      {
+        "slug": "sm",
+        "name": "Small corners",
+        "size": "0"
+      },
+      {
+        "slug": "md",
+        "name": "Corners",
+        "size": "0"
+      },
+      {
+        "slug": "lg",
+        "name": "Large corners",
+        "size": "0"
+      },
+      {
+        "slug": "xl",
+        "name": "Extra large corners",
+        "size": "0"
+      },
+      {
+        "slug": "full",
+        "name": "Round",
+        "size": "9999px"
+      }
+    ],
+    "fontFamily": [
+      {
+        "slug": "auvyx-body",
+        "name": "Body font",
+        "size": "Geist, system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+      },
+      {
+        "slug": "auvyx-heading",
+        "name": "Heading font",
+        "size": "Geist, system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+      }
+    ]
+  },
+  "$comment": "The Auvyx look out of the box (shadcn Lyra, the same values as products/theme/theme.json): neutral, square, Geist. A brand's own tokens (the Design screen, DESIGN.md, the AI) replace these; on WordPress, colors and sizes nobody chose follow the theme's palette."
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/nav",
+  "title": "Auvyx Navigation",
+  "category": "auvyx-builder",
+  "description": "A menu bar that turns into a menu button on small screens. Shows pages, a navigation or a classic menu. No JavaScript.",
+  "keywords": ["menu", "navigation", "links", "header"],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "source": { "type": "string", "default": "pages" },
+    "toggleAt": { "type": "string", "enum": ["mobile", "tablet", "never"], "default": "mobile" },
+    "auvyx": { "type": "object" }
+  },
+  "supports": { "anchor": true, "html": false },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks",
+  "render": "file:./render.php"
+}

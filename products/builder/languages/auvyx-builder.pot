@@ -1,0 +1,2311 @@
+# Copyright (C) 2026 Auvyx
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Auvyx Builder 1.0.0\n"
+"Report-Msgid-Bugs-To: https://auvyx.org/support\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: auvyx-builder\n"
+
+#. Plugin Name of the plugin
+#: auvyx-builder.php
+#: src/Modules/Blocks/Blocks.php:232
+#: src/Modules/Patterns/Patterns.php:213
+#: src/Modules/Studio/Admin.php:77
+#: src/Modules/Studio/Admin.php:108
+#: src/Modules/Studio/Admin.php:876
+msgid "Auvyx Builder"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: auvyx-builder.php
+msgid "https://auvyx.org/"
+msgstr ""
+
+#. Description of the plugin
+#: auvyx-builder.php
+msgid "Block-native visual builder: responsive styles, design tokens and layout blocks for block themes."
+msgstr ""
+
+#. Author of the plugin
+#: auvyx-builder.php
+msgid "Auvyx"
+msgstr ""
+
+#: auvyx-builder.php:34
+msgid "Auvyx Builder is not built, or was built before this version. Run \"bun run build\" in the monorepo, or install a release zip."
+msgstr ""
+
+#. translators: %s: site template name.
+#: blocks/loop/render.php:83
+#: src/Modules/Data/Menus.php:27
+#: src/Modules/Studio/Admin.php:41
+#: src/Modules/Studio/Admin.php:192
+#: src/Modules/Studio/MenuBuilder.php:165
+#: src/Modules/Studio/MenuBuilder.php:183
+msgid "Pages"
+msgstr ""
+
+#: blocks/nav/render.php:51
+msgid "Shop by categories"
+msgstr ""
+
+#: blocks/nav/render.php:52
+#: blocks/nav/render.php:59
+#: src/Modules/Studio/MenuBuilder.php:276
+msgid "Menu"
+msgstr ""
+
+#: blocks/snippet/render.php:55
+msgid "Copy"
+msgstr ""
+
+#: blocks/video/render.php:38
+#: blocks/video/render.php:40
+#: blocks/video/render.php:67
+msgid "Video"
+msgstr ""
+
+#: patterns/landing.php:75
+msgid "Block-native visual builder"
+msgstr ""
+
+#: patterns/landing.php:89
+msgid "Design faster. Own your content."
+msgstr ""
+
+#: patterns/landing.php:105
+msgid "Responsive styles, design tokens and native blocks. Deactivate the plugin and your content is still there."
+msgstr ""
+
+#: patterns/landing.php:119
+msgid "Get started"
+msgstr ""
+
+#: patterns/landing.php:121
+msgid "View docs"
+msgstr ""
+
+#: patterns/landing.php:187
+msgid "Everything a modern site needs"
+msgstr ""
+
+#: patterns/landing.php:201
+msgid "Responsive by default"
+msgstr ""
+
+#: patterns/landing.php:201
+msgid "Set styles per breakpoint. Tablet and mobile inherit from desktop until you override them."
+msgstr ""
+
+#: patterns/landing.php:202
+msgid "Design tokens"
+msgstr ""
+
+#: patterns/landing.php:202
+msgid "Colors, spacing and type live in theme.json, so core blocks and other plugins share them."
+msgstr ""
+
+#: patterns/landing.php:203
+msgid "No lock-in"
+msgstr ""
+
+#: patterns/landing.php:203
+msgid "Everything is saved as native WordPress blocks. Your content survives a plugin switch."
+msgstr ""
+
+#: patterns/landing.php:204
+msgid "Fast frontend"
+msgstr ""
+
+#: patterns/landing.php:204
+msgid "Only the CSS your page uses is printed, deduplicated. Zero JavaScript for static layouts."
+msgstr ""
+
+#: patterns/landing.php:205
+msgid "Hover & focus states"
+msgstr ""
+
+#: patterns/landing.php:205
+msgid "Style interactions per breakpoint without writing CSS."
+msgstr ""
+
+#: patterns/landing.php:206
+msgid "AI-ready"
+msgstr ""
+
+#: patterns/landing.php:206
+msgid "A structured style model that agents can read and edit safely."
+msgstr ""
+
+#: patterns/landing.php:242
+msgid "Auvyx Landing (hero + features)"
+msgstr ""
+
+#: patterns/landing.php:243
+msgid "Responsive hero and feature grid built with Auvyx blocks."
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:199
+msgid "Anthropic's own API takes Anthropic keys (sk-ant-…) and model ids like claude-sonnet-4-5. This key or model belongs to OpenRouter: choose \"OpenAI-compatible\" with the base URL https://openrouter.ai/api/v1."
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:202
+msgid "This is an Anthropic key: choose the provider \"Anthropic\"."
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:213
+msgid "AI agent: your own provider"
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:215
+msgid "Connected"
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:215
+msgid "Not set up"
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:216
+msgid "The AI agent in Auvyx Editor needs this site's own AI provider key: pick the provider, paste your key and choose a model. Requests go from this site to the provider, at its prices; the key is stored encrypted and never sent to the browser. Auvyx Cloud does not run the agent."
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:218
+msgid "Provider"
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:232
+msgid "API address"
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:235
+msgid "Filled in for the provider you pick; change it for a proxy or your own server."
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:239
+msgid "Model"
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:242
+msgid "Any model id your provider offers. A model that can call tools works best."
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:246
+msgid "API key"
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:248
+msgid "Saved (leave empty to keep)"
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:249
+#: src/Modules/ContentTypes/Admin.php:248
+#: src/Modules/ContentTypes/Admin.php:420
+msgid "Remove"
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:250
+msgid "Local servers (Ollama, LM Studio) take any text here."
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:256
+msgid "Test the saved connection"
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:296
+msgid "Save a provider, a model and a key first."
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:377
+#: src/Modules/Ai/Gateway.php:153
+msgid "The AI agent needs this site's own AI provider key. Add the provider, key and model in Auvyx Builder → Settings → AI."
+msgstr ""
+
+#: src/Modules/Ai/Ai.php:418
+msgid "No message."
+msgstr ""
+
+#. translators: 1: HTTP status, 2: provider error message
+#: src/Modules/Ai/Ai.php:694
+#, php-format
+msgid "Provider error %1$d: %2$s"
+msgstr ""
+
+#: src/Modules/Ai/Gateway.php:106
+msgid "This site's AI provider does not speak that API."
+msgstr ""
+
+#: src/Modules/Ai/Gateway.php:157
+msgid "The request is not JSON."
+msgstr ""
+
+#: src/Modules/Ai/Gateway.php:171
+msgid "The AI agent needs PHP's cURL extension to stream answers."
+msgstr ""
+
+#: src/Modules/Ai/Gateway.php:225
+msgid "The AI provider did not answer."
+msgstr ""
+
+#: src/Modules/Ai/Sessions.php:67
+msgid "AI conversations"
+msgstr ""
+
+#: src/Modules/Ai/Sessions.php:175
+#: src/Modules/Ai/Sessions.php:209
+msgid "You cannot edit this document."
+msgstr ""
+
+#: src/Modules/Ai/Sessions.php:196
+#: src/Modules/Ai/Sessions.php:225
+#: src/Modules/Ai/Sessions.php:249
+msgid "No such conversation."
+msgstr ""
+
+#: src/Modules/Ai/Sessions.php:212
+msgid "The conversation is too long or not JSON."
+msgstr ""
+
+#: src/Modules/BlankPage/BlankPage.php:48
+msgid "Blank (no header, footer or title)"
+msgstr ""
+
+#: src/Modules/BlankPage/BlankPage.php:49
+msgid "Only the page content, full width. Add the site header and footer as blocks when the page needs them."
+msgstr ""
+
+#: src/Modules/CanvasWeb/CanvasWeb.php:325
+msgid "The canvas sent elements this site cannot mark."
+msgstr ""
+
+#: src/Modules/CanvasWeb/CanvasWeb.php:328
+msgid "This document is too large to draw here."
+msgstr ""
+
+#: src/Modules/Components/Components.php:57
+msgid "at the very top"
+msgstr ""
+
+#: src/Modules/Components/Components.php:58
+msgid "under the header"
+msgstr ""
+
+#: src/Modules/Components/Components.php:59
+msgid "above the page’s content"
+msgstr ""
+
+#: src/Modules/Components/Components.php:60
+msgid "below the page’s content"
+msgstr ""
+
+#: src/Modules/Components/Components.php:61
+msgid "above the footer"
+msgstr ""
+
+#: src/Modules/Components/Components.php:65
+msgid "above a product"
+msgstr ""
+
+#: src/Modules/Components/Components.php:66
+msgid "below a product’s summary"
+msgstr ""
+
+#: src/Modules/Components/Components.php:67
+msgid "above the cart"
+msgstr ""
+
+#. translators: %s: page titles
+#: src/Modules/Components/Components.php:387
+#, php-format
+msgid "not on %s"
+msgstr ""
+
+#: src/Modules/Components/Components.php:390
+msgid "signed-in people"
+msgstr ""
+
+#: src/Modules/Components/Components.php:392
+msgid "visitors not signed in"
+msgstr ""
+
+#. translators: 1: where on the page ("under the header"), 2: which pages ("every page")
+#: src/Modules/Components/Components.php:401
+#, php-format
+msgid "%1$s, on %2$s"
+msgstr ""
+
+#. translators: 1: header or footer, 2: where it shows, in words
+#: src/Modules/Components/Components.php:455
+#, php-format
+msgid "as the %1$s on %2$s"
+msgstr ""
+
+#. translators: 1: header or footer, 2: where it shows, in words
+#: src/Modules/Components/Components.php:455
+#: src/Modules/Studio/Studio.php:198
+msgid "footer"
+msgstr ""
+
+#. translators: 1: header or footer, 2: where it shows, in words
+#: src/Modules/Components/Components.php:455
+#: src/Modules/Studio/Studio.php:198
+msgid "header"
+msgstr ""
+
+#. translators: %d: number of pages
+#: src/Modules/Components/Components.php:464
+#, php-format
+msgid "inserted in %d page"
+msgid_plural "inserted in %d pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Modules/Components/Components.php:472
+msgid "every page"
+msgstr ""
+
+#: src/Modules/Components/Components.php:473
+msgid "the home page"
+msgstr ""
+
+#: src/Modules/Components/Components.php:474
+msgid "every page or post of a kind"
+msgstr ""
+
+#: src/Modules/Components/Components.php:475
+msgid "the pages I pick"
+msgstr ""
+
+#. translators: %s: content type name (singular)
+#: src/Modules/ContentTypes/Admin.php:45
+#, php-format
+msgid "%s details"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:71
+msgid "These fields were not saved:"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:95
+msgid "(required)"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:182
+msgid "— Choose —"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:218
+msgid "— None —"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:221
+#: src/Modules/Studio/Admin.php:217
+#: src/Modules/Studio/Studio.php:950
+msgid "(no title)"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:246
+msgid "Add pictures"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:246
+msgid "Choose a file"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:246
+msgid "Choose a picture"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:274
+msgid "Add a row"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:291
+msgid "Move up"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:292
+msgid "Move down"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:293
+msgid "Remove row"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:398
+msgid "Some fields were not saved (they keep their previous value):"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:419
+msgid "Use"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:444
+msgid "Content types"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:447
+msgid "Your own kinds of content (Properties, Courses, Rooms…) with their fields and taxonomies."
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:467
+msgid "The definition was not saved:"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:476
+msgid "Types"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:478
+msgid "No content types yet. Describe one below (or ask the AI in the Auvyx editor)."
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:480
+msgid "Type"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:480
+msgid "Address"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:480
+msgid "Fields"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:480
+msgid "Entries"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:488
+msgid "(private)"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:496
+msgid "Taxonomies"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:504
+#: src/Modules/ContentTypes/Admin.php:509
+msgid "Definition (JSON)"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:505
+msgid "The whole definition: saving replaces it. Removing a type keeps its entries; they come back with the type."
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:511
+msgid "Validate"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:512
+msgid "Validate & save"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:513
+msgid "Export"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:516
+#: src/Modules/ContentTypes/Admin.php:523
+msgid "Import"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:517
+msgid "Paste a definition: its types and taxonomies are added, or replace the ones with the same key. The others stay."
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:521
+msgid "Definition to import (JSON)"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:529
+msgid "Sorry, you are not allowed to change content types."
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:585
+msgid "Content types saved."
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:587
+msgid "The definition is valid (not saved yet)."
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:601
+msgid "Nothing was imported:"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:611
+msgid "Nothing was imported (the merged definition is refused):"
+msgstr ""
+
+#: src/Modules/ContentTypes/Admin.php:615
+msgid "Imported."
+msgstr ""
+
+#. translators: %s: taxonomy name (singular)
+#. translators: %s: content type name (singular)
+#: src/Modules/ContentTypes/ContentTypes.php:168
+#: src/Modules/ContentTypes/ContentTypes.php:203
+#, php-format
+msgid "Add %s"
+msgstr ""
+
+#. translators: %s: taxonomy name (singular)
+#. translators: %s: content type name (singular)
+#: src/Modules/ContentTypes/ContentTypes.php:170
+#: src/Modules/ContentTypes/ContentTypes.php:205
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#. translators: %s: content type name (singular)
+#: src/Modules/ContentTypes/ContentTypes.php:207
+#, php-format
+msgid "New %s"
+msgstr ""
+
+#. translators: %s: content type name (singular)
+#: src/Modules/ContentTypes/ContentTypes.php:209
+#, php-format
+msgid "View %s"
+msgstr ""
+
+#. translators: %s: content type name (plural)
+#: src/Modules/ContentTypes/ContentTypes.php:211
+#, php-format
+msgid "Search %s"
+msgstr ""
+
+#: src/Modules/ContentTypes/ContentTypes.php:212
+msgid "Nothing found."
+msgstr ""
+
+#: src/Modules/ContentTypes/ContentTypes.php:213
+msgid "Nothing found in the trash."
+msgstr ""
+
+#: src/Modules/ContentTypes/ContentTypes.php:725
+msgid "Yes"
+msgstr ""
+
+#: src/Modules/ContentTypes/ContentTypes.php:725
+msgid "No"
+msgstr ""
+
+#: src/Modules/ContentTypes/Rest.php:38
+msgid "The whole definition (auvyx-content/1)."
+msgstr ""
+
+#: src/Modules/ContentTypes/Rest.php:219
+#: src/Modules/ContentTypes/Rest.php:296
+msgid "No such content type."
+msgstr ""
+
+#: src/Modules/ContentTypes/Rest.php:262
+msgid "No such entry."
+msgstr ""
+
+#: src/Modules/ContentTypes/Rest.php:304
+msgid "Sorry, you are not allowed to publish these entries."
+msgstr ""
+
+#: src/Modules/ContentTypes/Rest.php:400
+msgid "The entry could not be moved to the trash."
+msgstr ""
+
+#: src/Modules/Data/Data.php:128
+msgid "Auvyx data"
+msgstr ""
+
+#: src/Modules/Data/Data.php:190
+msgid "More"
+msgstr ""
+
+#: src/Modules/Data/Menus.php:41
+#: src/Modules/Studio/MenuBuilder.php:115
+msgid "Navigation"
+msgstr ""
+
+#: src/Modules/Data/Menus.php:176
+#: src/Modules/Studio/Admin.php:529
+#: src/Modules/Studio/MenuBuilder.php:137
+#: src/Modules/Studio/MenuBuilder.php:160
+#: src/Modules/Widgets/Widgets.php:185
+msgid "Home"
+msgstr ""
+
+#: src/Modules/DemoCatalog/DemoCatalog.php:52
+msgid "Photo credits"
+msgstr ""
+
+#: src/Modules/DemoCatalog/DemoCatalog.php:85
+msgid "Activate WooCommerce to import this demo's products."
+msgstr ""
+
+#: src/Modules/DemoCatalog/DemoCatalog.php:88
+msgid "You cannot import products and images on this site."
+msgstr ""
+
+#: src/Modules/DesignSystem/Brief.php:327
+msgid "The AI assistant is not configured."
+msgstr ""
+
+#: src/Modules/DesignSystem/Brief.php:348
+msgid "The AI answer was not a usable preset."
+msgstr ""
+
+#: src/Modules/DesignSystem/Brief.php:579
+msgid "Concept"
+msgstr ""
+
+#: src/Modules/DesignSystem/Brief.php:588
+msgid "Dark mode"
+msgstr ""
+
+#: src/Modules/DesignSystem/Brief.php:599
+msgid "Shadows"
+msgstr ""
+
+#: src/Modules/DesignSystem/Fonts.php:61
+msgid "The fonts folder cannot be created."
+msgstr ""
+
+#. translators: %s: font family
+#: src/Modules/DesignSystem/Fonts.php:74
+#, php-format
+msgid "\"%s\" was not found in the open font library; the theme's fonts are used instead."
+msgstr ""
+
+#. translators: %s: font family
+#: src/Modules/DesignSystem/Fonts.php:119
+#, php-format
+msgid "\"%s\" could not be downloaded; the theme's fonts are used instead."
+msgstr ""
+
+#: src/Modules/Edition/Edition.php:147
+msgid "Pro licence"
+msgstr ""
+
+#: src/Modules/Edition/Edition.php:150
+msgid "Your Auvyx Builder Pro licence: updates, support and every Pro feature."
+msgstr ""
+
+#: src/Modules/Editor/Editor.php:79
+msgid "Only an http or https address can be read."
+msgstr ""
+
+#. translators: %d: HTTP status code
+#: src/Modules/Editor/Editor.php:105
+#, php-format
+msgid "The page answered %d."
+msgstr ""
+
+#. translators: %s: time span, e.g. "2 hours"
+#: src/Modules/Editor/Editor.php:268
+#: src/Modules/Studio/Admin.php:221
+#: src/Modules/Studio/Admin.php:284
+#: src/Modules/Studio/Admin.php:679
+#: src/Modules/Studio/Studio.php:695
+msgid "Edit with Auvyx"
+msgstr ""
+
+#: src/Modules/Editor/Editor.php:297
+#: src/Modules/SiteTemplates/SiteTemplates.php:93
+#: src/Modules/Studio/Admin.php:44
+#: src/Modules/Studio/Admin.php:537
+#: src/Modules/Studio/Admin.php:547
+msgid "Site templates"
+msgstr ""
+
+#: src/Modules/Editor/Editor.php:301
+#: src/Modules/Studio/Admin.php:603
+#: src/Modules/Studio/Admin.php:668
+msgid "Footer"
+msgstr ""
+
+#: src/Modules/Editor/Editor.php:301
+#: src/Modules/Studio/Admin.php:603
+#: src/Modules/Studio/Admin.php:667
+msgid "Header"
+msgstr ""
+
+#. translators: %s: Header or Footer
+#: src/Modules/Editor/Editor.php:303
+#: src/Modules/Studio/Admin.php:605
+#, php-format
+msgid "Add New %s"
+msgstr ""
+
+#: src/Modules/Editor/Editor.php:316
+#: src/Modules/Studio/Studio.php:1156
+msgid "You cannot edit this item with Auvyx."
+msgstr ""
+
+#: src/Modules/Editor/Editor.php:319
+msgid "The Auvyx editor is not built."
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:59
+msgid "Auvyx Form"
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:83
+#: src/Modules/Forms/Forms.php:85
+msgid "Form entries"
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:84
+msgid "Form entry"
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:207
+msgid "Your message could not be sent. Check the fields and try again."
+msgstr ""
+
+#. translators: 1: site name, 2: the page the form is on (or the form's id)
+#: src/Modules/Forms/Forms.php:460
+#, php-format
+msgid "[%1$s] New message from %2$s"
+msgstr ""
+
+#. translators: %s: page address
+#: src/Modules/Forms/Forms.php:472
+#, php-format
+msgid "Sent from %s"
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:527
+msgid "What was sent"
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:533
+msgid "From page"
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:548
+msgid "Entry"
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:549
+msgid "Form"
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:550
+msgid "Sent"
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:551
+msgid "Date"
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:563
+msgid "Export CSV"
+msgstr ""
+
+#: src/Modules/Forms/Forms.php:606
+msgid "You cannot export form entries."
+msgstr ""
+
+#: src/Modules/LoopMore/LoopMore.php:73
+msgid "Load more"
+msgstr ""
+
+#: src/Modules/LoopMore/LoopMore.php:74
+msgid "Loading…"
+msgstr ""
+
+#. translators: %d: number of items just added to the list
+#: src/Modules/LoopMore/LoopMore.php:76
+#, php-format
+msgid "%d more items shown"
+msgstr ""
+
+#: src/Modules/Mcp/Mcp.php:344
+msgid "Default (the theme's page template)"
+msgstr ""
+
+#: src/Modules/Mcp/Mcp.php:379
+msgid "No such post."
+msgstr ""
+
+#: src/Modules/Mcp/Mcp.php:407
+#: src/Modules/Mcp/Writes.php:131
+msgid "No such page template."
+msgstr ""
+
+#: src/Modules/Mcp/Mcp.php:456
+msgid "The page changed since you read it. Read it again and redo your change."
+msgstr ""
+
+#: src/Modules/Mcp/Mcp.php:493
+msgid "No such revision of this page."
+msgstr ""
+
+#: src/Modules/Mcp/Mcp.php:518
+msgid "The page could not be moved to the trash."
+msgstr ""
+
+#: src/Modules/Mcp/Mcp.php:532
+#: src/Modules/SiteTemplates/SiteTemplates.php:504
+msgid "No such page."
+msgstr ""
+
+#: src/Modules/Mcp/Pending.php:136
+msgid "Nothing waits for approval on this page."
+msgstr ""
+
+#: src/Modules/Mcp/Writes.php:128
+msgid "The content is too large."
+msgstr ""
+
+#: src/Modules/McpAccess/McpAccess.php:210
+msgid "Too many failed Auvyx token attempts; wait a minute."
+msgstr ""
+
+#. translators: %s: a scope name (draft, publish, code, delete)
+#: src/Modules/McpAccess/McpAccess.php:268
+#, php-format
+msgid "This Auvyx token lacks the \"%s\" scope. The site owner can make a connection with it under Auvyx Builder → AI connections."
+msgstr ""
+
+#: src/Modules/McpAccess/Rules.php:99
+msgid "An Auvyx token writes pages only through auvyx/v1/mcp (pages, save, restore, trash)."
+msgstr ""
+
+#: src/Modules/McpAccess/Rules.php:125
+msgid "An Auvyx token cannot use this route."
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:29
+msgid "AI connections"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:32
+msgid "Let Claude, Cursor or another AI build pages on this site through MCP, with a token you can limit and revoke."
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:61
+msgid "Connection revoked. Its token no longer works."
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:88
+msgid "Claude Code (terminal)"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:89
+msgid "Claude Desktop (claude_desktop_config.json)"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:90
+msgid "Cursor (.cursor/mcp.json)"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:91
+msgid "HTTP (one server for several clients)"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:117
+msgid "Your new connection"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:118
+msgid "Copy the token now: it is shown only once and cannot be recovered."
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:119
+msgid "Token"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:126
+msgid "Connect a client"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:126
+msgid "Put your connection's token in place of auvyxmcp_… (it is shown when you create the connection)."
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:142
+msgid "Read: site, pages, media, revisions (always)"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:143
+msgid "Draft: create pages and save drafts, upload media"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:144
+msgid "Publish: publish pages, set the front page, change the design"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:145
+msgid "Code: save code elements and custom CSS (otherwise they wait for your approval)"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:146
+msgid "Delete: move pages to the trash (never deleted for good)"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:148
+msgid "New connection"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:151
+#: src/Modules/McpAccess/Screen.php:178
+#: src/Modules/Studio/Admin.php:253
+#: src/Modules/Studio/Admin.php:265
+msgid "Name"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:151
+msgid "Claude on my laptop"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:152
+msgid "What it may do"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:163
+msgid "Expires after"
+msgstr ""
+
+#. translators: %d: number of days
+#: src/Modules/McpAccess/Screen.php:166
+#, php-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Modules/McpAccess/Screen.php:168
+msgid "Create connection"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:175
+msgid "No AI connections yet"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:175
+msgid "Create one above, then paste its config into your AI client."
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:178
+msgid "Acts as"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:178
+msgid "Scopes"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:178
+msgid "Created"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:178
+msgid "Last used"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:178
+msgid "Expires"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:178
+#: src/Modules/Studio/Admin.php:210
+#: src/Modules/Studio/Admin.php:265
+#: src/Modules/Studio/Admin.php:664
+msgid "Actions"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:190
+msgid "Revoked"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:192
+msgid "Expired"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:196
+msgid "Revoke"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:205
+msgid "What the connections did"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:205
+msgid "the last 100 requests (500 are kept)"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:207
+msgid "Nothing yet."
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:210
+msgid "When"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:210
+msgid "Connection"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:210
+msgid "Request"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:210
+msgid "Page"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:210
+msgid "Result"
+msgstr ""
+
+#: src/Modules/McpAccess/Screen.php:216
+msgid "(unknown token)"
+msgstr ""
+
+#: src/Modules/McpAccess/Tokens.php:86
+msgid "Give the connection a name."
+msgstr ""
+
+#: src/Modules/McpAccess/Tokens.php:89
+msgid "Only an administrator makes AI connections."
+msgstr ""
+
+#: src/Modules/McpAccess/Tokens.php:123
+msgid "Too many AI connections: revoke one first."
+msgstr ""
+
+#: src/Modules/McpAccess/Tokens.php:141
+msgid "Unknown, expired or revoked Auvyx token."
+msgstr ""
+
+#: src/Modules/Patterns/Patterns.php:214
+msgid "Auvyx Sections"
+msgstr ""
+
+#: src/Modules/Patterns/Patterns.php:215
+msgid "Auvyx Blocks"
+msgstr ""
+
+#: src/Modules/Patterns/Patterns.php:216
+msgid "Auvyx Rows & layout"
+msgstr ""
+
+#: src/Modules/Play/Play.php:68
+msgid "Games"
+msgstr ""
+
+#: src/Modules/Play/Play.php:69
+msgid "Game"
+msgstr ""
+
+#: src/Modules/Play/Play.php:96
+msgid "A game needs a title."
+msgstr ""
+
+#: src/Modules/Play/Play.php:119
+msgid "An asset needs a name, a type and an address."
+msgstr ""
+
+#. translators: %d: the most assets a game may have.
+#: src/Modules/Play/Play.php:129
+#, php-format
+msgid "A game may have at most %d assets."
+msgstr ""
+
+#: src/Modules/Play/Play.php:180
+msgid "A game needs a valid key."
+msgstr ""
+
+#: src/Modules/Play/Play.php:309
+msgid "Play"
+msgstr ""
+
+#: src/Modules/Play/Play.php:419
+msgid "No such game."
+msgstr ""
+
+#. translators: 1: a part of a game (html, css, js), 2: a number of characters.
+#: src/Modules/Play/PlayDocument.php:135
+#, php-format
+msgid "The game's %1$s is over %2$d characters."
+msgstr ""
+
+#. translators: %s: site template name.
+#: src/Modules/SiteTemplates/SiteTemplates.php:83
+#, php-format
+msgid "From template: %s"
+msgstr ""
+
+#: src/Modules/SiteTemplates/SiteTemplates.php:329
+msgid "The template is larger than 4 MB."
+msgstr ""
+
+#: src/Modules/SiteTemplates/SiteTemplates.php:333
+msgid "The template is not a JSON object."
+msgstr ""
+
+#: src/Modules/SiteTemplates/SiteTemplates.php:383
+msgid "Built-in templates cannot be deleted."
+msgstr ""
+
+#: src/Modules/SiteTemplates/SiteTemplates.php:383
+#: src/Modules/SiteTemplates/SiteTemplates.php:478
+msgid "No such template."
+msgstr ""
+
+#: src/Modules/SiteTemplates/SiteTemplates.php:521
+msgid "The theme has no such part."
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:102
+msgid "We are making a few improvements. Please check back soon."
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:103
+msgid "Something new is on its way. Check back soon."
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:160
+msgid "Maintenance mode is on"
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:160
+msgid "Coming soon mode is on"
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:173
+msgid "Off: the site is public"
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:174
+msgid "Coming soon: visitors see one page; search engines are asked not to index"
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:175
+msgid "Maintenance: visitors see one page; search engines are told to come back (503)"
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:177
+msgid "Coming soon & maintenance"
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:177
+msgid "While it is on, people who can edit pages still see the whole site."
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:181
+msgid "Page to show"
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:187
+msgid "A simple screen with the message below"
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:191
+msgid "Design it like any page with Auvyx; the theme header and footer are left out."
+msgstr ""
+
+#: src/Modules/SiteTools/SiteTools.php:194
+msgid "Message"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:42
+#: src/Modules/Studio/Admin.php:248
+msgid "Patterns & components"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:43
+#: src/Modules/Studio/Admin.php:559
+#: src/Modules/Studio/Studio.php:206
+msgid "Theme Builder"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:45
+#: src/Modules/Studio/Admin.php:798
+msgid "Design system"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:46
+#: src/Modules/Studio/Admin.php:841
+msgid "Settings"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:120
+msgid "View site"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:127
+msgid "The Auvyx editor is not built. Run \"bun run editor:build\" in the monorepo, or install a release zip."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:165
+msgid "Untitled page"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:193
+msgid "Everything you can edit with Auvyx, most recently changed first."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:194
+msgid "New page title"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:194
+msgid "Create page"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:197
+msgid "Search…"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:197
+msgid "Search pages"
+msgstr ""
+
+#. translators: %d: number of items
+#: src/Modules/Studio/Admin.php:198
+#, php-format
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Modules/Studio/Admin.php:200
+msgid "Nothing found"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:200
+msgid "No pages yet"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:200
+msgid "Create a page above; it opens in the editor."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:210
+msgid "Title"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:210
+msgid "Status"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:210
+msgid "Modified"
+msgstr ""
+
+#. translators: %s: time span, e.g. "2 hours"
+#: src/Modules/Studio/Admin.php:220
+#, php-format
+msgid "%s ago"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:223
+msgid "Block editor"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:225
+msgid "View"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:249
+msgid "A pattern is a starting point: inserting it copies it, and the copy is edited on its own. A component is one shared piece: change it once and every page that shows it changes. Both are WordPress patterns (synced or not)."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:252
+#: src/Modules/Studio/Admin.php:265
+msgid "Kind"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:252
+#: src/Modules/Studio/Admin.php:285
+msgid "Pattern"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:252
+#: src/Modules/Studio/Admin.php:285
+msgid "Component"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:253
+msgid "Create"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:261
+msgid "No patterns or components yet"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:261
+msgid "Create one above, or right-click a section in the Auvyx editor and choose \"Save as pattern\" or \"Save as component\"."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:265
+msgid "Shown on the site"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:265
+msgid "Shortcode"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:281
+#: src/Modules/Studio/Admin.php:429
+#: src/Modules/Studio/Library.php:62
+#: src/Modules/ThemeBuilder/ThemeBuilder.php:543
+msgid "(untitled)"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:282
+msgid "Only where inserted"
+msgstr ""
+
+#. translators: %d: number of pages
+#: src/Modules/Studio/Admin.php:300
+#, php-format
+msgid "Inserted in %d page"
+msgid_plural "Inserted in %d pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of pages
+#: src/Modules/Studio/Admin.php:300
+msgid "Not inserted in any page"
+msgstr ""
+
+#. translators: %s: component name
+#: src/Modules/Studio/Admin.php:330
+#, php-format
+msgid "Saved where \"%s\" shows."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:366
+msgid "Where it shows…"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:375
+msgid "Show it somewhere else"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:376
+msgid "Show it"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:377
+msgid "choose a place…"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:377
+msgid "Where"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:378
+msgid "on"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:379
+msgid "On which pages"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:381
+msgid "Of these kinds"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:382
+msgid "These pages"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:384
+msgid "Stop showing it here"
+msgstr ""
+
+#. translators: %s: link to Auvyx Builder Pro
+#: src/Modules/Studio/Admin.php:390
+#, php-format
+msgid "Archives, categories, search, 404, pages left out, who sees it and dates: %s"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:391
+msgid "Auvyx Builder Pro"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:394
+msgid "Save"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:431
+msgid "Find a page…"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:431
+msgid "Find a page"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:433
+msgid "No pages yet."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:448
+msgid "More conditions"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:478
+msgid "This template part does not exist."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:537
+msgid "Start a whole site from a demo: its pages, menus, header, footer and colors. To change a single page, open it with Auvyx and choose Page templates."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:541
+msgid "The Auvyx editor is not available."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:559
+msgid "Your site’s header and footer. Each one shows where its display conditions say; where none of yours does, the theme’s own shows."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:563
+msgid "Your theme uses PHP templates"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:564
+msgid "The Theme Builder needs a block theme (like Auvyx Theme). With this theme, build a component and show it \"under the header\" or \"above the footer\"."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:566
+msgid "Go to Components"
+msgstr ""
+
+#. translators: %s: template name
+#: src/Modules/Studio/Admin.php:591
+#, php-format
+msgid "“%s” was moved to the trash."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:631
+msgid "No display conditions: not shown yet"
+msgstr ""
+
+#. translators: %s: other templates
+#: src/Modules/Studio/Admin.php:634
+#, php-format
+msgid "Also set for the same pages: %s. The newest one shows."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:637
+msgid "Edit"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:639
+msgid "Edit Conditions"
+msgstr ""
+
+#. translators: %s: template name
+#: src/Modules/Studio/Admin.php:642
+#, php-format
+msgid "Move “%s” to the trash? Where it showed, the theme’s own shows again."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:643
+msgid "Delete"
+msgstr ""
+
+#. translators: %s: header or footer
+#: src/Modules/Studio/Admin.php:654
+#, php-format
+msgid "No %s of your own yet: the theme’s shows on every page."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:664
+msgid "The theme’s own parts"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:664
+msgid "shown wherever none of yours is"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:664
+msgid "Part"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:664
+msgid "Area"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:664
+msgid "Source"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:675
+msgid "General"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:676
+msgid "Edited"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:676
+#: src/Modules/Studio/Admin.php:880
+msgid "Theme"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:678
+msgid "Site Editor"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:683
+msgid "This theme has no template parts."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:713
+msgid "No colors, fonts or radius found. Write them like \"Primary: #2563eb\" or \"Heading font: Inter\", or connect the AI assistant."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:752
+msgid "Heading font"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:753
+msgid "Body font"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:754
+msgid "Radius"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:755
+msgid "Buttons"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:768
+msgid "Design brief (DESIGN.md)"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:768
+msgid "Paste or upload your brand's design document. Auvyx turns it into a preset for the theme, WooCommerce and Auvyx elements, and the AI follows it when it builds pages."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:777
+msgid "Use the AI assistant"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:779
+msgid "Save brief"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:779
+msgid "Generate preset"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:781
+msgid "New preset"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:783
+msgid "Apply to the site"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:783
+msgid "Discard"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:786
+msgid "Applied preset"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:788
+msgid "Remove preset (back to the theme)"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:799
+msgid "Tokens are added to theme.json, so core blocks and other plugins use them too."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:800
+msgid "Edit in Styles"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:803
+msgid "Colors"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:812
+msgid "Type scale"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:821
+msgid "Spacing"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:830
+msgid "Breakpoints"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:832
+msgid "Base (desktop)"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:841
+msgid "What the builder edits and how its assistant connects."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:847
+msgid "Editing"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:847
+msgid "Content types that open with Auvyx. Components (synced patterns) always do."
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:864
+msgid "Save settings"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:877
+msgid "Auvyx Editor"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:877
+msgid "Installed"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:877
+msgid "Not built"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:878
+msgid "WordPress"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:879
+msgid "PHP"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:881
+msgid "WooCommerce"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:881
+msgid "Not active"
+msgstr ""
+
+#: src/Modules/Studio/Admin.php:883
+msgid "System"
+msgstr ""
+
+#: src/Modules/Studio/Library.php:104
+msgid "Untitled pattern"
+msgstr ""
+
+#. translators: %s: site template name.
+#: src/Modules/Studio/MenuBuilder.php:183
+#, php-format
+msgid "Pages · %s"
+msgstr ""
+
+#: src/Modules/Studio/MenuBuilder.php:187
+msgid "Product categories"
+msgstr ""
+
+#: src/Modules/Studio/MenuBuilder.php:188
+msgid "Categories"
+msgstr ""
+
+#: src/Modules/Studio/MenuBuilder.php:229
+msgid "A menu needs its items."
+msgstr ""
+
+#: src/Modules/Studio/MenuBuilder.php:240
+msgid "The menu was not saved."
+msgstr ""
+
+#: src/Modules/Studio/MenuBuilder.php:259
+msgid "This menu does not exist."
+msgstr ""
+
+#: src/Modules/Studio/Preview.php:55
+msgid "Rendered in the visitor's browser by WooCommerce."
+msgstr ""
+
+#: src/Modules/Studio/Preview.php:85
+msgid "Cart"
+msgstr ""
+
+#: src/Modules/Studio/Preview.php:86
+msgid "Checkout"
+msgstr ""
+
+#: src/Modules/Studio/Preview.php:87
+msgid "My account"
+msgstr ""
+
+#: src/Modules/Studio/Preview.php:88
+msgid "Order tracking"
+msgstr ""
+
+#: src/Modules/Studio/Preview.php:91
+msgid "WooCommerce shows this page for the visitor who opens it (their account, cart or order)."
+msgstr ""
+
+#: src/Modules/Studio/Preview.php:98
+msgid "This shortcode shows nothing in the editor."
+msgstr ""
+
+#: src/Modules/Studio/Preview.php:133
+msgid "Order summary"
+msgstr ""
+
+#: src/Modules/Studio/Preview.php:139
+msgid "Checkout (WooCommerce)"
+msgstr ""
+
+#: src/Modules/Studio/Preview.php:139
+msgid "Cart (WooCommerce)"
+msgstr ""
+
+#: src/Modules/Studio/Preview.php:139
+msgid "Outline of its sections: the form renders on the live page. Edit its fields in the block editor."
+msgstr ""
+
+#. translators: 1: header or footer, 2: where it shows, in words
+#: src/Modules/Studio/Studio.php:202
+#, php-format
+msgid "This %1$s shows on: %2$s. What you change here shows there."
+msgstr ""
+
+#. translators: %s: header or footer
+#: src/Modules/Studio/Studio.php:204
+#, php-format
+msgid "This %s has no display conditions yet, so it shows nowhere. Publish it to choose where."
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:214
+msgid "A shared component. It shows nowhere yet: insert it in a page (Assets → Your patterns & components), or choose where it shows."
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:216
+msgid "Choose where it shows"
+msgstr ""
+
+#. translators: %s: where the component shows ("as the site's header; under the header, on every page")
+#: src/Modules/Studio/Studio.php:221
+#, php-format
+msgid "A shared component: what you change here shows %s."
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:223
+msgid "Where it shows"
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:237
+msgid "This is the posts page: the theme shows the latest posts here, not this page's content."
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:248
+msgid "This is the WooCommerce Shop page: visitors see the product catalog template here, not this page's content."
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:250
+msgid "Edit the shop catalog"
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:254
+msgid "This is the Cart page. The cart itself is a WooCommerce app, rendered for each visitor: add content around it here, edit its sections in the block editor."
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:255
+msgid "This is the Checkout page. The checkout form is a WooCommerce app, rendered for each visitor: add content around it here, edit its fields in the block editor."
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:256
+msgid "This is the My account page. WooCommerce shows each customer their own account here."
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:262
+msgid "Open in the block editor"
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:277
+msgid "This block is too large to convert here."
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:484
+msgid "This block cannot be inserted from the Auvyx editor."
+msgstr ""
+
+#: src/Modules/Studio/Studio.php:553
+msgid "Another user"
+msgstr ""
+
+#: src/Modules/ThemeBuilder/ThemeBuilder.php:255
+msgid "Entire Site"
+msgstr ""
+
+#: src/Modules/ThemeBuilder/ThemeBuilder.php:256
+msgid "Front Page"
+msgstr ""
+
+#: src/Modules/ThemeBuilder/ThemeBuilder.php:257
+msgid "Specific Pages"
+msgstr ""
+
+#: src/Modules/ThemeBuilder/ThemeBuilder.php:258
+msgid "All Of A Kind"
+msgstr ""
+
+#. translators: %s: kinds of post ("Pages, Posts")
+#: src/Modules/ThemeBuilder/ThemeBuilder.php:295
+#, php-format
+msgid "All %s"
+msgstr ""
+
+#. translators: %s: kinds of post ("Pages, Posts")
+#: src/Modules/ThemeBuilder/ThemeBuilder.php:295
+msgid "All Posts And Pages"
+msgstr ""
+
+#. translators: %s: pages left out
+#: src/Modules/ThemeBuilder/ThemeBuilder.php:316
+#, php-format
+msgid "except %s"
+msgstr ""
+
+#: src/Modules/ThemeBuilder/ThemeBuilder.php:481
+msgid "This is not a header or a footer of the Theme Builder."
+msgstr ""
+
+#: src/Modules/VisualBuilder/VisualBuilder.php:107
+msgid "You cannot edit this item with Auvyx Builder."
+msgstr ""
+
+#: src/Modules/VisualBuilder/VisualBuilder.php:110
+msgid "Auvyx Builder is not built."
+msgstr ""
+
+#. translators: %s: post title
+#: src/Modules/VisualBuilder/VisualBuilder.php:153
+#, php-format
+msgid "Auvyx Builder: %s"
+msgstr ""
+
+#: src/Modules/VisualBuilder/VisualBuilder.php:296
+#: src/Modules/VisualBuilder/VisualBuilder.php:311
+msgid "Edit with Auvyx Builder"
+msgstr ""
+
+#: src/Modules/Widgets/Widgets.php:84
+msgid "Map"
+msgstr ""
+
+#: src/Modules/Widgets/Widgets.php:85
+msgid "A Google map of an address. No API key needed."
+msgstr ""
+
+#: src/Modules/Widgets/Widgets.php:114
+msgid "Breadcrumbs"
+msgstr ""
+
+#: src/Modules/Widgets/Widgets.php:115
+msgid "Where the visitor is: Home › Section › Page, with structured data for search engines."
+msgstr ""
+
+#. translators: %s: address
+#: src/Modules/Widgets/Widgets.php:171
+#, php-format
+msgid "Map of %s"
+msgstr ""
+
+#. translators: %s: search terms
+#: src/Modules/Widgets/Widgets.php:237
+#, php-format
+msgid "Search: %s"
+msgstr ""
+
+#: src/Modules/Widgets/Widgets.php:239
+msgid "Page not found"
+msgstr ""
+
+#: src/Modules/Widgets/Widgets.php:284
+msgid "Breadcrumb"
+msgstr ""
+
+#: blocks/accordion/block.json
+msgctxt "block title"
+msgid "Auvyx Accordion"
+msgstr ""
+
+#: blocks/accordion/block.json
+msgctxt "block description"
+msgid "Collapsible item (native <details>, no JavaScript). Stack several for an FAQ."
+msgstr ""
+
+#: blocks/accordion/block.json
+msgctxt "block keyword"
+msgid "faq"
+msgstr ""
+
+#: blocks/accordion/block.json
+msgctxt "block keyword"
+msgid "toggle"
+msgstr ""
+
+#: blocks/accordion/block.json
+msgctxt "block keyword"
+msgid "collapse"
+msgstr ""
+
+#: blocks/accordion/block.json
+msgctxt "block keyword"
+msgid "details"
+msgstr ""
+
+#: blocks/button/block.json
+msgctxt "block title"
+msgid "Auvyx Button"
+msgstr ""
+
+#: blocks/button/block.json
+msgctxt "block description"
+msgid "Link styled as a button, with hover/focus states."
+msgstr ""
+
+#: blocks/button/block.json
+msgctxt "block keyword"
+msgid "link"
+msgstr ""
+
+#: blocks/button/block.json
+msgctxt "block keyword"
+msgid "cta"
+msgstr ""
+
+#: blocks/button/block.json
+msgctxt "block keyword"
+msgid "call to action"
+msgstr ""
+
+#: blocks/carousel/block.json
+msgctxt "block title"
+msgid "Auvyx Carousel"
+msgstr ""
+
+#: blocks/carousel/block.json
+msgctxt "block description"
+msgid "A banner strip. Slides are content of the component, scrolled with native scroll-snap. No JavaScript."
+msgstr ""
+
+#: blocks/carousel/block.json
+msgctxt "block keyword"
+msgid "slider"
+msgstr ""
+
+#: blocks/carousel/block.json
+msgctxt "block keyword"
+msgid "carousel"
+msgstr ""
+
+#: blocks/carousel/block.json
+msgctxt "block keyword"
+msgid "banner"
+msgstr ""
+
+#: blocks/carousel/block.json
+msgctxt "block keyword"
+msgid "slides"
+msgstr ""
+
+#: blocks/divider/block.json
+msgctxt "block title"
+msgid "Auvyx Divider"
+msgstr ""
+
+#: blocks/divider/block.json
+msgctxt "block description"
+msgid "Horizontal line; style it with border color/width."
+msgstr ""
+
+#: blocks/divider/block.json
+msgctxt "block keyword"
+msgid "separator"
+msgstr ""
+
+#: blocks/divider/block.json
+msgctxt "block keyword"
+msgid "hr"
+msgstr ""
+
+#: blocks/divider/block.json
+msgctxt "block keyword"
+msgid "line"
+msgstr ""
+
+#: blocks/heading/block.json
+msgctxt "block title"
+msgid "Auvyx Heading"
+msgstr ""
+
+#: blocks/heading/block.json
+msgctxt "block description"
+msgid "Heading (h1–h6) with responsive styles."
+msgstr ""
+
+#: blocks/heading/block.json
+msgctxt "block keyword"
+msgid "title"
+msgstr ""
+
+#: blocks/heading/block.json
+msgctxt "block keyword"
+msgid "headline"
+msgstr ""
+
+#: blocks/icon/block.json
+msgctxt "block title"
+msgid "Auvyx Icon"
+msgstr ""
+
+#: blocks/icon/block.json
+msgctxt "block description"
+msgid "Icon from the Auvyx set (Lucide). Size with font-size or width/height, color with text color."
+msgstr ""
+
+#: blocks/icon/block.json
+msgctxt "block keyword"
+msgid "symbol"
+msgstr ""
+
+#: blocks/icon/block.json
+#: blocks/vector/block.json
+msgctxt "block keyword"
+msgid "svg"
+msgstr ""
+
+#: blocks/image/block.json
+msgctxt "block title"
+msgid "Auvyx Image"
+msgstr ""
+
+#: blocks/image/block.json
+msgctxt "block description"
+msgid "Image with responsive styles (size, radius, object-fit)."
+msgstr ""
+
+#: blocks/image/block.json
+msgctxt "block keyword"
+msgid "picture"
+msgstr ""
+
+#: blocks/image/block.json
+msgctxt "block keyword"
+msgid "photo"
+msgstr ""
+
+#: blocks/image/block.json
+msgctxt "block keyword"
+msgid "media"
+msgstr ""
+
+#: blocks/loop/block.json
+msgctxt "block title"
+msgid "Auvyx Posts loop"
+msgstr ""
+
+#: blocks/loop/block.json
+msgctxt "block description"
+msgid "Repeats its content for each post of a query. Elements inside can show the post's title, excerpt, image and fields."
+msgstr ""
+
+#: blocks/loop/block.json
+msgctxt "block keyword"
+msgid "query"
+msgstr ""
+
+#: blocks/loop/block.json
+msgctxt "block keyword"
+msgid "posts"
+msgstr ""
+
+#: blocks/loop/block.json
+msgctxt "block keyword"
+msgid "loop"
+msgstr ""
+
+#: blocks/loop/block.json
+msgctxt "block keyword"
+msgid "list"
+msgstr ""
+
+#: blocks/loop/block.json
+msgctxt "block keyword"
+msgid "grid"
+msgstr ""
+
+#: blocks/loop/block.json
+msgctxt "block keyword"
+msgid "products"
+msgstr ""
+
+#: blocks/nav/block.json
+msgctxt "block title"
+msgid "Auvyx Navigation"
+msgstr ""
+
+#: blocks/nav/block.json
+msgctxt "block description"
+msgid "A menu bar that turns into a menu button on small screens. Shows pages, a navigation or a classic menu. No JavaScript."
+msgstr ""
+
+#: blocks/nav/block.json
+msgctxt "block keyword"
+msgid "menu"
+msgstr ""
+
+#: blocks/nav/block.json
+msgctxt "block keyword"
+msgid "navigation"
+msgstr ""
+
+#: blocks/nav/block.json
+msgctxt "block keyword"
+msgid "links"
+msgstr ""
+
+#: blocks/nav/block.json
+msgctxt "block keyword"
+msgid "header"
+msgstr ""
+
+#: blocks/section/block.json
+msgctxt "block title"
+msgid "Section"
+msgstr ""
+
+#: blocks/section/block.json
+msgctxt "block description"
+msgid "Layout container with responsive styles. Holds any blocks."
+msgstr ""
+
+#: blocks/section/block.json
+msgctxt "block keyword"
+msgid "container"
+msgstr ""
+
+#: blocks/section/block.json
+msgctxt "block keyword"
+msgid "box"
+msgstr ""
+
+#: blocks/section/block.json
+msgctxt "block keyword"
+msgid "row"
+msgstr ""
+
+#: blocks/section/block.json
+msgctxt "block keyword"
+msgid "column"
+msgstr ""
+
+#: blocks/section/block.json
+msgctxt "block keyword"
+msgid "wrapper"
+msgstr ""
+
+#: blocks/snippet/block.json
+msgctxt "block title"
+msgid "Auvyx Code"
+msgstr ""
+
+#: blocks/snippet/block.json
+msgctxt "block description"
+msgid "Syntax-highlighted code sample with copy button."
+msgstr ""
+
+#: blocks/snippet/block.json
+msgctxt "block keyword"
+msgid "code"
+msgstr ""
+
+#: blocks/snippet/block.json
+msgctxt "block keyword"
+msgid "snippet"
+msgstr ""
+
+#: blocks/snippet/block.json
+msgctxt "block keyword"
+msgid "pre"
+msgstr ""
+
+#: blocks/text/block.json
+msgctxt "block title"
+msgid "Auvyx Text"
+msgstr ""
+
+#: blocks/text/block.json
+msgctxt "block description"
+msgid "Paragraph with responsive styles."
+msgstr ""
+
+#: blocks/text/block.json
+msgctxt "block keyword"
+msgid "paragraph"
+msgstr ""
+
+#: blocks/text/block.json
+msgctxt "block keyword"
+msgid "copy"
+msgstr ""
+
+#: blocks/vector/block.json
+msgctxt "block title"
+msgid "Auvyx Vector"
+msgstr ""
+
+#: blocks/vector/block.json
+msgctxt "block description"
+msgid "A vector shape (SVG path) drawn with the pen in Auvyx Studio. Color it with fill and stroke."
+msgstr ""
+
+#: blocks/vector/block.json
+msgctxt "block keyword"
+msgid "shape"
+msgstr ""
+
+#: blocks/vector/block.json
+msgctxt "block keyword"
+msgid "path"
+msgstr ""
+
+#: blocks/vector/block.json
+msgctxt "block keyword"
+msgid "pen"
+msgstr ""
+
+#: blocks/video/block.json
+msgctxt "block title"
+msgid "Auvyx Video"
+msgstr ""
+
+#: blocks/video/block.json
+msgctxt "block description"
+msgid "YouTube or Vimeo video (privacy-friendly embed), responsive 16:9."
+msgstr ""
+
+#: blocks/video/block.json
+msgctxt "block keyword"
+msgid "youtube"
+msgstr ""
+
+#: blocks/video/block.json
+msgctxt "block keyword"
+msgid "vimeo"
+msgstr ""
+
+#: blocks/video/block.json
+msgctxt "block keyword"
+msgid "embed"
+msgstr ""

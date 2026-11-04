@@ -1,0 +1,7 @@
+/*
+ * The editor's stylesheet: Tailwind v4, its tokens, the Lyra pack (cn-* hooks) and the chrome rules (auvyx-card,
+ * auvyx-pill…), in ./styles. They started as a copy of the deprecated Auvyx Studio's (apps/studio/packages/ui/src/styles)
+ * and are this editor's own now: Tailwind scans only this editor's files.
+ */
+@import "./styles/globals.css";
+@source "./**/*.{svelte,ts}";

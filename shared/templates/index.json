@@ -1,0 +1,794 @@
+[
+ {
+  "id": "icon-box",
+  "group": "Block",
+  "category": "Feature",
+  "title": "Icon box",
+  "description": "Icon, title and text.",
+  "kit": "Starter",
+  "elements": 4
+ },
+ {
+  "id": "icon-box-inline",
+  "group": "Block",
+  "category": "Feature",
+  "title": "Icon box (side)",
+  "description": "Icon on the left of the text.",
+  "kit": "Starter",
+  "elements": 5
+ },
+ {
+  "id": "image-box",
+  "group": "Block",
+  "category": "Feature",
+  "title": "Image box",
+  "description": "Image with title and text.",
+  "kit": "Starter",
+  "elements": 4
+ },
+ {
+  "id": "message-box",
+  "group": "Block",
+  "category": "Feature",
+  "title": "Message box",
+  "description": "Highlighted note with an icon.",
+  "kit": "Starter",
+  "elements": 3
+ },
+ {
+  "id": "price-card",
+  "group": "Block",
+  "category": "Commerce",
+  "title": "Price table",
+  "description": "Plan, price, features and a button.",
+  "kit": "Starter",
+  "elements": 16
+ },
+ {
+  "id": "testimonial",
+  "group": "Block",
+  "category": "Trust",
+  "title": "Testimonial",
+  "description": "Quote with avatar, name and role.",
+  "kit": "Starter",
+  "elements": 8
+ },
+ {
+  "id": "team-member",
+  "group": "Block",
+  "category": "Trust",
+  "title": "Team member",
+  "description": "Photo, name, role and follow icons.",
+  "kit": "Starter",
+  "elements": 10
+ },
+ {
+  "id": "tabs",
+  "group": "Block",
+  "category": "Interactive",
+  "title": "Tabs",
+  "description": "Panels shown one at a time. Each panel's first heading is its tab. Without JavaScript they stack, still readable.",
+  "kit": "Starter",
+  "elements": 10
+ },
+ {
+  "id": "gallery",
+  "group": "Block",
+  "category": "Media",
+  "title": "Gallery",
+  "description": "Image grid; on the published page a click opens the image large (arrows, Esc). Swap the images in Content.",
+  "kit": "Starter",
+  "elements": 7
+ },
+ {
+  "id": "search",
+  "group": "Block",
+  "category": "Content",
+  "title": "Search",
+  "description": "The site's search box (WordPress search block).",
+  "kit": "Starter",
+  "elements": 2
+ },
+ {
+  "id": "product-search",
+  "group": "Block",
+  "category": "Commerce",
+  "title": "Product search",
+  "description": "Search box that looks only through products.",
+  "kit": "Starter",
+  "elements": 2
+ },
+ {
+  "id": "banner-box",
+  "group": "Block",
+  "category": "Media",
+  "title": "Banner",
+  "description": "Background image, overlay and a text box. Fits in a column.",
+  "kit": "Starter",
+  "elements": 5
+ },
+ {
+  "id": "stat",
+  "group": "Block",
+  "category": "Trust",
+  "title": "Stat",
+  "description": "Big number with a label.",
+  "kit": "Starter",
+  "elements": 3
+ },
+ {
+  "id": "counter",
+  "group": "Block",
+  "category": "Trust",
+  "title": "Counter",
+  "description": "Numbers that count up when they scroll into view. Change the numbers like any text.",
+  "kit": "Starter",
+  "elements": 10
+ },
+ {
+  "id": "progress",
+  "group": "Block",
+  "category": "Content",
+  "title": "Progress bars",
+  "description": "Labelled bars that fill when they scroll into view. Set each fill's width in Style.",
+  "kit": "Starter",
+  "elements": 19
+ },
+ {
+  "id": "star-rating",
+  "group": "Block",
+  "category": "Trust",
+  "title": "Star rating",
+  "description": "Five stars and a score. Delete a star or tint it to show less.",
+  "kit": "Starter",
+  "elements": 8
+ },
+ {
+  "id": "icon-list",
+  "group": "Block",
+  "category": "Content",
+  "title": "Icon list",
+  "description": "Short lines, each with an icon: benefits, what is included, contact details.",
+  "kit": "Starter",
+  "elements": 13
+ },
+ {
+  "id": "alert",
+  "group": "Block",
+  "category": "Content",
+  "title": "Notice",
+  "description": "A highlighted message: an announcement, a tip or a warning.",
+  "kit": "Starter",
+  "elements": 5
+ },
+ {
+  "id": "map",
+  "group": "Block",
+  "category": "Content",
+  "title": "Map",
+  "description": "A Google map of an address (no API key). Set the address in Content.",
+  "kit": "Starter",
+  "elements": 2
+ },
+ {
+  "id": "breadcrumbs",
+  "group": "Block",
+  "category": "Content",
+  "title": "Breadcrumbs",
+  "description": "Home › Section › Page, with structured data for search engines.",
+  "kit": "Starter",
+  "elements": 2
+ },
+ {
+  "id": "logo",
+  "group": "Block",
+  "category": "Branding",
+  "title": "Logo (text)",
+  "description": "Wordmark; replace with an image when ready.",
+  "kit": "Starter",
+  "elements": 1
+ },
+ {
+  "id": "follow-icons",
+  "group": "Block",
+  "category": "Social",
+  "title": "Follow icons",
+  "description": "Social icons row.",
+  "kit": "Starter",
+  "elements": 6
+ },
+ {
+  "id": "buttons",
+  "group": "Block",
+  "category": "Content",
+  "title": "Button group",
+  "description": "Primary and secondary buttons.",
+  "kit": "Starter",
+  "elements": 3
+ },
+ {
+  "id": "title-divider",
+  "group": "Block",
+  "category": "Content",
+  "title": "Title + divider",
+  "description": "Section title with a line.",
+  "kit": "Starter",
+  "elements": 3
+ },
+ {
+  "id": "faq-item",
+  "group": "Block",
+  "category": "Interactive",
+  "title": "Accordion",
+  "description": "Collapsible question and answer.",
+  "kit": "Starter",
+  "elements": 2
+ },
+ {
+  "id": "video",
+  "group": "Block",
+  "category": "Media",
+  "title": "Video",
+  "description": "Responsive YouTube/Vimeo embed.",
+  "kit": "Starter",
+  "elements": 1
+ },
+ {
+  "id": "sk-feature-cards",
+  "group": "Block",
+  "category": "Skeleton",
+  "title": "Feature cards",
+  "description": "Three bordered cards with an icon, a title and a line; 3 → 2 → 1 columns.",
+  "kit": "Skeleton",
+  "elements": 13
+ },
+ {
+  "id": "sk-pricing",
+  "group": "Block",
+  "category": "Skeleton",
+  "title": "Pricing",
+  "description": "Three tiers, the middle one emphasised with a token colour.",
+  "kit": "Skeleton",
+  "elements": 16
+ },
+ {
+  "id": "sk-testimonial",
+  "group": "Block",
+  "category": "Skeleton",
+  "title": "Testimonial",
+  "description": "A quote with its author in one bordered card.",
+  "kit": "Skeleton",
+  "elements": 5
+ },
+ {
+  "id": "sk-stats",
+  "group": "Block",
+  "category": "Skeleton",
+  "title": "Stats",
+  "description": "Four numbers with labels; 4 → 2 columns.",
+  "kit": "Skeleton",
+  "elements": 13
+ },
+ {
+  "id": "sk-faq",
+  "group": "Block",
+  "category": "Skeleton",
+  "title": "FAQ",
+  "description": "Three accordions with one-line answers.",
+  "kit": "Skeleton",
+  "elements": 7
+ },
+ {
+  "id": "ezy-product-card",
+  "group": "Block",
+  "category": "Shop",
+  "title": "Product card",
+  "description": "One product: picture, name, price, discount and a link to the product. Put it in a Products loop.",
+  "kit": "EzyPlatform",
+  "elements": 9
+ },
+ {
+  "id": "ezy-part-header-bar",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Header bar",
+  "description": "Logo, the site's menu (a button on tablets and phones), search, account and cart.",
+  "kit": "EzyPlatform",
+  "elements": 7
+ },
+ {
+  "id": "ezy-part-actions",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Shop icons",
+  "description": "Search (desktop), language, account and cart.",
+  "kit": "EzyPlatform",
+  "elements": 5
+ },
+ {
+  "id": "ezy-part-top-bar",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Top bar",
+  "description": "Tagline, language and sign in in one thin line; hidden on phones.",
+  "kit": "EzyPlatform",
+  "elements": 5
+ },
+ {
+  "id": "ezy-part-footer-columns",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Footer columns",
+  "description": "Logo and tagline, then three columns of links; 2 on tablets, 1 on phones.",
+  "kit": "EzyPlatform",
+  "elements": 19
+ },
+ {
+  "id": "ezy-part-footer-bottom",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Footer last line",
+  "description": "Copyright and follow icons.",
+  "kit": "EzyPlatform",
+  "elements": 6
+ },
+ {
+  "id": "ezy-part-mobile-bar",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Phone bar",
+  "description": "Home, search, cart and account at the bottom of a phone's screen (phones only).",
+  "kit": "EzyPlatform",
+  "elements": 13
+ },
+ {
+  "id": "wp-part-header-bar",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Header bar",
+  "description": "Logo, the site's menu (a button on tablets and phones) and search.",
+  "kit": "Starter",
+  "elements": 5
+ },
+ {
+  "id": "wp-part-shop-header-bar",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Shop header bar",
+  "description": "Logo, menu, search, account and the mini cart.",
+  "kit": "Starter",
+  "elements": 7
+ },
+ {
+  "id": "wp-part-footer-columns",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Footer columns",
+  "description": "Site title and tagline, then three columns of links.",
+  "kit": "Starter",
+  "elements": 17
+ },
+ {
+  "id": "wp-part-footer-bottom",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Footer last line",
+  "description": "Copyright and follow icons.",
+  "kit": "Starter",
+  "elements": 6
+ },
+ {
+  "id": "wp-part-store-header",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Store header (3 rows)",
+  "description": "Top bar, then logo, search and shop icons, then the menu under a line (Flatsome's header rows).",
+  "kit": "Starter",
+  "elements": 15
+ },
+ {
+  "id": "wp-part-top-bar",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Top bar",
+  "description": "A thin dark line: a message on the left, links on the right; hidden on phones.",
+  "kit": "Starter",
+  "elements": 5
+ },
+ {
+  "id": "wp-part-el-logo",
+  "group": "Block",
+  "category": "Header elements",
+  "title": "Logo",
+  "description": "The site logo.",
+  "kit": "Starter",
+  "elements": 1
+ },
+ {
+  "id": "wp-part-el-title",
+  "group": "Block",
+  "category": "Header elements",
+  "title": "Site title",
+  "description": "The site's name, linked to the home page.",
+  "kit": "Starter",
+  "elements": 1
+ },
+ {
+  "id": "wp-part-el-menu",
+  "group": "Block",
+  "category": "Header elements",
+  "title": "Menu",
+  "description": "The site's menu; a button on tablets and phones.",
+  "kit": "Starter",
+  "elements": 1
+ },
+ {
+  "id": "wp-part-el-search",
+  "group": "Block",
+  "category": "Header elements",
+  "title": "Search icon",
+  "description": "A search button that opens a field.",
+  "kit": "Starter",
+  "elements": 1
+ },
+ {
+  "id": "wp-part-el-account",
+  "group": "Block",
+  "category": "Header elements",
+  "title": "Account",
+  "description": "Sign in / my account link.",
+  "kit": "Starter",
+  "elements": 1
+ },
+ {
+  "id": "wp-part-el-cart",
+  "group": "Block",
+  "category": "Header elements",
+  "title": "Cart",
+  "description": "The mini cart with its count.",
+  "kit": "Starter",
+  "elements": 1
+ },
+ {
+  "id": "wp-part-el-wishlist",
+  "group": "Block",
+  "category": "Header elements",
+  "title": "Wishlist",
+  "description": "Wishlist link with its count (Auvyx Woo).",
+  "kit": "Starter",
+  "elements": 1
+ },
+ {
+  "id": "wp-part-el-contact",
+  "group": "Block",
+  "category": "Header elements",
+  "title": "Contact line",
+  "description": "A phone icon and number.",
+  "kit": "Starter",
+  "elements": 3
+ },
+ {
+  "id": "wp-part-el-social",
+  "group": "Block",
+  "category": "Header elements",
+  "title": "Follow icons",
+  "description": "Facebook, Instagram, YouTube.",
+  "kit": "Starter",
+  "elements": 4
+ },
+ {
+  "id": "wp-part-mobile-bar",
+  "group": "Block",
+  "category": "Header & footer",
+  "title": "Phone bar",
+  "description": "Home, search, cart and account at the bottom of a phone's screen (phones only).",
+  "kit": "Starter",
+  "elements": 13
+ },
+ {
+  "id": "countdown",
+  "group": "Block",
+  "category": "Commerce",
+  "title": "Countdown",
+  "description": "Days, hours, minutes and seconds to a sale's end. Set the end in Content; it counts on the published page.",
+  "kit": "Starter",
+  "elements": 13
+ },
+ {
+  "id": "popup",
+  "group": "Block",
+  "category": "Interactive",
+  "title": "Popup",
+  "description": "Opens over the page: after a few seconds, on exit, on scroll or from a link to #newsletter-popup. Set when and how often in Content.",
+  "kit": "Starter",
+  "elements": 5
+ },
+ {
+  "id": "banner-left",
+  "group": "Block",
+  "category": "Media",
+  "title": "Banner — left",
+  "description": "Text box on the left of the photo.",
+  "kit": "Starter",
+  "elements": 5
+ },
+ {
+  "id": "banner-right",
+  "group": "Block",
+  "category": "Media",
+  "title": "Banner — right",
+  "description": "Text box on the right of the photo.",
+  "kit": "Starter",
+  "elements": 5
+ },
+ {
+  "id": "banner-boxed",
+  "group": "Block",
+  "category": "Media",
+  "title": "Banner — box left",
+  "description": "Copy on a light panel over the photo.",
+  "kit": "Starter",
+  "elements": 5
+ },
+ {
+  "id": "banner-huge",
+  "group": "Block",
+  "category": "Media",
+  "title": "Banner — huge sale",
+  "description": "One big sale headline.",
+  "kit": "Starter",
+  "elements": 5
+ },
+ {
+  "id": "hotspot",
+  "group": "Block",
+  "category": "Media",
+  "title": "Hotspot",
+  "description": "A dot on a banner photo that shows a product card. Drop it on a Banner, then drag it into place.",
+  "kit": "Starter",
+  "elements": 7
+ },
+ {
+  "id": "shop-the-look",
+  "group": "Block",
+  "category": "Media",
+  "title": "Shop the look",
+  "description": "A photo with product hotspots (Flatsome lookbook).",
+  "kit": "Starter",
+  "elements": 15
+ },
+ {
+  "id": "banner-slider",
+  "group": "Block",
+  "category": "Media",
+  "title": "Slider",
+  "description": "Banners that slide (or fade). Each slide is a Banner; settings in Content → Slider.",
+  "kit": "Starter",
+  "elements": 16
+ },
+ {
+  "id": "toc",
+  "group": "Block",
+  "category": "Content",
+  "title": "Table of contents",
+  "description": "Lists the page's headings with links to them, built on the published page.",
+  "kit": "Starter",
+  "elements": 2
+ },
+ {
+  "id": "share",
+  "group": "Block",
+  "category": "Social",
+  "title": "Share buttons",
+  "description": "Share this page on Facebook, X, LinkedIn or WhatsApp, or copy its link.",
+  "kit": "Starter",
+  "elements": 8
+ },
+ {
+  "id": "flip-box",
+  "group": "Block",
+  "category": "Interactive",
+  "title": "Flip box",
+  "description": "A card that turns over on hover (a tap on phones): the front, then the back with a button.",
+  "kit": "Starter",
+  "elements": 9
+ },
+ {
+  "id": "before-after",
+  "group": "Block",
+  "category": "Media",
+  "title": "Before / after",
+  "description": "Two images and a handle to compare them. Use two photos of the same size.",
+  "kit": "Starter",
+  "elements": 3
+ },
+ {
+  "id": "marquee",
+  "group": "Block",
+  "category": "Interactive",
+  "title": "Marquee",
+  "description": "A strip of words or logos that scrolls sideways, without end. Pauses under the pointer.",
+  "kit": "Starter",
+  "elements": 9
+ },
+ {
+  "id": "geo-course-card",
+  "group": "Block",
+  "category": "Catalog",
+  "title": "Course card",
+  "description": "Cover, tag, title, rating, price and button.",
+  "kit": "Geometric",
+  "elements": 10
+ },
+ {
+  "id": "geo-webinar-card",
+  "group": "Block",
+  "category": "Catalog",
+  "title": "Webinar card",
+  "description": "Navy card with tag, speaker, title and shapes.",
+  "kit": "Geometric",
+  "elements": 6
+ },
+ {
+  "id": "geo-mentor-card",
+  "group": "Block",
+  "category": "Catalog",
+  "title": "Mentor card",
+  "description": "Portrait with a gradient and name.",
+  "kit": "Geometric",
+  "elements": 6
+ },
+ {
+  "id": "geo-promo-card",
+  "group": "Block",
+  "category": "Call to action",
+  "title": "Promo card",
+  "description": "Navy offer card with geometric tiles.",
+  "kit": "Geometric",
+  "elements": 5
+ },
+ {
+  "id": "ed-product-card",
+  "group": "Block",
+  "category": "Catalog",
+  "title": "Product card — editorial",
+  "description": "Photo, New-in tag, uppercase name, price (bound to the product).",
+  "kit": "Editorial",
+  "elements": 7
+ },
+ {
+  "id": "ma-product-card",
+  "group": "Block",
+  "category": "Catalog",
+  "title": "Product card — maison",
+  "description": "Framed photo, category, serif name, price, outlined button.",
+  "kit": "Maison",
+  "elements": 11
+ },
+ {
+  "id": "academy-course-card",
+  "group": "Block",
+  "category": "Catalog",
+  "title": "Course card",
+  "description": "One course: a photograph, subject and level, length, rating, price and Enrol.",
+  "kit": "Academy",
+  "elements": 11
+ },
+ {
+  "id": "academy-category-tile",
+  "group": "Block",
+  "category": "Catalog",
+  "title": "Subject tile",
+  "description": "One subject in a ruled cell, with its course count set large.",
+  "kit": "Academy",
+  "elements": 6
+ },
+ {
+  "id": "academy-instructor-card",
+  "group": "Block",
+  "category": "Team",
+  "title": "Mentor row",
+  "description": "One mentor: the name in capitals, the day job and the subject.",
+  "kit": "Academy",
+  "elements": 4
+ },
+ {
+  "id": "academy-testimonial-card",
+  "group": "Block",
+  "category": "Trust",
+  "title": "Review card",
+  "description": "One review in a ruled cell, with the learner's name and role.",
+  "kit": "Academy",
+  "elements": 6
+ },
+ {
+  "id": "pc-classic",
+  "group": "Block",
+  "category": "Product card",
+  "title": "Product card — Classic",
+  "description": "Photo on a tile, category, name, stars and price; the second photo on hover; heart, compare and quick view over the photo.",
+  "kit": "Product display",
+  "elements": 18
+ },
+ {
+  "id": "pc-minimal",
+  "group": "Block",
+  "category": "Product card",
+  "title": "Product card — Minimal",
+  "description": "Centered name and price under a bare photo that zooms on hover.",
+  "kit": "Product display",
+  "elements": 11
+ },
+ {
+  "id": "pc-icons",
+  "group": "Block",
+  "category": "Product card",
+  "title": "Product card — Icons on hover",
+  "description": "Wishlist, compare and quick view slide in over the photo; an add to cart link under the price.",
+  "kit": "Product display",
+  "elements": 20
+ },
+ {
+  "id": "pc-cart-bar",
+  "group": "Block",
+  "category": "Product card",
+  "title": "Product card — Add to cart bar",
+  "description": "A full-width add to cart bar slides up over the photo on hover (always shown on touch screens).",
+  "kit": "Product display",
+  "elements": 19
+ },
+ {
+  "id": "pc-quick-buy",
+  "group": "Block",
+  "category": "Product card",
+  "title": "Product card — Quick buy",
+  "description": "Options as swatches, quantity and add to cart inside the card, for buying from the grid.",
+  "kit": "Product display",
+  "elements": 18
+ },
+ {
+  "id": "pc-gallery",
+  "group": "Block",
+  "category": "Product card",
+  "title": "Product card — Photo slider",
+  "description": "Every product photo in the card, with arrows and dots; outlined add to cart.",
+  "kit": "Product display",
+  "elements": 17
+ },
+ {
+  "id": "pc-list",
+  "group": "Block",
+  "category": "Product card",
+  "title": "Product card — List",
+  "description": "Photo beside the name, stars, price, summary, swatches and buttons: for list views and sidebars.",
+  "kit": "Product display",
+  "elements": 21
+ },
+ {
+  "id": "pc-deal",
+  "group": "Block",
+  "category": "Product card",
+  "title": "Product card — Deal",
+  "description": "Compact card with a countdown to the end of the sale and a sold / available bar.",
+  "kit": "Product display",
+  "elements": 18
+ },
+ {
+  "id": "pc-bordered",
+  "group": "Block",
+  "category": "Product card",
+  "title": "Product card — Bordered",
+  "description": "Framed card with a row of badges, color swatches and a full-width button.",
+  "kit": "Product display",
+  "elements": 19
+ },
+ {
+  "id": "pc-overlay",
+  "group": "Block",
+  "category": "Product card",
+  "title": "Product card — Caption on photo",
+  "description": "Tall photo with the name and price over a shade at the bottom: editorial.",
+  "kit": "Product display",
+  "elements": 9
+ }
+]

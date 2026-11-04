@@ -1,0 +1,46 @@
+{
+  "name": "auvyx-builder",
+  "private": true,
+  "type": "module",
+  "license": "GPL-2.0-or-later",
+  "packageManager": "bun@1.4.2",
+  "workspaces": [
+    "shared",
+    "packages/*",
+    "products/*"
+  ],
+  "scripts": {
+    "setup": "bun run tools/doctor.ts",
+    "dev": "bun run tools/dev.ts",
+    "build": "turbo run build",
+    "test": "bun test ./packages ./products ./apps/editor/test",
+    "test:php": "bun run tools/php-test.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint --deny-warnings packages products tools",
+    "zip": "bun run editor:build && bun run build && bun run tools/zip.ts",
+    "check": "bun run lint && bun run typecheck && bun run test && bun run phpcs && bun run zip && bun run plugin-check && bun run test:php && bun run smoke",
+    "smoke": "bun run tools/smoke.ts",
+    "try": "bun run zip && bun run tools/smoke.ts --serve",
+    "editor:dev": "cd apps/editor && npm run dev",
+    "editor:build": "cd apps/editor && npm install --no-audit --no-fund && npm run build",
+    "plugin-check": "bun run tools/plugin-check.ts",
+    "pot": "bun run tools/pot.ts",
+    "phpcs": "bun run tools/phpcs.ts",
+    "phpcbf": "bun run tools/phpcs.ts --fix"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "18",
+    "@wp-playground/cli": "3.1.56",
+    "global-jsdom": "^30.0.0",
+    "happy-dom": "^21.0.4",
+    "jsdom": "^30.1.1",
+    "oxlint": "^1.86.0",
+    "playwright": "1.63.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sharp": "^0.35.4",
+    "turbo": "^2.11.7",
+    "typescript": "^5.9.0"
+  }
+}

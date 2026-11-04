@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "types": ["svelte"],
+    "paths": {
+      "@auvyx/editor-core/import": ["../../packages/editor-core/src/import/index.ts"],
+      "@auvyx/editor-core": ["../../packages/editor-core/src/index.ts"],
+      "@auvyx/style-engine": ["../../packages/style-engine/src/index.ts"],
+      "@auvyx/shared/*": ["../../shared/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.svelte"]
+}

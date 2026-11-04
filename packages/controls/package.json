@@ -1,0 +1,11 @@
+{
+  "name": "@auvyx/controls",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generic inspector controls built only on stable @wordpress/components APIs.",
+  "exports": {
+    ".": "./src/index.tsx"
+  },
+  "dependencies": {  }
+}

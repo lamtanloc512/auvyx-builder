@@ -1,0 +1,13 @@
+{
+  "schema": "auvyx-store-slot-code/1",
+  "template": "auvyx-template/1",
+  "profiles": [
+    {"name": "template", "marker": "auvyx-code-template-v1", "script": false},
+    {"name": "module", "marker": "auvyx-code-module-v1", "script": true}
+  ],
+  "execution": {"realm": "containing-page-same-origin", "entry": "init(el,ctx)", "cleanup": "returned-function", "canvasDefault": "stopped", "sourceEditResetsRun": true, "libs": [], "uses": []},
+  "approval": {"source": "authorized-administrator", "save": "explicit-user-action", "publish": "explicit-user-action", "run": "separate-explicit-user-action", "agentCanApprove": false},
+  "css": {"scope": "per-instance-selector-prefix", "properties": "free", "designSystemLint": false, "globalRegistrations": false},
+  "recovery": {"setting": "auvyx_custom_code_enabled", "operatorOverride": "AUVYX_DISABLE_CUSTOM_CODE", "suppresses": ["script", "authored-css", "active-legacy-markup"], "preservesSource": true},
+  "limits": {"markupBytes": 60000, "scriptBytes": 60000, "cssBytes": 16384, "sourceBytes": 131072, "templateNodes": 1000, "templateDepth": 16, "loopItems": 20, "loopExpansions": 100, "outputBytes": 262144, "contextBytes": 32768, "modulesPerPage": 8, "slotHtmlBytesPerPage": 524288}
+}

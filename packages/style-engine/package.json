@@ -1,0 +1,13 @@
+{
+  "name": "@auvyx/style-engine",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "auvyx.styles attribute → CSS. Zero runtime dependencies. Mirrored in PHP (see AGENTS.md).",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@auvyx/shared": "workspace:*"
+  }
+}

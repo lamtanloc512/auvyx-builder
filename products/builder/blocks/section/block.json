@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/section",
+  "title": "Section",
+  "category": "auvyx-builder",
+  "description": "Layout container with responsive styles. Holds any blocks.",
+  "keywords": ["container", "box", "row", "column", "wrapper"],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "tagName": {
+      "type": "string",
+      "enum": ["section", "div", "header", "footer", "main", "article", "aside", "nav"],
+      "default": "section"
+    },
+    "auvyx": { "type": "object" }
+  },
+  "supports": {
+    "anchor": true,
+    "align": ["wide", "full"],
+    "html": false
+  },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks"
+}

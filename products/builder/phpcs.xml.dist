@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<ruleset name="Auvyx Builder">
+	<description>WordPress Coding Standards for the Auvyx Builder plugin (run: bun run phpcs).</description>
+
+	<file>.</file>
+	<exclude-pattern type="relative">^build/*</exclude-pattern>
+	<exclude-pattern type="relative">^generated/*</exclude-pattern>
+	<exclude-pattern type="relative">^studio/*</exclude-pattern>
+	<exclude-pattern type="relative">^node_modules/*</exclude-pattern>
+	<exclude-pattern type="relative">^tests/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg value="sp"/>
+	<arg name="colors"/>
+
+	<config name="minimum_wp_version" value="6.7"/>
+	<config name="testVersion" value="7.4-"/>
+
+	<!-- WordPress-Extra: core + best practices and security, without the inline-docs ruleset. -->
+	<rule ref="WordPress-Extra">
+		<!-- PSR-4 class files (src/Modules/Blocks/Blocks.php) instead of class-*.php. -->
+		<exclude name="WordPress.Files.FileName"/>
+		<!-- Shells out to `php -l` (unavailable in php-wasm); CI lints syntax separately. -->
+		<exclude name="Generic.PHP.Syntax"/>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="auvyx-builder"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<!-- Every option, hook and handle starts with auvyx_ / auvyx- (AGENTS.md "WordPress hygiene"). -->
+				<element value="auvyx"/>
+				<element value="auvyx_builder"/>
+				<element value="Auvyx\Builder"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

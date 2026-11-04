@@ -1,0 +1,105 @@
+{
+  "$comment": "PlayDocument parity (docs/play-sandbox.md): the Scala (Studio, EzyPlatform) and PHP (WordPress) builders, and the TS policy, must give exactly these.",
+  "documents": [
+    {
+      "name": "a small game",
+      "game": {
+        "title": "Coin Run",
+        "lang": "vi",
+        "html": "<canvas></canvas>",
+        "css": "canvas{width:100%}",
+        "js": "export default ({ el }) => { el.textContent = 'hi' }",
+        "libs": [
+          "three"
+        ]
+      },
+      "runtime": "https://shop.vn/wp-content/plugins/auvyx-builder/assets/play-game.js",
+      "expected": "<!doctype html>\n<html lang=\"vi\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>Coin Run</title>\n<style>html,body{margin:0;height:100%;overflow:hidden;background:#000;touch-action:none;-webkit-user-select:none;user-select:none}#auvyx-game{position:fixed;inset:0}</style>\n<style>canvas{width:100%}</style>\n</head>\n<body>\n<div id=\"auvyx-game\"><canvas></canvas></div>\n<script type=\"application/json\" id=\"auvyx-play-config\">{\"libs\":[\"three\"]}</script>\n<script type=\"text/auvyx-game\" id=\"auvyx-play-module\">export default ({ el }) => { el.textContent = 'hi' }</script>\n<script src=\"https://shop.vn/wp-content/plugins/auvyx-builder/assets/play-game.js\"></script>\n</body>\n</html>\n"
+    },
+    {
+      "name": "what could end its element early is escaped",
+      "game": {
+        "title": "A <b>\"bold\"</b> & 'odd' title",
+        "html": "<p>{css} {js} stays text</p>",
+        "css": "a::after{content:'</style><script>alert(1)</script>'}",
+        "js": "const s = '</script><script>alert(1)</script>'; const t = '</SCRIPT>'; // <!-- x",
+        "libs": []
+      },
+      "runtime": "/auvyx/assets/play-game.js?v=1&x=\"y\"",
+      "expected": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>A &lt;b&gt;&quot;bold&quot;&lt;/b&gt; &amp; &#039;odd&#039; title</title>\n<style>html,body{margin:0;height:100%;overflow:hidden;background:#000;touch-action:none;-webkit-user-select:none;user-select:none}#auvyx-game{position:fixed;inset:0}</style>\n<style>a::after{content:'<\\/style><script>alert(1)</script>'}</style>\n</head>\n<body>\n<div id=\"auvyx-game\"><p>{css} {js} stays text</p></div>\n<script type=\"application/json\" id=\"auvyx-play-config\">{\"libs\":[]}</script>\n<script type=\"text/auvyx-game\" id=\"auvyx-play-module\">const s = '<\\/script><script>alert(1)<\\/script>'; const t = '<\\/SCRIPT>'; // <\\!-- x</script>\n<script src=\"/auvyx/assets/play-game.js?v=1&amp;x=&quot;y&quot;\"></script>\n</body>\n</html>\n"
+    },
+    {
+      "name": "only the libraries a game may use, once each, in order",
+      "game": {
+        "title": "Libs",
+        "lang": "bad lang!",
+        "libs": [
+          "gsap",
+          "three",
+          "motion",
+          "three",
+          "nope",
+          "lottie"
+        ]
+      },
+      "runtime": "/r.js",
+      "expected": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>Libs</title>\n<style>html,body{margin:0;height:100%;overflow:hidden;background:#000;touch-action:none;-webkit-user-select:none;user-select:none}#auvyx-game{position:fixed;inset:0}</style>\n<style></style>\n</head>\n<body>\n<div id=\"auvyx-game\"></div>\n<script type=\"application/json\" id=\"auvyx-play-config\">{\"libs\":[\"three\",\"motion\",\"lottie\"]}</script>\n<script type=\"text/auvyx-game\" id=\"auvyx-play-module\"></script>\n<script src=\"/r.js\"></script>\n</body>\n</html>\n"
+    },
+    {
+      "name": "placeholders inside content are not filled again",
+      "game": {
+        "title": "{title}",
+        "html": "{html}{runtime}",
+        "css": "/* {css} */",
+        "js": "// {config}",
+        "libs": []
+      },
+      "runtime": "/r.js",
+      "expected": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>{title}</title>\n<style>html,body{margin:0;height:100%;overflow:hidden;background:#000;touch-action:none;-webkit-user-select:none;user-select:none}#auvyx-game{position:fixed;inset:0}</style>\n<style>/* {css} */</style>\n</head>\n<body>\n<div id=\"auvyx-game\">{html}{runtime}</div>\n<script type=\"application/json\" id=\"auvyx-play-config\">{\"libs\":[]}</script>\n<script type=\"text/auvyx-game\" id=\"auvyx-play-module\">// {config}</script>\n<script src=\"/r.js\"></script>\n</body>\n</html>\n"
+    }
+  ],
+  "policies": [
+    {
+      "siteOrigin": "https://shop.vn",
+      "runtimeOrigin": "https://shop.vn",
+      "expected": "sandbox allow-scripts allow-pointer-lock; default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' blob: https://shop.vn; style-src 'unsafe-inline' blob:; img-src data: blob:; media-src data: blob:; font-src data: blob:; connect-src data: blob:; worker-src blob:; base-uri 'none'; form-action 'none'; frame-ancestors https://shop.vn"
+    },
+    {
+      "siteOrigin": "http://127.0.0.1:8088",
+      "runtimeOrigin": "https://cdn.auvyx.dev",
+      "expected": "sandbox allow-scripts allow-pointer-lock; default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' blob: https://cdn.auvyx.dev; style-src 'unsafe-inline' blob:; img-src data: blob:; media-src data: blob:; font-src data: blob:; connect-src data: blob:; worker-src blob:; base-uri 'none'; form-action 'none'; frame-ancestors http://127.0.0.1:8088"
+    }
+  ],
+  "embeds": [
+    {
+      "name": "a game with a poster and assets",
+      "game": {
+        "id": "12",
+        "title": "Coin Run",
+        "src": "https://shop.vn/?auvyx_play=12",
+        "poster": "https://shop.vn/uploads/coin.jpg",
+        "assets": [
+          {
+            "name": "hero.png",
+            "type": "image/png",
+            "url": "https://shop.vn/uploads/hero.png"
+          }
+        ]
+      },
+      "label": "Chơi",
+      "expected": "<div class=\"auvyx-play\" data-auvyx-play=\"{&quot;id&quot;:&quot;12&quot;,&quot;title&quot;:&quot;Coin Run&quot;,&quot;src&quot;:&quot;https://shop.vn/?auvyx_play=12&quot;,&quot;assets&quot;:[{&quot;name&quot;:&quot;hero.png&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;url&quot;:&quot;https://shop.vn/uploads/hero.png&quot;}]}\"><img class=\"auvyx-play__poster\" src=\"https://shop.vn/uploads/coin.jpg\" alt=\"\" loading=\"lazy\" decoding=\"async\"><button class=\"auvyx-play__start\" type=\"button\"><span class=\"auvyx-play__icon\" aria-hidden=\"true\"></span><span class=\"auvyx-play__label\">Chơi</span></button></div>"
+    },
+    {
+      "name": "what is typed stays text",
+      "game": {
+        "id": "7",
+        "title": "\"><script>alert(1)</script> & co",
+        "src": "/?auvyx_play=7&x=1",
+        "poster": "",
+        "assets": []
+      },
+      "label": "Play <now>",
+      "expected": "<div class=\"auvyx-play\" data-auvyx-play=\"{&quot;id&quot;:&quot;7&quot;,&quot;title&quot;:&quot;\\&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt; &amp; co&quot;,&quot;src&quot;:&quot;/?auvyx_play=7&amp;x=1&quot;,&quot;assets&quot;:[]}\"><button class=\"auvyx-play__start\" type=\"button\"><span class=\"auvyx-play__icon\" aria-hidden=\"true\"></span><span class=\"auvyx-play__label\">Play &lt;now&gt;</span></button></div>"
+    }
+  ]
+}

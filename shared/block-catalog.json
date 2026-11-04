@@ -1,0 +1,935 @@
+{
+  "version": 1,
+  "blocks": [
+    {
+      "kind": "section",
+      "block": "auvyx/section",
+      "label": "Section",
+      "container": true,
+      "props": [
+        {
+          "name": "tag",
+          "type": "enum",
+          "values": [
+            "section",
+            "div",
+            "header",
+            "footer",
+            "main",
+            "article",
+            "aside",
+            "nav"
+          ]
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "appearance",
+        "effects",
+        "fill",
+        "layout",
+        "space",
+        "stroke"
+      ],
+      "interaction": {
+        "automatic": "none",
+        "recipes": [
+          "auto",
+          "card",
+          "control",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "heading",
+      "block": "auvyx/heading",
+      "label": "Heading",
+      "container": false,
+      "props": [
+        {
+          "name": "text",
+          "type": "string"
+        },
+        {
+          "name": "level",
+          "type": "integer"
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "appearance",
+        "layout",
+        "space",
+        "typography"
+      ],
+      "interaction": {
+        "automatic": "link",
+        "recipes": [
+          "auto",
+          "link",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "text",
+      "block": "auvyx/text",
+      "label": "Text",
+      "container": false,
+      "props": [
+        {
+          "name": "text",
+          "type": "string"
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "appearance",
+        "layout",
+        "space",
+        "typography"
+      ],
+      "interaction": {
+        "automatic": "link",
+        "recipes": [
+          "auto",
+          "link",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "snippet",
+      "block": "auvyx/snippet",
+      "label": "Code",
+      "container": false,
+      "props": [
+        {
+          "name": "code",
+          "type": "string"
+        },
+        {
+          "name": "language",
+          "type": "string"
+        },
+        {
+          "name": "theme",
+          "type": "enum",
+          "values": [
+            "dark",
+            "light"
+          ]
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "appearance",
+        "layout",
+        "space",
+        "typography"
+      ],
+      "interaction": {
+        "automatic": "none",
+        "recipes": [
+          "auto",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "button",
+      "block": "auvyx/button",
+      "label": "Button",
+      "container": false,
+      "props": [
+        {
+          "name": "text",
+          "type": "string"
+        },
+        {
+          "name": "href",
+          "type": "string"
+        },
+        {
+          "name": "target",
+          "type": "enum",
+          "values": [
+            "",
+            "_blank"
+          ]
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "appearance",
+        "effects",
+        "fill",
+        "layout",
+        "space",
+        "stroke",
+        "typography"
+      ],
+      "interaction": {
+        "automatic": "button",
+        "recipes": [
+          "auto",
+          "button",
+          "link",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "image",
+      "block": "auvyx/image",
+      "label": "Image",
+      "container": false,
+      "props": [
+        {
+          "name": "src",
+          "type": "string"
+        },
+        {
+          "name": "alt",
+          "type": "string"
+        },
+        {
+          "name": "href",
+          "type": "string"
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "appearance",
+        "effects",
+        "layout",
+        "space"
+      ],
+      "interaction": {
+        "automatic": "link",
+        "recipes": [
+          "auto",
+          "link",
+          "card",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "icon",
+      "block": "auvyx/icon",
+      "label": "Icon",
+      "container": false,
+      "props": [
+        {
+          "name": "icon",
+          "type": "enum",
+          "values": [
+            "check",
+            "circle-check",
+            "star",
+            "heart",
+            "zap",
+            "shield-check",
+            "lock",
+            "globe",
+            "phone",
+            "mail",
+            "map-pin",
+            "clock",
+            "calendar",
+            "users",
+            "user",
+            "award",
+            "rocket",
+            "sparkles",
+            "layers",
+            "layout-grid",
+            "palette",
+            "code-xml",
+            "smartphone",
+            "monitor",
+            "truck",
+            "credit-card",
+            "gift",
+            "shopping-cart",
+            "shopping-bag",
+            "message-circle",
+            "camera",
+            "play",
+            "leaf",
+            "sun",
+            "moon",
+            "cloud",
+            "settings",
+            "search",
+            "thumbs-up",
+            "trending-up",
+            "chart-bar",
+            "target",
+            "lightbulb",
+            "headphones",
+            "package",
+            "wallet",
+            "arrow-right",
+            "quote",
+            "facebook",
+            "instagram",
+            "twitter",
+            "youtube",
+            "linkedin"
+          ]
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "appearance",
+        "color",
+        "layout"
+      ],
+      "interaction": {
+        "automatic": "link",
+        "recipes": [
+          "auto",
+          "link",
+          "card",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "divider",
+      "block": "auvyx/divider",
+      "label": "Divider",
+      "container": false,
+      "props": [
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "appearance",
+        "space",
+        "stroke"
+      ],
+      "interaction": {
+        "automatic": "none",
+        "recipes": [
+          "auto",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "video",
+      "block": "auvyx/video",
+      "label": "Video",
+      "container": false,
+      "props": [
+        {
+          "name": "src",
+          "type": "string"
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "appearance",
+        "effects",
+        "layout"
+      ],
+      "interaction": {
+        "automatic": "none",
+        "recipes": [
+          "auto",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "vector",
+      "block": "auvyx/vector",
+      "label": "Vector",
+      "container": false,
+      "props": [
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "fill",
+        "stroke"
+      ],
+      "interaction": {
+        "automatic": "none",
+        "recipes": [
+          "auto",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "accordion",
+      "block": "auvyx/accordion",
+      "label": "Accordion",
+      "container": true,
+      "props": [
+        {
+          "name": "text",
+          "type": "string"
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "appearance",
+        "space",
+        "typography"
+      ],
+      "interaction": {
+        "automatic": "disclosure",
+        "recipes": [
+          "auto",
+          "disclosure",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "loop",
+      "block": "auvyx/loop",
+      "label": "Posts loop",
+      "container": true,
+      "props": [
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "layout",
+        "space"
+      ],
+      "interaction": {
+        "automatic": "none",
+        "recipes": [
+          "auto",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "carousel",
+      "block": "auvyx/carousel",
+      "label": "Carousel",
+      "container": false,
+      "props": [
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "fill",
+        "layout",
+        "space"
+      ],
+      "interaction": {
+        "automatic": "none",
+        "recipes": [
+          "auto",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "navigation",
+      "block": "auvyx/nav",
+      "label": "Navigation",
+      "container": false,
+      "props": [
+        {
+          "name": "menu",
+          "type": "string"
+        },
+        {
+          "name": "toggleAt",
+          "type": "enum",
+          "values": [
+            "mobile",
+            "tablet",
+            "never"
+          ]
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [
+        "layout",
+        "space",
+        "typography"
+      ],
+      "interaction": {
+        "automatic": "link",
+        "recipes": [
+          "auto",
+          "link",
+          "none"
+        ]
+      }
+    },
+    {
+      "kind": "block",
+      "block": "",
+      "label": "Block",
+      "container": false,
+      "props": [
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "",
+            "full",
+            "wide"
+          ]
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "styleGroups": [],
+      "interaction": {
+        "automatic": "none",
+        "recipes": [
+          "auto",
+          "none"
+        ]
+      }
+    }
+  ],
+  "presets": [
+    {
+      "id": "hero-centered",
+      "category": "Hero",
+      "title": "Hero — centered",
+      "description": "Dark hero with headline, text and two buttons."
+    },
+    {
+      "id": "hero-split",
+      "category": "Hero",
+      "title": "Hero — split",
+      "description": "Headline and CTAs left, code snippet right; stacks on mobile."
+    },
+    {
+      "id": "banner",
+      "category": "Hero",
+      "title": "Banner (background image)",
+      "description": "Text over a background image with an overlay."
+    },
+    {
+      "id": "logos",
+      "category": "Logos",
+      "title": "Logo strip",
+      "description": "Row of client logos (text placeholders)."
+    },
+    {
+      "id": "features",
+      "category": "Features",
+      "title": "Features — 3 icon boxes",
+      "description": "Section title and three icon boxes."
+    },
+    {
+      "id": "pricing",
+      "category": "Pricing",
+      "title": "Pricing — 3 plans",
+      "description": "Three price tables, middle one highlighted."
+    },
+    {
+      "id": "testimonials",
+      "category": "Testimonials",
+      "title": "Testimonials",
+      "description": "Three customer quotes."
+    },
+    {
+      "id": "faq",
+      "category": "FAQ",
+      "title": "FAQ",
+      "description": "Questions with collapsible answers."
+    },
+    {
+      "id": "cta",
+      "category": "CTA",
+      "title": "Call to action",
+      "description": "Colored band with a headline and button."
+    },
+    {
+      "id": "footer",
+      "category": "Footer",
+      "title": "Footer",
+      "description": "Brand, three link columns, copyright."
+    },
+    {
+      "id": "lib-product-grid",
+      "category": "Ecommerce",
+      "title": "Product grid",
+      "description": "Four product cards. Four across, two on a tablet, one on a phone."
+    },
+    {
+      "id": "lib-product-highlight",
+      "category": "Ecommerce",
+      "title": "Product highlight",
+      "description": "One product: picture, price, and a button. The picture stacks above the copy on a phone."
+    },
+    {
+      "id": "lib-course-grid",
+      "category": "LMS",
+      "title": "Course grid",
+      "description": "Three course cards with a cover, a length, and a price. One column on a phone."
+    },
+    {
+      "id": "lib-curriculum",
+      "category": "LMS",
+      "title": "Curriculum",
+      "description": "A numbered lesson list. Each row stacks on a phone."
+    },
+    {
+      "id": "lib-instructor",
+      "category": "LMS",
+      "title": "Instructor",
+      "description": "Portrait, name, and a short bio. The portrait shrinks and sits above the bio on a phone."
+    }
+  ],
+  "interactions": {
+    "recipes": [
+      {
+        "id": "auto",
+        "label": "Automatic",
+        "about": "What the block's kind gets: buttons press, linked pictures and icons respond, accordion headers respond, text links underline"
+      },
+      {
+        "id": "button",
+        "label": "Button",
+        "about": "Background and border follow the pointer, presses in, keyboard focus ring; aria-pressed/aria-current show as selected, aria-disabled as disabled"
+      },
+      {
+        "id": "link",
+        "label": "Link",
+        "about": "A quiet link: colour/underline (text) or a light change (picture, icon) on hover, focus ring"
+      },
+      {
+        "id": "card",
+        "label": "Card",
+        "about": "A box people point at: lifts or outlines on hover, ring when something inside has keyboard focus. Use on boxes that hold one link or action"
+      },
+      {
+        "id": "control",
+        "label": "Form controls",
+        "about": "Inputs, selects and text areas inside this box: hover border, focus ring, aria-invalid in the alert colour, disabled dimmed"
+      },
+      {
+        "id": "disclosure",
+        "label": "Disclosure",
+        "about": "An accordion header: hover tint, focus ring, chevron turns when open"
+      },
+      {
+        "id": "none",
+        "label": "None",
+        "about": "No interaction feedback (still a focus ring for keyboards: never removed)"
+      }
+    ],
+    "variants": [
+      {
+        "id": "default",
+        "label": "Default",
+        "about": "Clear but quiet feedback"
+      },
+      {
+        "id": "subtle",
+        "label": "Subtle",
+        "about": "Colour only: no movement, no shadow"
+      },
+      {
+        "id": "expressive",
+        "label": "Expressive",
+        "about": "A little more: lift and shadow on hover, a deeper press"
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      {
+        "slug": "auvyx-primary",
+        "variable": "var(--wp--preset--color--auvyx-primary)"
+      },
+      {
+        "slug": "auvyx-secondary",
+        "variable": "var(--wp--preset--color--auvyx-secondary)"
+      },
+      {
+        "slug": "auvyx-accent",
+        "variable": "var(--wp--preset--color--auvyx-accent)"
+      },
+      {
+        "slug": "auvyx-surface",
+        "variable": "var(--wp--preset--color--auvyx-surface)"
+      },
+      {
+        "slug": "auvyx-text",
+        "variable": "var(--wp--preset--color--auvyx-text)"
+      },
+      {
+        "slug": "auvyx-inverse",
+        "variable": "var(--wp--preset--color--auvyx-inverse)"
+      },
+      {
+        "slug": "auvyx-on-primary",
+        "variable": "var(--wp--preset--color--auvyx-on-primary)"
+      },
+      {
+        "slug": "auvyx-base",
+        "variable": "var(--wp--preset--color--auvyx-base)"
+      },
+      {
+        "slug": "auvyx-muted",
+        "variable": "var(--wp--preset--color--auvyx-muted)"
+      },
+      {
+        "slug": "auvyx-border",
+        "variable": "var(--wp--preset--color--auvyx-border)"
+      }
+    ],
+    "fontSize": [
+      {
+        "slug": "auvyx-sm",
+        "variable": "var(--wp--preset--font-size--auvyx-sm)"
+      },
+      {
+        "slug": "auvyx-md",
+        "variable": "var(--wp--preset--font-size--auvyx-md)"
+      },
+      {
+        "slug": "auvyx-lg",
+        "variable": "var(--wp--preset--font-size--auvyx-lg)"
+      },
+      {
+        "slug": "auvyx-xl",
+        "variable": "var(--wp--preset--font-size--auvyx-xl)"
+      },
+      {
+        "slug": "auvyx-xxl",
+        "variable": "var(--wp--preset--font-size--auvyx-xxl)"
+      }
+    ],
+    "spacing": [
+      {
+        "slug": "auvyx-xs",
+        "variable": "var(--wp--preset--spacing--auvyx-xs)"
+      },
+      {
+        "slug": "auvyx-sm",
+        "variable": "var(--wp--preset--spacing--auvyx-sm)"
+      },
+      {
+        "slug": "auvyx-md",
+        "variable": "var(--wp--preset--spacing--auvyx-md)"
+      },
+      {
+        "slug": "auvyx-lg",
+        "variable": "var(--wp--preset--spacing--auvyx-lg)"
+      },
+      {
+        "slug": "auvyx-xl",
+        "variable": "var(--wp--preset--spacing--auvyx-xl)"
+      }
+    ],
+    "radius": [
+      {
+        "slug": "sm",
+        "variable": "var(--wp--custom--radius--sm)"
+      },
+      {
+        "slug": "md",
+        "variable": "var(--wp--custom--radius--md)"
+      },
+      {
+        "slug": "lg",
+        "variable": "var(--wp--custom--radius--lg)"
+      },
+      {
+        "slug": "xl",
+        "variable": "var(--wp--custom--radius--xl)"
+      },
+      {
+        "slug": "full",
+        "variable": "var(--wp--custom--radius--full)"
+      }
+    ],
+    "fontFamily": [
+      {
+        "slug": "auvyx-body",
+        "variable": "var(--wp--preset--font-family--auvyx-body)"
+      },
+      {
+        "slug": "auvyx-heading",
+        "variable": "var(--wp--preset--font-family--auvyx-heading)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+<!-- wp:auvyx/section {"align":"full","auvyx":{"v":1,"styles":{"base":{"default":{"padding-inline-start":"var(\u002d\u002dauvyx-band, max(24px, calc((100% - 1200px) / 2)))","padding-inline-end":"var(\u002d\u002dauvyx-band, max(24px, calc((100% - 1200px) / 2)))","padding-block-start":"128px","padding-block-end":"128px","margin-block-start":"0","background-color":"var(\u002d\u002dwp\u002d\u002dpreset\u002d\u002dcolor\u002d\u002dauvyx-base)","color":"var(\u002d\u002dwp\u002d\u002dpreset\u002d\u002dcolor\u002d\u002dauvyx-text)","background-image":"radial-gradient(ellipse 72% 80% at 78% 42%, color-mix(in srgb, var(\u002d\u002dwp\u002d\u002dpreset\u002d\u002dcolor\u002d\u002dauvyx-primary) 28%, transparent), transparent 62%)"}},"mobile":{"default":{"padding-block-start":"72px","padding-block-end":"72px"}}},"label":"Hero — split"}} -->
+<section class="wp-block-auvyx-section alignfull">
+<!-- wp:auvyx/section {"tagName":"div","auvyx":{"v":1,"styles":{"base":{"default":{"display":"grid","grid-template-columns":"minmax(0, 1.15fr) minmax(0, 0.85fr)","gap":"72px","align-items":"center"}},"mobile":{"default":{"grid-template-columns":"1fr","gap":"40px"}}}}} -->
+<div class="wp-block-auvyx-section">
+<!-- wp:auvyx/section {"tagName":"div","auvyx":{"v":1,"styles":{"base":{"default":{"display":"flex","flex-direction":"column","gap":"28px"}}}}} -->
+<div class="wp-block-auvyx-section">
+<!-- wp:auvyx/text {"auvyx":{"v":1,"styles":{"base":{"default":{"color":"var(\u002d\u002dwp\u002d\u002dpreset\u002d\u002dcolor\u002d\u002dauvyx-primary)","font-size":"0.8125rem","font-weight":"600","text-transform":"uppercase","letter-spacing":"0.12em","margin-block-start":"0","margin-block-end":"0"}}}}} -->
+<p class="wp-block-auvyx-text">Serverless Postgres</p>
+<!-- /wp:auvyx/text -->
+
+<!-- wp:auvyx/heading {"level":1,"auvyx":{"v":1,"styles":{"base":{"default":{"font-size":"clamp(56px, 4.5vw, 80px)","line-height":"0.95","letter-spacing":"-0.04em","font-weight":"600","color":"var(\u002d\u002dwp\u002d\u002dpreset\u002d\u002dcolor\u002d\u002dauvyx-text)","max-width":"14ch","margin-block-start":"0","margin-block-end":"0"}},"mobile":{"default":{"font-size":"clamp(36px, 11vw, 44px)"}}}}} -->
+<h1 class="wp-block-auvyx-heading">Ship the query. Keep the cluster quiet.</h1>
+<!-- /wp:auvyx/heading -->
+
+<!-- wp:auvyx/text {"auvyx":{"v":1,"styles":{"base":{"default":{"color":"var(\u002d\u002dwp\u002d\u002dpreset\u002d\u002dcolor\u002d\u002dauvyx-muted)","font-size":"clamp(18px, 1.4vw, 20px)","line-height":"1.5","max-width":"36ch","margin-block-start":"0","margin-block-end":"0"}}}}} -->
+<p class="wp-block-auvyx-text">Branching, autoscaling, and a console that stays out of your way.</p>
+<!-- /wp:auvyx/text -->
+
+<!-- wp:auvyx/section {"tagName":"div","auvyx":{"v":1,"styles":{"base":{"default":{"display":"flex","flex-wrap":"wrap","align-items":"center","gap":"16px"}}}}} -->
+<div class="wp-block-auvyx-section">
+<!-- wp:auvyx/button -->
+<a class="wp-block-auvyx-button" href="#">Start free</a>
+<!-- /wp:auvyx/button -->
+
+<!-- wp:auvyx/button {"className":"auvyx-btn-ghost","auvyx":{"v":1,"styles":{"base":{"default":{"background-color":"transparent","color":"inherit","border-width":"1px","border-style":"solid","border-color":"color-mix(in srgb, currentColor 35%, transparent)"},"hover":{"background-color":"color-mix(in srgb, currentColor 12%, transparent)"}}}}} -->
+<a class="wp-block-auvyx-button auvyx-btn-ghost" href="#">Read docs</a>
+<!-- /wp:auvyx/button -->
+</div>
+<!-- /wp:auvyx/section -->
+</div>
+<!-- /wp:auvyx/section -->
+
+<!-- wp:auvyx/snippet {"code":"import { neon } from '@neondatabase/serverless';\nconst sql = neon(process.env.DATABASE_URL);\nawait sql`SELECT * FROM orders WHERE region = 'ap-southeast'`;","language":"typescript","auvyx":{"v":1,"styles":{"base":{"default":{"width":"100%","min-height":"280px"}}}}} -->
+<div class="wp-block-auvyx-snippet auvyx-snippet auvyx-snippet--dark" data-auvyx-snippet="1" data-theme="dark"><pre><code class="language-typescript"><span class="token-keyword">import</span> { neon } <span class="token-keyword">from</span> <span class="token-string">'@neondatabase/serverless'</span>;
+<span class="token-keyword">const</span> sql = neon(process.env.DATABASE_URL);
+<span class="token-keyword">await</span> sql<span class="token-string">`SELECT * FROM orders WHERE region = 'ap-southeast'`</span>;</code></pre><button type="button" class="auvyx-snippet__copy" aria-label="Copy code">Copy</button></div>
+<!-- /wp:auvyx/snippet -->
+</div>
+<!-- /wp:auvyx/section -->
+</section>
+<!-- /wp:auvyx/section -->

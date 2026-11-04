@@ -1,0 +1,17 @@
+{
+  "name": "@auvyx/block-kit",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Editor glue shared by all Auvyx blocks: style panel, editor CSS injection, design system access.",
+  "exports": {
+    ".": "./src/index.tsx"
+  },
+  "dependencies": {
+    "@auvyx/block-ops": "workspace:*",
+    "@auvyx/controls": "workspace:*",
+    "@auvyx/shared": "workspace:*",
+    "@auvyx/style-engine": "workspace:*",
+    "@auvyx/canvas-tools": "workspace:*"
+  }
+}

@@ -1,0 +1,1394 @@
+{
+ "schema": "auvyx-store-slot-template-fixtures/1",
+ "compile": [
+  {
+   "name": "hero layout normalises class whitespace and keeps order",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<section class=\"auvyx-sf-sheet  auvyx-sf-layers\"><h1 class=\"auvyx-sf-type-3xl\">{{category.title}}</h1></section>",
+   "canonical": "<section class=\"auvyx-sf-sheet auvyx-sf-layers\"><h1 class=\"auvyx-sf-type-3xl\">{{category.title}}</h1></section>"
+  },
+  {
+   "name": "entities are decoded once and the canonical form re-encodes only what it must",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>Tom &amp; Jerry &lt;3 &#123;&#123;x}} &copy; &#x1F6D2; a > b</p>",
+   "canonical": "<p>Tom &amp; Jerry &lt;3 &#123;&#123;x}} © 🛒 a &gt; b</p>"
+  },
+  {
+   "name": "void tags are canonical without a slash and tag names are lower-case",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<P>a<br/>b<BR>c</P><hr>",
+   "canonical": "<p>a<br>b<br>c</p><hr>"
+  },
+  {
+   "name": "presence and inverse sections on a record",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{#category.banner}}<img src=\"{{category.banner.url}}\" alt=\"{{category.banner.alt}}\">{{/category.banner}}{{^category.banner}}<p>none</p>{{/category.banner}}",
+   "canonical": "{{#category.banner}}<img src=\"{{category.banner.url}}\" alt=\"{{category.banner.alt}}\">{{/category.banner}}{{^category.banner}}<p>none</p>{{/category.banner}}"
+  },
+  {
+   "name": "array section iterates item fields",
+   "sets": [
+    "B",
+    "P"
+   ],
+   "source": "<ul>{{#product.specs}}<li><strong>{{label}}</strong>: {{value}}</li>{{/product.specs}}</ul>",
+   "canonical": "<ul>{{#product.specs}}<li><strong>{{label}}</strong>: {{value}}</li>{{/product.specs}}</ul>"
+  },
+  {
+   "name": "a button is always type=button",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<button>Go</button>",
+   "canonical": "<button type=\"button\">Go</button>"
+  },
+  {
+   "name": "whitespace inside a tag is trimmed",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{ category.title }}",
+   "canonical": "{{category.title}}"
+  },
+  {
+   "name": "static attributes: url, title, code hooks and boolean flags",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<a href='/shop?x=1&amp;y=2' title=\"T\" data-code-action=\"reveal\" hidden>x</a>",
+   "canonical": "<a href=\"/shop?x=1&amp;y=2\" title=\"T\" data-code-action=\"reveal\" hidden>x</a>"
+  },
+  {
+   "name": "details needs its summary as a direct child",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<details><summary>More</summary><p>text</p></details>",
+   "canonical": "<details><summary>More</summary><p>text</p></details>"
+  },
+  {
+   "name": "alias paths are catalogue paths",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>{{count}} {{category.count}} {{locale}}</p>",
+   "canonical": "<p>{{count}} {{category.count}} {{locale}}</p>"
+  }
+ ],
+ "render": [
+  {
+   "name": "category hero from the design note, markup in data stays text",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<section class=\"auvyx-sf-sheet auvyx-sf-tone-dark auvyx-sf-layers\">{{#category.banner}}<div class=\"auvyx-sf-frame auvyx-sf-ratio-16-9 auvyx-sf-r-card auvyx-sf-clip\"><img src=\"{{category.banner.url}}\" alt=\"{{category.banner.alt}}\"></div>{{/category.banner}}<div class=\"auvyx-sf-stack auvyx-sf-gap-s auvyx-sf-p-m\"><h1 class=\"auvyx-sf-type-3xl\">{{category.title}}</h1>{{#category.intro}}<p>{{category.intro}}</p>{{/category.intro}}<span class=\"auvyx-sf-type-sm\">{{count}} products</span></div></section>",
+   "context": "category",
+   "html": "<section class=\"auvyx-sf-sheet auvyx-sf-tone-dark auvyx-sf-layers\"><div class=\"auvyx-sf-frame auvyx-sf-ratio-16-9 auvyx-sf-r-card auvyx-sf-clip\"><img src=\"https://shop.example/banner.webp\" alt=\"a&quot;b &amp; c\"></div><div class=\"auvyx-sf-stack auvyx-sf-gap-s auvyx-sf-p-m\"><h1 class=\"auvyx-sf-type-3xl\">Phones</h1><p>Điện thoại &amp; &lt;b&gt;not HTML&lt;/b&gt;</p><span class=\"auvyx-sf-type-sm\">7 products</span></div></section>"
+  },
+  {
+   "name": "the same template on a brand: absent record, absent values print nothing",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<section class=\"auvyx-sf-sheet auvyx-sf-tone-dark auvyx-sf-layers\">{{#category.banner}}<div class=\"auvyx-sf-frame auvyx-sf-ratio-16-9 auvyx-sf-r-card auvyx-sf-clip\"><img src=\"{{category.banner.url}}\" alt=\"{{category.banner.alt}}\"></div>{{/category.banner}}<div class=\"auvyx-sf-stack auvyx-sf-gap-s auvyx-sf-p-m\"><h1 class=\"auvyx-sf-type-3xl\">{{category.title}}</h1>{{#category.intro}}<p>{{category.intro}}</p>{{/category.intro}}<span class=\"auvyx-sf-type-sm\">{{count}} products</span></div></section>",
+   "context": "brand",
+   "html": "<section class=\"auvyx-sf-sheet auvyx-sf-tone-dark auvyx-sf-layers\"><div class=\"auvyx-sf-stack auvyx-sf-gap-s auvyx-sf-p-m\"><h1 class=\"auvyx-sf-type-3xl\"></h1><span class=\"auvyx-sf-type-sm\">0 products</span></div></section>"
+  },
+  {
+   "name": "inverse section on a missing banner",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{^category.banner}}<p class=\"auvyx-sf-type-sm\">Explore the collection</p>{{/category.banner}}",
+   "context": "brand",
+   "html": "<p class=\"auvyx-sf-type-sm\">Explore the collection</p>"
+  },
+  {
+   "name": "template delimiters in data are inert character references",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>{{listing.search}}</p>",
+   "context": "shop",
+   "html": "<p>&lt;/script&gt;&lt;img src=x onerror=alert(1)&gt;$&#123;x} &#91;&#91;x]] &#123;&#123;x}}</p>",
+   "patch": [
+    {
+     "path": "listing.search",
+     "value": "</script><img src=x onerror=alert(1)>${x} [[x]] {{x}}"
+    }
+   ]
+  },
+  {
+   "name": "a value cannot leave its attribute",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<img src=\"{{category.banner.url}}\" alt=\"{{category.banner.alt}}\">",
+   "context": "category",
+   "html": "<img src=\"https://shop.example/banner.webp\" alt=\"&quot; onmouseover=&quot;alert(1)\">",
+   "patch": [
+    {
+     "path": "category.banner.alt",
+     "value": "\" onmouseover=\"alert(1)"
+    }
+   ]
+  },
+  {
+   "name": "a bound link and title",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<a href=\"{{category.url}}\" title=\"{{category.title}}\">x</a>",
+   "context": "category",
+   "html": "<a href=\"/category/phones\" title=\"Phones\">x</a>"
+  },
+  {
+   "name": "specs rows are item scope and escape their values",
+   "sets": [
+    "B",
+    "P"
+   ],
+   "source": "<ul>{{#product.specs}}<li><strong>{{label}}</strong>: {{value}}</li>{{/product.specs}}</ul>",
+   "context": "product",
+   "html": "<ul><li><strong>Size</strong>: 6.1&quot;</li></ul>"
+  },
+  {
+   "name": "a root path inside a loop is the page value, never the item",
+   "sets": [
+    "B",
+    "P"
+   ],
+   "source": "{{#product.specs}}<p>{{product.title}}: {{label}}</p>{{/product.specs}}",
+   "context": "product",
+   "html": "<p>Phone: Size</p>"
+  },
+  {
+   "name": "an empty array is false and prints no rows",
+   "sets": [
+    "B",
+    "P"
+   ],
+   "source": "{{#product.specs}}<p>row</p>{{/product.specs}}{{^product.specs}}<p>no specs</p>{{/product.specs}}",
+   "context": "product-empty",
+   "html": "<p>no specs</p>"
+  },
+  {
+   "name": "an absent bound image removes the image and says why",
+   "sets": [
+    "B",
+    "P"
+   ],
+   "source": "<img src=\"{{product.image.url}}\" alt=\"x\">",
+   "context": "product",
+   "html": "",
+   "diagnostics": [
+    {
+     "code": "missing_src",
+     "path": "product.image.url"
+    }
+   ]
+  },
+  {
+   "name": "origin pinning drops an unlisted absolute address",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<img src=\"{{category.banner.url}}\" alt=\"b\">",
+   "context": "category",
+   "html": "",
+   "patch": [
+    {
+     "path": "category.banner.url",
+     "value": "https://evil.example/x.png"
+    }
+   ],
+   "origins": [
+    "https://shop.example"
+   ],
+   "diagnostics": [
+    {
+     "code": "unsafe_url",
+     "path": "category.banner.url"
+    },
+    {
+     "code": "missing_src",
+     "path": "category.banner.url"
+    }
+   ]
+  },
+  {
+   "name": "origin pinning keeps a listed address",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<img src=\"{{category.banner.url}}\" alt=\"b\">",
+   "context": "category",
+   "html": "<img src=\"https://shop.example/banner.webp\" alt=\"b\">",
+   "origins": [
+    "https://shop.example"
+   ]
+  },
+  {
+   "name": "ids and references get the instance prefix",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<button aria-controls=\"note\" id=\"b\">x</button><div id=\"note\" hidden>y</div><a href=\"#note\">z</a>",
+   "context": "shop",
+   "html": "<button aria-controls=\"yc1-note\" id=\"yc1-b\" type=\"button\">x</button><div id=\"yc1-note\" hidden>y</div><a href=\"#yc1-note\">z</a>",
+   "idPrefix": "yc1-"
+  },
+  {
+   "name": "without a prefix ids, references and fragment links are dropped",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<button aria-controls=\"note\" id=\"b\">x</button><div id=\"note\" hidden>y</div><a href=\"#note\">z</a>",
+   "context": "shop",
+   "html": "<button type=\"button\">x</button><div hidden>y</div><a>z</a>"
+  },
+  {
+   "name": "zero is present, the empty string is not",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{#listing.total}}n={{listing.total}}{{/listing.total}}{{^listing.intro}} no intro{{/listing.intro}}",
+   "context": "shop",
+   "html": "n=0 no intro"
+  },
+  {
+   "name": "booleans and numbers print as JSON would",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{viewer.signedIn}} {{listing.page}} {{listing.onSaleFilter}}",
+   "context": "category",
+   "html": "true 2 true"
+  },
+  {
+   "name": "unicode and markup in a title",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>{{page.title}}</p>",
+   "context": "shop",
+   "html": "<p>Cửa hàng &lt;em&gt; &amp; 🛒</p>"
+  },
+  {
+   "name": "sale badge",
+   "sets": [
+    "B",
+    "P"
+   ],
+   "source": "{{#product.onSale}}<span class=\"auvyx-sf-tag\">Sale · {{product.price}}</span>{{/product.onSale}}",
+   "context": "product",
+   "html": "<span class=\"auvyx-sf-tag\">Sale · $1,234.50</span>"
+  },
+  {
+   "name": "a path in a set the page does not offer prints nothing, sections are false",
+   "sets": [
+    "B",
+    "L",
+    "P"
+   ],
+   "source": "<p>{{product.title}}</p>{{^product.title}}<i>n/a</i>{{/product.title}}",
+   "context": "shop",
+   "html": "<p></p><i>n/a</i>"
+  },
+  {
+   "name": "quotes and apostrophes in text",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p title=\"{{listing.title}}\">{{listing.title}}</p>",
+   "context": "shop",
+   "html": "<p title=\"it&#39;s &quot;q&quot;\">it&#39;s &quot;q&quot;</p>",
+   "patch": [
+    {
+     "path": "listing.title",
+     "value": "it's \"q\""
+    }
+   ]
+  }
+ ],
+ "invalid": [
+  {
+   "name": "script",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<script>alert(1)</script>",
+   "line": 1,
+   "column": 1,
+   "code": "tag_not_allowed"
+  },
+  {
+   "name": "event handler",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p onclick=\"x\">a</p>",
+   "line": 1,
+   "column": 4,
+   "code": "event_handler_not_allowed"
+  },
+  {
+   "name": "event handler upper case",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p ONCLICK=\"x\">a</p>",
+   "line": 1,
+   "column": 4,
+   "code": "event_handler_not_allowed"
+  },
+  {
+   "name": "style attribute",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p style=\"color:red\">a</p>",
+   "line": 1,
+   "column": 4,
+   "code": "style_not_allowed"
+  },
+  {
+   "name": "srcset",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<img src=\"x\" srcset=\"a 1x\" alt=\"\">",
+   "line": 1,
+   "column": 14,
+   "code": "srcset_not_allowed"
+  },
+  {
+   "name": "thymeleaf attribute",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p th:text=\"x\">a</p>",
+   "line": 1,
+   "column": 4,
+   "code": "server_attribute_not_allowed"
+  },
+  {
+   "name": "ezy attribute",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p ezy:text=\"x\">a</p>",
+   "line": 1,
+   "column": 4,
+   "code": "server_attribute_not_allowed"
+  },
+  {
+   "name": "reserved auvyx attribute",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p data-auvyx-id=\"x\">a</p>",
+   "line": 1,
+   "column": 4,
+   "code": "reserved_attribute"
+  },
+  {
+   "name": "substitution in class",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<div class=\"{{category.title}}\"></div>",
+   "line": 1,
+   "column": 13,
+   "code": "substitution_not_allowed"
+  },
+  {
+   "name": "substitution in attribute name",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p {{x}}>a</p>",
+   "line": 1,
+   "column": 4,
+   "code": "substitution_not_allowed"
+  },
+  {
+   "name": "substitution in tag name",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<{{x}}>a</p>",
+   "line": 1,
+   "column": 1,
+   "code": "invalid_markup"
+  },
+  {
+   "name": "substitution beside static text in an attribute",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<a href=\"/x/{{category.slug}}\">a</a>",
+   "line": 1,
+   "column": 10,
+   "code": "substitution_not_allowed"
+  },
+  {
+   "name": "text field in href",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<a href=\"{{category.title}}\">x</a>",
+   "line": 1,
+   "column": 10,
+   "code": "url_field_required"
+  },
+  {
+   "name": "triple mustache",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{{category.title}}}",
+   "line": 1,
+   "column": 1,
+   "code": "raw_not_allowed"
+  },
+  {
+   "name": "ampersand mustache",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{&category.title}}",
+   "line": 1,
+   "column": 1,
+   "code": "raw_not_allowed"
+  },
+  {
+   "name": "comment tag",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{! hi }}",
+   "line": 1,
+   "column": 1,
+   "code": "comment_not_allowed"
+  },
+  {
+   "name": "partial",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{> p}}",
+   "line": 1,
+   "column": 1,
+   "code": "partial_not_allowed"
+  },
+  {
+   "name": "delimiter change",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{=<% %>=}}",
+   "line": 1,
+   "column": 1,
+   "code": "delimiter_change_not_allowed"
+  },
+  {
+   "name": "html comment",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<!-- x -->",
+   "line": 1,
+   "column": 1,
+   "code": "markup_declaration_not_allowed"
+  },
+  {
+   "name": "cdata",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<![CDATA[x]]>",
+   "line": 1,
+   "column": 1,
+   "code": "markup_declaration_not_allowed"
+  },
+  {
+   "name": "unclosed mustache",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{category.title",
+   "line": 1,
+   "column": 1,
+   "code": "unclosed_tag"
+  },
+  {
+   "name": "unclosed section",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{#category.banner}}<p>x</p>",
+   "line": 1,
+   "column": 1,
+   "code": "unclosed_section"
+  },
+  {
+   "name": "unclosed element",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<div><p>x</p>",
+   "line": 1,
+   "column": 1,
+   "code": "unclosed_tag"
+  },
+  {
+   "name": "section crosses an element",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>{{#category.banner}}</p>{{/category.banner}}",
+   "line": 1,
+   "column": 24,
+   "code": "unbalanced_tag"
+  },
+  {
+   "name": "element crosses an element",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<div><p>a</div></p>",
+   "line": 1,
+   "column": 10,
+   "code": "unbalanced_tag"
+  },
+  {
+   "name": "mismatched section close",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{#category.banner}}{{/category.title}}",
+   "line": 1,
+   "column": 21,
+   "code": "unbalanced_section"
+  },
+  {
+   "name": "unknown field",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{category.nope}}",
+   "line": 1,
+   "column": 1,
+   "code": "unknown_field"
+  },
+  {
+   "name": "prototype names",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{constructor}}",
+   "line": 1,
+   "column": 1,
+   "code": "unknown_field"
+  },
+  {
+   "name": "underscore names",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{__proto__}}",
+   "line": 1,
+   "column": 1,
+   "code": "invalid_path"
+  },
+  {
+   "name": "double dot",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{category..title}}",
+   "line": 1,
+   "column": 1,
+   "code": "invalid_path"
+  },
+  {
+   "name": "dot",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{.}}",
+   "line": 1,
+   "column": 1,
+   "code": "invalid_path"
+  },
+  {
+   "name": "this",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{this}}",
+   "line": 1,
+   "column": 1,
+   "code": "unknown_field"
+  },
+  {
+   "name": "field in a set the template does not offer",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{product.title}}",
+   "line": 1,
+   "column": 1,
+   "code": "field_unavailable"
+  },
+  {
+   "name": "bare item field outside a loop",
+   "sets": [
+    "B",
+    "P"
+   ],
+   "source": "{{label}}",
+   "line": 1,
+   "column": 1,
+   "code": "unknown_field"
+  },
+  {
+   "name": "record is not a scalar",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "{{category.banner}}",
+   "line": 1,
+   "column": 1,
+   "code": "not_scalar"
+  },
+  {
+   "name": "array is not a scalar",
+   "sets": [
+    "B",
+    "P"
+   ],
+   "source": "{{product.specs}}",
+   "line": 1,
+   "column": 1,
+   "code": "not_scalar"
+  },
+  {
+   "name": "nested loop",
+   "sets": [
+    "B",
+    "P"
+   ],
+   "source": "{{#product.specs}}{{#product.specs}}x{{/product.specs}}{{/product.specs}}",
+   "line": 1,
+   "column": 19,
+   "code": "nested_loop"
+  },
+  {
+   "name": "text inside a list",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<ul>x</ul>",
+   "line": 1,
+   "column": 5,
+   "code": "invalid_content"
+  },
+  {
+   "name": "print inside a list",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<ul>{{category.title}}</ul>",
+   "line": 1,
+   "column": 5,
+   "code": "invalid_content"
+  },
+  {
+   "name": "block inside a list",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<ul><div></div></ul>",
+   "line": 1,
+   "column": 5,
+   "code": "invalid_content"
+  },
+  {
+   "name": "block inside a paragraph",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p><div>x</div></p>",
+   "line": 1,
+   "column": 4,
+   "code": "invalid_content"
+  },
+  {
+   "name": "list item outside a list",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<li>x</li>",
+   "line": 1,
+   "column": 1,
+   "code": "invalid_content"
+  },
+  {
+   "name": "nested links",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<a href=\"/x\"><a href=\"/y\">z</a></a>",
+   "line": 1,
+   "column": 14,
+   "code": "nested_interactive"
+  },
+  {
+   "name": "button in link",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<a href=\"/x\"><button>z</button></a>",
+   "line": 1,
+   "column": 14,
+   "code": "nested_interactive"
+  },
+  {
+   "name": "image without alt",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<img src=\"/x\">",
+   "line": 1,
+   "column": 1,
+   "code": "alt_required"
+  },
+  {
+   "name": "image without src",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<img alt=\"x\">",
+   "line": 1,
+   "column": 1,
+   "code": "src_required"
+  },
+  {
+   "name": "javascript url",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<a href=\"javascript:alert(1)\">x</a>",
+   "line": 1,
+   "column": 10,
+   "code": "unsafe_url"
+  },
+  {
+   "name": "entity-encoded javascript url",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<a href=\"java&#115;cript:alert(1)\">x</a>",
+   "line": 1,
+   "column": 10,
+   "code": "unsafe_url"
+  },
+  {
+   "name": "data url",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<img src=\"data:image/png;base64,AAAA\" alt=\"\">",
+   "line": 1,
+   "column": 11,
+   "code": "unsafe_url"
+  },
+  {
+   "name": "protocol-relative url",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<a href=\"//evil.example\">x</a>",
+   "line": 1,
+   "column": 10,
+   "code": "unsafe_url"
+  },
+  {
+   "name": "credentials in url",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<a href=\"https://u:p@evil.example/\">x</a>",
+   "line": 1,
+   "column": 10,
+   "code": "unsafe_url"
+  },
+  {
+   "name": "mailto in an image",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<img src=\"mailto:a@b.co\" alt=\"\">",
+   "line": 1,
+   "column": 11,
+   "code": "unsafe_url"
+  },
+  {
+   "name": "submit button",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<button type=\"submit\">x</button>",
+   "line": 1,
+   "column": 15,
+   "code": "button_type"
+  },
+  {
+   "name": "unknown entity",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>&bogus;</p>",
+   "line": 1,
+   "column": 4,
+   "code": "unknown_entity"
+  },
+  {
+   "name": "character reference beyond U+10FFFF (hex)",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>&#x110000;</p>",
+   "line": 1,
+   "column": 4,
+   "code": "invalid_entity"
+  },
+  {
+   "name": "character reference beyond U+10FFFF (decimal)",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>&#1114112;</p>",
+   "line": 1,
+   "column": 4,
+   "code": "invalid_entity"
+  },
+  {
+   "name": "character reference with too many digits",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>&#x00000041;</p>",
+   "line": 1,
+   "column": 4,
+   "code": "invalid_entity"
+  },
+  {
+   "name": "surrogate character reference",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>&#xD800;</p>",
+   "line": 1,
+   "column": 4,
+   "code": "invalid_character"
+  },
+  {
+   "name": "bare ampersand",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>a & b</p>",
+   "line": 1,
+   "column": 6,
+   "code": "invalid_entity"
+  },
+  {
+   "name": "nul character reference",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>&#0;</p>",
+   "line": 1,
+   "column": 4,
+   "code": "invalid_character"
+  },
+  {
+   "name": "position on a later line",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>a</p>\n<p onclick=\"1\">b</p>",
+   "line": 2,
+   "column": 4,
+   "code": "event_handler_not_allowed"
+  },
+  {
+   "name": "duplicate attribute",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p class=\"a b\" class=\"c\">x</p>",
+   "line": 1,
+   "column": 16,
+   "code": "duplicate_attribute"
+  },
+  {
+   "name": "form",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<form></form>",
+   "line": 1,
+   "column": 1,
+   "code": "tag_not_allowed"
+  },
+  {
+   "name": "svg",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<svg></svg>",
+   "line": 1,
+   "column": 1,
+   "code": "tag_not_allowed"
+  },
+  {
+   "name": "table",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<table></table>",
+   "line": 1,
+   "column": 1,
+   "code": "tag_not_allowed"
+  },
+  {
+   "name": "iframe",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<iframe></iframe>",
+   "line": 1,
+   "column": 1,
+   "code": "tag_not_allowed"
+  },
+  {
+   "name": "style element",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<style>p{}</style>",
+   "line": 1,
+   "column": 1,
+   "code": "tag_not_allowed"
+  },
+  {
+   "name": "space after angle bracket",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "< p>x</p>",
+   "line": 1,
+   "column": 1,
+   "code": "invalid_markup"
+  },
+  {
+   "name": "lone angle bracket",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "a < b",
+   "line": 1,
+   "column": 3,
+   "code": "invalid_markup"
+  },
+  {
+   "name": "incomplete closing tag",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p>a</p",
+   "line": 1,
+   "column": 5,
+   "code": "invalid_markup"
+  },
+  {
+   "name": "bad id",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p id=\"9x\">a</p>",
+   "line": 1,
+   "column": 8,
+   "code": "invalid_id"
+  },
+  {
+   "name": "bad class token",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p class=\"a;b\">a</p>",
+   "line": 1,
+   "column": 11,
+   "code": "invalid_class"
+  },
+  {
+   "name": "code hook value",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p data-code-x=\"a b\">a</p>",
+   "line": 1,
+   "column": 17,
+   "code": "invalid_value"
+  },
+  {
+   "name": "details without summary",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<details>x</details>",
+   "line": 1,
+   "column": 1,
+   "code": "details_requires_summary"
+  },
+  {
+   "name": "summary outside details",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<summary>x</summary>",
+   "line": 1,
+   "column": 1,
+   "code": "invalid_content"
+  },
+  {
+   "name": "closing a void tag",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<br></br>",
+   "line": 1,
+   "column": 5,
+   "code": "unbalanced_tag"
+  },
+  {
+   "name": "self-closing non-void",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p/>",
+   "line": 1,
+   "column": 1,
+   "code": "self_closing_not_allowed"
+  },
+  {
+   "name": "unquoted attribute",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<p title=x>a</p>",
+   "line": 1,
+   "column": 10,
+   "code": "unquoted_attribute"
+  },
+  {
+   "name": "valueless non-boolean attribute",
+   "sets": [
+    "B",
+    "L"
+   ],
+   "source": "<a href>x</a>",
+   "line": 1,
+   "column": 4,
+   "code": "attribute_value_required"
+  }
+ ],
+ "urls": [
+  {
+   "url": "/shop",
+   "contact": false,
+   "safe": true
+  },
+  {
+   "url": "/shop?q=a%20b&x=1",
+   "contact": false,
+   "safe": true
+  },
+  {
+   "url": "https://shop.example/x",
+   "contact": false,
+   "safe": true
+  },
+  {
+   "url": "http://shop.example",
+   "contact": false,
+   "safe": true
+  },
+  {
+   "url": "relative/path",
+   "contact": false,
+   "safe": true
+  },
+  {
+   "url": "?q=1",
+   "contact": false,
+   "safe": true
+  },
+  {
+   "url": "#frag",
+   "contact": false,
+   "safe": true
+  },
+  {
+   "url": "/a:b",
+   "contact": false,
+   "safe": true
+  },
+  {
+   "url": "javascript:alert(1)",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "JaVaScRiPt:alert(1)",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "java\tscript:x",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "javascript%3Aalert(1)",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "data:text/html,x",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "vbscript:x",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "//evil.example/x",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "/\\evil",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "https://u:p@evil/",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "https:///x",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "https:example.com",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": " /x",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "/x ",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "a:b",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "https://exa%6Dple.com/",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "mailto:a@b.co",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "tel:+84123",
+   "contact": false,
+   "safe": false
+  },
+  {
+   "url": "mailto:a@b.co",
+   "contact": true,
+   "safe": true
+  },
+  {
+   "url": "tel:+84123",
+   "contact": true,
+   "safe": true
+  },
+  {
+   "url": "mailto://x",
+   "contact": true,
+   "safe": false
+  },
+  {
+   "url": "mailto:",
+   "contact": true,
+   "safe": false
+  }
+ ],
+ "code": [
+  {
+   "name": "page module: template, inert module source, frozen context",
+   "className": "auvyx-code auvyx-code-module-v1",
+   "id": "c",
+   "slot": "listing.hero",
+   "instance": "0",
+   "key": "auvyxceb48e0d2be",
+   "context": "account",
+   "markup": "<p data-code-part=\"note\" id=\"n\">{{account.section}}</p>",
+   "script": "export default (el, ctx) => () => {};\n</script><b>${x}[[y]]{{z}}",
+   "inner": "<p data-code-part=\"note\" id=\"auvyxceb48e0d2be-n\">overview</p><script type=\"application/json\" data-auvyx-module>\"export default (el, ctx) =\\u003e () =\\u003e \\u007b};\\n\\u003c/script\\u003e\\u003cb\\u003e$\\u007bx}\\u005b\\u005by]]\\u007b\\u007bz}}\"</script><script type=\"application/json\" data-auvyx-ctx>{\"page\":{\"kind\":\"account\",\"title\":\"Account\",\"path\":\"/account\"},\"site\":{\"title\":\"Auvyx\",\"url\":\"https://shop.example\"},\"locale\":\"en\",\"currency\":\"USD\",\"viewer\":{\"signedIn\":true},\"account\":{\"section\":\"overview\"}}</script>"
+  },
+  {
+   "name": "static template: no module, no context script",
+   "className": "auvyx-code auvyx-code-template-v1",
+   "id": "c",
+   "slot": "listing.hero",
+   "instance": "0",
+   "key": "auvyxceb48e0d2be",
+   "context": "account",
+   "markup": "<p>{{account.section}}</p>",
+   "script": "",
+   "inner": "<p>overview</p>"
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "auvyx-demo-catalog/2",
+  "id": "shop",
+  "categories": [{ "key": "mugs", "name": "Mugs", "parent": null }],
+  "products": [
+    { "key": "mug", "name": "Red mug", "price": "12", "stock": 4, "categories": ["mugs"], "description": "A red mug.",
+      "media": [{ "path": "images/products/red.jpg", "credit": "Test photo" }, { "path": "images/products/blue.jpg", "credit": "Test photo" }] },
+    { "key": "up", "name": "Outside the folder", "price": "1", "stock": 1, "media": [{ "path": "images/../../../../demo-catalog-run.php" }] },
+    { "key": "remote", "name": "A URL", "price": "1", "stock": 1, "media": [{ "url": "https://example.com/images/products/red.jpg" }] },
+    { "key": "missing", "name": "No such photo", "price": "1", "stock": 1, "media": [{ "path": "images/products/none.jpg" }] }
+  ]
+}

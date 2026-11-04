@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/video",
+  "title": "Auvyx Video",
+  "category": "auvyx-builder",
+  "description": "YouTube or Vimeo video (privacy-friendly embed), responsive 16:9.",
+  "keywords": ["youtube", "vimeo", "embed"],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "url": { "type": "string", "default": "" },
+    "auvyx": { "type": "object" }
+  },
+  "supports": { "anchor": true, "html": false },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks",
+  "render": "file:./render.php"
+}

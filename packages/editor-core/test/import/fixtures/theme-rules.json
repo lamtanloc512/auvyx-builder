@@ -1,0 +1,7 @@
+{"type":"page","title":"Rules","content":[{"id":"s1","elType":"section","settings":{},"elements":[{"id":"c1","elType":"column","settings":{},"elements":[
+      {"id":"acme-pricing-table","elType":"widget","widgetType":"acme-pricing-table","settings":{"title":"Basic","price":"$29","after_price":"/month","desc":"<ul><li>One site</li></ul>","button_text":"Start","content_bg_color":"#FAFAFA"}},
+      {"id":"acme-image-box","elType":"widget","widgetType":"acme-image-box","settings":{"image":{"url":"https://old.example/u/sofa.jpg"},"text":"Sofas","desc":"From $399","badge_min_height":{"unit":"px","size":20}}},
+      {"id":"acme-banner","elType":"widget","widgetType":"acme-banner","settings":{"image":{"url":"https://old.example/u/decor.jpg"},"title":"Decor","button_text":"Shop","content_bg":"#FFFFFF","banner_vertical_position":"bottom","banner_horizontal_position":"right"}},
+      {"id":"acme-banner-2","elType":"widget","widgetType":"acme-banner-2","settings":{"image":{"url":"https://old.example/u/sale.jpg"},"title":"Sale","title_color":"#FFFFFF","banner_horizontal_position":"right","banner_text_align":"right"}},
+      {"id":"acme-newsletter","elType":"widget","widgetType":"acme-newsletter","settings":{"title":"Stay in touch","desc":"News","text_align":"left","banners_background_image":{"url":"https://old.example/u/green.jpg"}}},
+      {"id":"acme-products-slider","elType":"widget","widgetType":"acme-products-slider","settings":{"slides":[{"title":"Book of the day","banner_background_img":{"url":"https://old.example/u/book.webp"},"ids":"12"}]}}]}]}]}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/",
+  "login": true,
+  "steps": [
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/mu-plugins/auvyx-dev-loader.php",
+      "data": "<?php\n// DEV ONLY. Loads blueprints/mu (mounted by tools/dev.ts).\nforeach ( array( 'dev-helpers.php', 'preview-photos.php', 'studio-example.php' ) as $f ) { if ( is_readable( WP_CONTENT_DIR . '/auvyx-dev/' . $f ) ) { require WP_CONTENT_DIR . '/auvyx-dev/' . $f; } }\n"
+    },
+    {
+      "step": "activatePlugin",
+      "pluginPath": "auvyx-builder/auvyx-builder.php"
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "Auvyx Builder Demo",
+        "permalink_structure": "/%postname%/"
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php require '/wordpress/wp-load.php'; wp_set_current_user( 1 ); $pattern = WP_Block_Patterns_Registry::get_instance()->get_registered( 'auvyx-builder/landing' ); $id = wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_title' => 'Auvyx Landing', 'post_name' => 'auvyx-landing', 'post_content' => wp_slash( $pattern['content'] ), 'page_template' => 'page-canvas' ) ); update_option( 'show_on_front', 'page' ); update_option( 'page_on_front', $id ); update_user_meta( 1, $GLOBALS['wpdb']->get_blog_prefix() . 'persisted_preferences', array( 'core/edit-post' => array( 'welcomeGuide' => false ), 'core/edit-site' => array( 'welcomeGuide' => false, 'welcomeGuideStyles' => false, 'welcomeGuidePage' => false, 'welcomeGuideTemplate' => false ), '_modified' => gmdate( 'c' ) ) );"
+    },
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "DISALLOW_FILE_MODS": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/icon",
+  "title": "Auvyx Icon",
+  "category": "auvyx-builder",
+  "description": "Icon from the Auvyx set (Lucide). Size with font-size or width/height, color with text color.",
+  "keywords": ["symbol", "svg"],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "icon": { "type": "string", "default": "star" },
+    "href": { "type": "string" },
+    "auvyx": { "type": "object" }
+  },
+  "supports": { "anchor": true, "html": false },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks",
+  "render": "file:./render.php"
+}

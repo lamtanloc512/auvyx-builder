@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/loop",
+  "title": "Auvyx Posts loop",
+  "category": "auvyx-builder",
+  "description": "Repeats its content for each post of a query. Elements inside can show the post's title, excerpt, image and fields.",
+  "keywords": [
+    "query",
+    "posts",
+    "loop",
+    "list",
+    "grid",
+    "products"
+  ],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "query": {
+      "type": "object",
+      "default": {
+        "postType": "post",
+        "perPage": 3,
+        "orderBy": "date",
+        "order": "desc",
+        "offset": 0,
+        "inherit": false,
+        "excludeCurrent": false,
+        "taxonomy": "",
+        "terms": "",
+        "paginate": false,
+        "source": "",
+        "include": ""
+      }
+    },
+    "auvyx": {
+      "type": "object"
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "html": false
+  },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks",
+  "render": "file:./render.php"
+}

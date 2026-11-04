@@ -1,0 +1,739 @@
+/* Auvyx Builder admin pages (Admin.php). Square, thin lines, like Auvyx Studio's Lyra pack. */
+.auvyx-admin {
+	--auvyx-fg: #0f172a;
+	--auvyx-muted: #64748b;
+	--auvyx-line: #e2e8f0;
+	--auvyx-soft: #f8fafc;
+	--auvyx-accent: #2563eb;
+	margin: 0 0 0 -20px;
+	color: var(--auvyx-fg);
+}
+
+/* brand bar + tabs */
+.auvyx-admin__bar {
+	display: flex;
+	align-items: stretch;
+	gap: 24px;
+	padding: 0 32px;
+	min-height: 52px;
+	background: #fff;
+	border-bottom: 1px solid var(--auvyx-line);
+}
+.auvyx-admin__brand {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: 600;
+	font-size: 14px;
+}
+.auvyx-admin__logo {
+	width: 18px;
+	height: 18px;
+	background: var(--auvyx-fg);
+	clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 50%, 50% 100%, 0 100%);
+}
+.auvyx-admin__version {
+	color: var(--auvyx-muted);
+	font-weight: 400;
+	font-size: 12px;
+}
+.auvyx-admin__tabs {
+	display: flex;
+	gap: 4px;
+	flex: 1;
+}
+.auvyx-admin__tab {
+	display: flex;
+	align-items: center;
+	padding: 0 12px;
+	color: var(--auvyx-muted);
+	text-decoration: none;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -1px;
+}
+.auvyx-admin__tab:hover,
+.auvyx-admin__tab:focus {
+	color: var(--auvyx-fg);
+	box-shadow: none;
+}
+.auvyx-admin__tab.is-active {
+	color: var(--auvyx-fg);
+	font-weight: 600;
+	border-bottom-color: var(--auvyx-fg);
+}
+.auvyx-admin__site {
+	align-self: center;
+	color: var(--auvyx-muted);
+	text-decoration: none;
+}
+
+/* page */
+.auvyx-admin__body {
+	max-width: 1120px;
+	padding: 28px 32px 48px;
+}
+.auvyx-admin__head {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 24px;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+}
+.auvyx-admin .auvyx-admin__head h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+.auvyx-admin__intro {
+	margin: 4px 0 0;
+	color: var(--auvyx-muted);
+	font-size: 13px;
+}
+.auvyx-admin .notice {
+	margin: 0 0 16px;
+}
+
+/* cards */
+.auvyx-card {
+	background: #fff;
+	border: 1px solid var(--auvyx-line);
+	padding: 20px 24px;
+	margin-bottom: 16px;
+}
+.auvyx-card--flush {
+	padding: 0;
+}
+.auvyx-admin .auvyx-card h2 {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 12px;
+	font-size: 15px;
+	font-weight: 600;
+}
+.auvyx-card > p.auvyx-muted {
+	margin: -6px 0 14px;
+}
+.auvyx-card__toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 12px 16px;
+	border-bottom: 1px solid var(--auvyx-line);
+}
+.auvyx-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 16px;
+}
+.auvyx-grid > .auvyx-card {
+	margin-bottom: 0;
+}
+.auvyx-grid + .auvyx-card {
+	margin-top: 16px;
+}
+.auvyx-muted {
+	color: var(--auvyx-muted);
+}
+
+/* inputs */
+.auvyx-admin input:not([type]),
+.auvyx-admin input[type="text"],
+.auvyx-admin input[type="search"],
+.auvyx-admin input[type="password"],
+.auvyx-admin select {
+	min-height: 40px;
+	padding: 0 12px;
+	border: 1px solid #cbd5e1;
+	border-radius: 0;
+	box-shadow: none;
+}
+.auvyx-admin input:focus,
+.auvyx-admin select:focus {
+	border-color: var(--auvyx-fg);
+	box-shadow: 0 0 0 1px var(--auvyx-fg);
+	outline: 0;
+}
+.auvyx-admin .button {
+	border-radius: 0;
+}
+.auvyx-admin .auvyx-card .regular-text,
+.auvyx-admin .auvyx-card select {
+	width: 420px;
+	max-width: 100%;
+}
+.auvyx-create {
+	display: flex;
+	gap: 8px;
+}
+.auvyx-create input[type="text"] {
+	width: 240px;
+}
+.auvyx-search input[type="search"] {
+	width: 260px;
+}
+
+/* tables */
+.auvyx-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.auvyx-table th {
+	text-align: left;
+	font-weight: 500;
+	font-size: 12px;
+	color: var(--auvyx-muted);
+	padding: 10px 16px;
+	background: var(--auvyx-soft);
+	border-bottom: 1px solid var(--auvyx-line);
+}
+.auvyx-table td {
+	padding: 12px 16px;
+	border-bottom: 1px solid var(--auvyx-line);
+	vertical-align: middle;
+}
+.auvyx-table tr:last-child td {
+	border-bottom: 0;
+}
+.auvyx-table tbody tr:hover {
+	background: var(--auvyx-soft);
+}
+.auvyx-table__title {
+	display: block;
+	font-weight: 600;
+	color: var(--auvyx-fg);
+	text-decoration: none;
+}
+.auvyx-table__title + .auvyx-muted {
+	font-size: 12px;
+}
+.auvyx-table__actions {
+	text-align: right;
+	white-space: nowrap;
+}
+.auvyx-table__actions a:not(.button) {
+	display: inline-block;
+	margin-right: 16px;
+	line-height: 30px;
+	vertical-align: middle;
+	color: var(--auvyx-muted);
+	text-decoration: none;
+	opacity: 0;
+}
+.auvyx-table tr:hover .auvyx-table__actions a,
+.auvyx-table__actions a:focus {
+	opacity: 1;
+}
+.auvyx-table__actions a:not(.button):hover {
+	color: var(--auvyx-accent);
+}
+.auvyx-admin .auvyx-table .button {
+	min-height: 30px;
+	line-height: 28px;
+	padding: 0 12px;
+	vertical-align: middle;
+}
+
+/* badges */
+.auvyx-badge {
+	display: inline-block;
+	padding: 1px 8px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 18px;
+	color: #334155;
+	background: #f1f5f9;
+	border: 1px solid var(--auvyx-line);
+}
+.auvyx-badge--green {
+	color: #15803d;
+	background: #f0fdf4;
+	border-color: #bbf7d0;
+}
+.auvyx-badge--blue {
+	color: #1d4ed8;
+	background: #eff6ff;
+	border-color: #bfdbfe;
+}
+.auvyx-badge--amber {
+	color: #b45309;
+	background: #fffbeb;
+	border-color: #fde68a;
+}
+.auvyx-badge--violet {
+	color: #6d28d9;
+	background: #f5f3ff;
+	border-color: #ddd6fe;
+}
+
+/* empty state */
+.auvyx-empty {
+	padding: 48px 24px;
+	text-align: center;
+}
+.auvyx-empty strong {
+	font-size: 14px;
+}
+.auvyx-empty p {
+	margin: 4px 0 0;
+	color: var(--auvyx-muted);
+}
+
+/* design system */
+.auvyx-swatches {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	gap: 12px;
+}
+.auvyx-swatch {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+.auvyx-swatch__chip {
+	height: 56px;
+	border: 1px solid var(--auvyx-line);
+	margin-bottom: 6px;
+}
+.auvyx-admin code {
+	background: none;
+	padding: 0;
+	font-size: 12px;
+	color: var(--auvyx-muted);
+}
+.auvyx-list {
+	margin: 0;
+}
+.auvyx-list li {
+	display: grid;
+	grid-template-columns: 140px 1fr auto;
+	align-items: center;
+	gap: 12px;
+	margin: 0;
+	padding: 8px 0;
+	border-top: 1px solid var(--auvyx-line);
+}
+.auvyx-list li:first-child {
+	border-top: 0;
+}
+.auvyx-type {
+	line-height: 1.1;
+	font-weight: 600;
+}
+.auvyx-space {
+	display: flex;
+}
+.auvyx-space span {
+	height: 12px;
+	min-width: 2px;
+	background: #bfdbfe;
+	border: 1px solid #93c5fd;
+}
+
+/* settings */
+.auvyx-checks {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 8px;
+}
+.auvyx-check {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 10px 12px;
+	border: 1px solid var(--auvyx-line);
+	cursor: pointer;
+}
+.auvyx-check:has(input:checked) {
+	border-color: var(--auvyx-fg);
+	background: var(--auvyx-soft);
+}
+.auvyx-check input {
+	margin: 2px 0 0;
+}
+.auvyx-check span {
+	display: flex;
+	flex-direction: column;
+}
+.auvyx-admin .auvyx-card .form-table {
+	margin: 0;
+}
+.auvyx-admin .auvyx-card .form-table th {
+	width: 160px;
+	padding-left: 0;
+	font-weight: 500;
+}
+.auvyx-savebar {
+	position: sticky;
+	bottom: 0;
+	z-index: 2;
+	padding: 12px 0;
+	margin-bottom: 16px;
+	background: #f0f0f1;
+	border-top: 1px solid var(--auvyx-line);
+}
+.auvyx-dl {
+	display: grid;
+	grid-template-columns: 160px 1fr;
+	gap: 8px 12px;
+	margin: 0;
+}
+.auvyx-dl dt {
+	color: var(--auvyx-muted);
+}
+.auvyx-dl dd {
+	margin: 0;
+}
+
+@media (max-width: 782px) {
+	.auvyx-admin {
+		margin-left: -10px;
+	}
+	.auvyx-admin__bar {
+		flex-wrap: wrap;
+		padding: 0 16px;
+		gap: 0 16px;
+	}
+	.auvyx-admin__tabs {
+		order: 3;
+		flex-basis: 100%;
+		overflow-x: auto;
+	}
+	.auvyx-admin__tab {
+		padding: 12px 10px;
+	}
+	.auvyx-admin__body {
+		padding: 20px 16px 40px;
+	}
+	.auvyx-create input[type="text"],
+	.auvyx-search input[type="search"] {
+		width: 100%;
+	}
+	.auvyx-table th:nth-child(3),
+	.auvyx-table td:nth-child(3) {
+		display: none;
+	}
+	.auvyx-table__actions a:not(.button) {
+		display: none;
+	}
+}
+
+/* design brief */
+.auvyx-admin textarea.code {
+	border-radius: 0;
+	border-color: #cbd5e1;
+	font-size: 12px;
+}
+.auvyx-brief-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+.auvyx-preset-draft,
+.auvyx-preset-current {
+	margin-top: 20px;
+	padding-top: 16px;
+	border-top: 1px solid var(--auvyx-line);
+}
+.auvyx-admin .auvyx-preset-draft h3,
+.auvyx-admin .auvyx-preset-current h3 {
+	margin: 0 0 12px;
+	font-size: 14px;
+}
+.auvyx-preset-draft form,
+.auvyx-preset-current form {
+	margin-top: 16px;
+}
+
+/* Site templates: the Studio's screen inside the admin shell. */
+.auvyx-sites-frame { display: block; width: 100%; height: calc(100vh - 220px); min-height: 560px; border: 1px solid var(--auvyx-admin-line, #e2e8f0); border-radius: 8px; background: #fff; }
+
+/* Settings → Auvyx Cloud account: Google first, then sign in and create account side by side. */
+.auvyx-admin .auvyx-license-forms { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 12px; max-width: 880px; }
+.auvyx-admin .auvyx-license-form { display: flex; flex-direction: column; border: 1px solid var(--auvyx-line, #e2e8f0); padding: 20px; background: #fff; }
+.auvyx-admin .auvyx-license-form h3 { margin: 0 0 12px; font-size: 14px; }
+.auvyx-admin .auvyx-license-form p { margin: 0 0 12px; }
+.auvyx-admin .auvyx-license-form label { display: flex; flex-direction: column; gap: 6px; font-weight: 500; }
+.auvyx-admin .auvyx-license-form input[type="text"],
+.auvyx-admin .auvyx-license-form input[type="email"],
+.auvyx-admin .auvyx-license-form input[type="password"] { width: 100%; max-width: none; min-height: 40px; padding: 0 12px; border: 1px solid #cbd5e1; border-radius: 0; box-shadow: none; }
+.auvyx-admin .auvyx-license-form input:focus { border-color: var(--auvyx-fg); box-shadow: 0 0 0 1px var(--auvyx-fg); outline: 0; }
+.auvyx-admin .auvyx-license-form p:last-child { margin-top: auto; margin-bottom: 0; padding-top: 4px; }
+.auvyx-admin .auvyx-google { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 44px; padding: 0 20px; border: 1px solid #dadce0; background: #fff; color: #1f1f1f; font-size: 14px; font-weight: 500; text-decoration: none; }
+.auvyx-admin .auvyx-google:hover { background: #f8f9fa; border-color: #c4c7c5; color: #1f1f1f; }
+.auvyx-admin .auvyx-google:focus-visible { outline: 2px solid var(--auvyx-fg); outline-offset: 2px; }
+.auvyx-admin .auvyx-google svg { width: 18px; height: 18px; flex: none; }
+.auvyx-admin .auvyx-license-key { margin-top: 16px; }
+.auvyx-admin .auvyx-license-key summary { cursor: pointer; color: #2271b1; }
+
+/* Component display rules (Patterns & components → Where it shows) */
+.auvyx-locations {
+	margin-top: 6px;
+}
+.auvyx-locations > summary {
+	cursor: pointer;
+	color: var(--wp-admin-theme-color, #2271b1);
+}
+.auvyx-locations__form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-top: 10px;
+}
+.auvyx-locations__row {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 10px 14px;
+	margin: 0;
+	padding: 12px;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+}
+.auvyx-locations__row legend {
+	padding: 0 6px;
+	font-weight: 600;
+}
+.auvyx-locations__field {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	font-size: 12px;
+}
+.auvyx-locations__field input,
+.auvyx-locations__field select {
+	width: 100%;
+	max-width: none;
+}
+.auvyx-locations__remove {
+	align-self: end;
+	font-size: 12px;
+}
+
+/* "Where it shows" as sentences: Show it [under the header] on [every page]. Fields a rule needs appear with it. */
+.auvyx-where {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	min-width: 0;
+	max-width: 640px;
+	margin: 0;
+	padding: 12px 14px;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	background: #fff;
+}
+.auvyx-where--new {
+	border-style: dashed;
+	background: #f6f7f7;
+}
+.auvyx-where legend {
+	padding: 0 6px;
+	font-weight: 600;
+}
+.auvyx-where__sentence {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+	font-size: 14px;
+}
+.auvyx-where__sentence select {
+	max-width: 100%;
+}
+.auvyx-where__when {
+	display: none;
+	flex-direction: column;
+	gap: 6px;
+	font-size: 12px;
+}
+.auvyx-where:has(select[name$="[rule]"] option[value="singular"]:checked) .auvyx-where__when--singular,
+.auvyx-where:has(select[name$="[rule]"] option[value="archive"]:checked) .auvyx-where__when--singular,
+.auvyx-where:has(select[name$="[rule]"] option[value="ids"]:checked) .auvyx-where__when--ids {
+	display: flex;
+}
+.auvyx-check-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 16px;
+}
+.auvyx-check {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+.auvyx-check[hidden] {
+	display: none;
+}
+.auvyx-picker {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+.auvyx-picker__filter {
+	max-width: 280px;
+}
+.auvyx-picker__list {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	max-height: 168px;
+	overflow-y: auto;
+	padding: 8px 10px;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	background: #fff;
+}
+.auvyx-where__more > summary {
+	cursor: pointer;
+	font-size: 12px;
+	color: var(--wp-admin-theme-color, #2271b1);
+}
+.auvyx-where__fields {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 10px 14px;
+	margin-top: 8px;
+}
+.auvyx-where__fields .auvyx-locations__field:has(.auvyx-picker) {
+	grid-column: 1 / -1;
+}
+.auvyx-where__remove {
+	font-size: 12px;
+	color: #b32d2e;
+}
+.auvyx-usage {
+	display: block;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #646970;
+}
+
+/* Auvyx Builder Pro: what it adds (Get Pro / Pro licence) */
+.auvyx-pro__list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 12px 20px;
+	margin: 12px 0 20px;
+	padding: 0;
+	list-style: none;
+}
+.auvyx-pro__list li {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	margin: 0;
+}
+.auvyx-pro__list span {
+	color: #50575e;
+}
+
+/* Theme Builder (as Elementor's): a card per header or footer, a live preview, a green dot when it has conditions. */
+.auvyx-tb {
+	margin: 0 0 28px;
+}
+.auvyx-tb__head {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 12px;
+}
+.auvyx-tb__head h2 {
+	margin: 0;
+	font-size: 18px;
+}
+.auvyx-tb__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+	gap: 16px;
+}
+.auvyx-tb__card,
+.auvyx-tb__empty {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border: 1px solid #dcdcde;
+	border-radius: 10px;
+	background: #fff;
+}
+.auvyx-tb__empty {
+	border-style: dashed;
+}
+.auvyx-tb__empty p {
+	margin: 12px 14px 4px;
+	color: #50575e;
+}
+.auvyx-tb__empty .button {
+	align-self: flex-start;
+	margin: 6px 14px 14px;
+}
+.auvyx-tb__shot {
+	position: relative;
+	height: 150px;
+	overflow: hidden;
+	border-bottom: 1px solid #f0f0f1;
+	background: #f6f7f7;
+}
+.auvyx-tb__shot iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1280px;
+	height: 560px;
+	border: 0;
+	pointer-events: none;
+	transform: scale(0.27);
+	transform-origin: 0 0;
+}
+.auvyx-tb__body {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: 12px 14px 14px;
+}
+.auvyx-tb__status {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 12px;
+	color: #3c434a;
+}
+.auvyx-tb__status i {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #c3c4c7;
+	flex-shrink: 0;
+}
+.auvyx-tb__status.is-on i {
+	background: #00a32a;
+}
+.auvyx-tb__status.is-off {
+	color: #8c8f94;
+}
+.auvyx-tb__conflict {
+	font-size: 12px;
+	color: #996800;
+}
+.auvyx-tb__actions {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 4px;
+}
+.auvyx-tb__delete {
+	margin-left: auto;
+	font-size: 12px;
+	color: #b32d2e;
+}
+.auvyx-tb__theme > summary {
+	padding: 12px 16px;
+	cursor: pointer;
+	font-weight: 600;
+}

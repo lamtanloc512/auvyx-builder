@@ -1,0 +1,5 @@
+{"content":[{"id":"s1","elType":"section","settings":{},"elements":[{"id":"c1","elType":"column","settings":{},"elements":[
+      {"id":"w1","elType":"widget","widgetType":"heading","settings":{"title":"Shop by Category"}},
+      {"id":"w2","elType":"widget","widgetType":"acme-category-tabs","settings":{"title":"Shop by <b>category</b>","tabs":[{"title":"Girls"},{"title":"Boys"}]}},
+      {"id":"w3","elType":"widget","widgetType":"text-editor","settings":{"editor":"<p>Shop by Category</p>"}}
+    ]}]}]}

@@ -1,0 +1,24 @@
+{
+  "$comment": "Money and number formatting the storefront prints. StorefrontHtml (Scala) and packages/storefront-js/src/format.ts must print the same text.",
+  "money": [
+    {"amount": "699", "currency": "USD", "text": "$699"},
+    {"amount": "1099", "currency": "USD", "text": "$1,099"},
+    {"amount": "648.5", "currency": "USD", "text": "$648.50"},
+    {"amount": "0.005", "currency": "USD", "text": "$0.01"},
+    {"amount": "12.5", "currency": "CHF", "text": "12.50 CHF"},
+    {"amount": "1250000", "currency": "VND", "text": "1,250,000 ₫"},
+    {"amount": "1999.9", "currency": "EUR", "text": "€1,999.90"},
+    {"amount": "5000", "currency": "JPY", "text": "¥5,000"}
+  ],
+  "oneDecimal": [
+    {"value": "4.67", "text": "4.7"},
+    {"value": "5", "text": "5.0"},
+    {"value": "4.25", "text": "4.3"}
+  ],
+  "percentOff": [
+    {"regular": "699", "sale": "649", "percent": 7},
+    {"regular": "100", "sale": "100", "percent": 0},
+    {"regular": "100", "sale": "50", "percent": 50},
+    {"regular": "0", "sale": "0", "percent": 0}
+  ]
+}

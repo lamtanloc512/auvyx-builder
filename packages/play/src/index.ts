@@ -1,0 +1,20 @@
+/** Auvyx Play SDK (docs/play-sandbox.md). Runtimes compose these; hosts (the Studio) import them. */
+export * from "./args";
+export * from "./capability";
+export * from "./channel";
+export * from "./peer";
+export * from "./policy";
+export * from "./protocol";
+export * from "./session";
+export * from "./capabilities/assets";
+export * from "./capabilities/input";
+export * from "./capabilities/inspect";
+export * from "./capabilities/libraries";
+export * from "./capabilities/log";
+export * from "./capabilities/storage";
+export * from "./capabilities/viewport";
+export * from "./adapters/fetching";
+export * from "./adapters/stores";
+export { canvasSnapshotter, consoleSink, domInput, frameViewport } from "./adapters/dom";
+export { type MountedGame, type PageGame, gameOf, mountGame, pageCapabilities } from "./runtime/page";
+export { type Yb, buildYb } from "./runtime/auvyx";

@@ -1,0 +1,78 @@
+{
+  "$comment": "Auvyx Play (docs/play-sandbox.md): how a game runs isolated on the site that owns it. One source for the TS SDK (packages/play), the Studio and EzyPlatform (Scala, generated) and WordPress (PHP, generated). The document template is filled by PlayDocument (Scala, PHP); shared/fixtures/play/cases.json keeps both the same. \"embed\" is a game on a page (poster and play button; play-page.js puts the frame in on press), \"poster\" its image. \"keyPattern\": a game's key, made by the Studio, which saves a game by it (upsert) on every platform.",
+  "protocol": "auvyx-play/1",
+  "sandbox": [
+    "allow-scripts",
+    "allow-pointer-lock"
+  ],
+  "permissions": [
+    "fullscreen",
+    "gamepad",
+    "autoplay",
+    "accelerometer",
+    "gyroscope"
+  ],
+  "csp": {
+    "default-src": [
+      "'none'"
+    ],
+    "script-src": [
+      "'unsafe-inline'",
+      "'unsafe-eval'",
+      "blob:",
+      "{runtime-origin}"
+    ],
+    "style-src": [
+      "'unsafe-inline'",
+      "blob:"
+    ],
+    "img-src": [
+      "data:",
+      "blob:"
+    ],
+    "media-src": [
+      "data:",
+      "blob:"
+    ],
+    "font-src": [
+      "data:",
+      "blob:"
+    ],
+    "connect-src": [
+      "data:",
+      "blob:"
+    ],
+    "worker-src": [
+      "blob:"
+    ],
+    "base-uri": [
+      "'none'"
+    ],
+    "form-action": [
+      "'none'"
+    ],
+    "frame-ancestors": [
+      "{site-origin}"
+    ]
+  },
+  "headers": {
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "no-referrer",
+    "Cross-Origin-Resource-Policy": "same-origin",
+    "Cache-Control": "no-store"
+  },
+  "document": "<!doctype html>\n<html lang=\"{lang}\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>{title}</title>\n<style>html,body{margin:0;height:100%;overflow:hidden;background:#000;touch-action:none;-webkit-user-select:none;user-select:none}#auvyx-game{position:fixed;inset:0}</style>\n<style>{css}</style>\n</head>\n<body>\n<div id=\"auvyx-game\">{html}</div>\n<script type=\"application/json\" id=\"auvyx-play-config\">{config}</script>\n<script type=\"text/auvyx-game\" id=\"auvyx-play-module\">{js}</script>\n<script src=\"{runtime}\"></script>\n</body>\n</html>\n",
+  "limits": {
+    "html": 200000,
+    "css": 200000,
+    "js": 400000,
+    "assets": 64,
+    "assetBytes": 16777216,
+    "storageKeys": 64,
+    "storageBytes": 1048576,
+    "callTimeoutMs": 15000
+  },
+  "embed": "<div class=\"auvyx-play\" data-auvyx-play=\"{config}\">{poster}<button class=\"auvyx-play__start\" type=\"button\"><span class=\"auvyx-play__icon\" aria-hidden=\"true\"></span><span class=\"auvyx-play__label\">{label}</span></button></div>",
+  "poster": "<img class=\"auvyx-play__poster\" src=\"{src}\" alt=\"\" loading=\"lazy\" decoding=\"async\">",
+  "keyPattern": "^[a-z0-9][a-z0-9-]{5,63}$"
+}

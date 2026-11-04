@@ -1,0 +1,262 @@
+.auvyx-style-panel__bar {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  display: grid;
+  gap: 8px;
+}
+
+.auvyx-style-panel__bar .components-button.has-styles::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--wp-admin-theme-color, #3858e9);
+  margin-inline-start: 4px;
+}
+
+.auvyx-style-panel__target {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #757575;
+}
+
+.auvyx-style-panel__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.auvyx-style-panel__fields > .is-full {
+  grid-column: 1 / -1;
+}
+
+.auvyx-style-panel__add {
+  display: grid;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed #ddd;
+}
+
+.auvyx-style-panel__error {
+  margin: 0;
+  color: #cc1818;
+  font-size: 12px;
+}
+
+.auvyx-field__label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.auvyx-field__inherited {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #757575;
+}
+
+/* ---- Figma-style controls ---------------------------------------------- */
+
+.auvyx-style-panel__stack {
+  display: grid;
+  gap: 12px;
+}
+
+.auvyx-segmented {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2px;
+  padding: 2px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.auvyx-segmented .components-button.is-inherited {
+  box-shadow: inset 0 0 0 1px #949494;
+}
+
+.auvyx-auto-layout {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.auvyx-auto-layout__side {
+  display: grid;
+  gap: 8px;
+}
+
+.auvyx-matrix {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 84px;
+  height: 84px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.auvyx-matrix__cell {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 0;
+}
+
+.auvyx-matrix__cell span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #bbb;
+}
+
+.auvyx-matrix__cell:hover span,
+.auvyx-matrix__cell.is-axis span {
+  background: #757575;
+}
+
+.auvyx-matrix__cell.is-active {
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.auvyx-matrix__cell.is-active span {
+  width: 14px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--wp-admin-theme-color, #3858e9);
+}
+
+.auvyx-scrub-field__label {
+  cursor: ew-resize;
+  user-select: none;
+}
+
+.auvyx-scrub-field__label:hover {
+  color: var(--wp-admin-theme-color, #3858e9);
+}
+
+body.auvyx-scrubbing,
+body.auvyx-scrubbing * {
+  cursor: ew-resize !important;
+  user-select: none !important;
+}
+
+/* Box model: margin ring around padding ring around content. */
+.auvyx-box {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  grid-template-rows: 26px 1fr 26px;
+  align-items: center;
+  justify-items: center;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.auvyx-box--margin {
+  background: rgba(249, 115, 22, 0.08);
+  border: 1px dashed rgba(249, 115, 22, 0.5);
+}
+
+.auvyx-box--padding {
+  width: 100%;
+  background: rgba(236, 72, 153, 0.08);
+  border: 1px solid rgba(236, 72, 153, 0.45);
+}
+
+.auvyx-box__caption {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #757575;
+}
+
+.auvyx-box__top,
+.auvyx-box__bottom {
+  grid-column: 2;
+}
+
+.auvyx-box__left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.auvyx-box__inner {
+  grid-column: 2;
+  grid-row: 2;
+  width: 100%;
+}
+
+.auvyx-box__right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.auvyx-box__bottom {
+  grid-row: 3;
+}
+
+.auvyx-box__content {
+  display: grid;
+  place-items: center;
+  min-height: 28px;
+  margin: 0 4px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  color: #757575;
+}
+
+.auvyx-box__input {
+  width: 38px;
+  height: 22px;
+  padding: 0 2px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  text-align: center;
+  font-size: 11px;
+  cursor: ew-resize;
+}
+
+.auvyx-box__input:hover {
+  border-color: #ccc;
+  background: #fff;
+}
+
+.auvyx-box__input:focus {
+  cursor: text;
+  border-color: var(--wp-admin-theme-color, #3858e9);
+  background: #fff;
+  outline: none;
+}
+
+.auvyx-box__input.is-inherited::placeholder {
+  color: #949494;
+}
+
+.auvyx-segmented .components-button.is-pressed {
+  background: #fff;
+  color: #1e1e1e;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+.auvyx-segmented .components-button {
+  padding-inline: 8px;
+}

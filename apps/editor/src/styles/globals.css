@@ -1,0 +1,102 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./tokens.css";
+@import "./pack-lyra.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply m-0 bg-background text-foreground antialiased; }
+  /* Smooth (squircle) corners wherever the Studio rounds one, as Figma and Monoco draw them, with the browser's own
+     corner-shape (CSS Borders 4): no script, borders and shadows follow the curve; a browser without it keeps round
+     corners. Circles and pills (avatars, switches, radios, rounded-full) stay round. In the canvas this layer applies
+     only inside live components (UiLive), so pages keep their own corners. */
+  @supports (corner-shape: squircle) {
+    * { corner-shape: squircle; }
+    .rounded-full, .cn-avatar, .cn-avatar::after, .cn-avatar-fallback, .cn-avatar-image, .cn-avatar-group-count,
+    .cn-radio-group-item, .cn-radio-group-indicator-icon, .cn-switch, .cn-switch-thumb { corner-shape: round; }
+  }
+}
+
+/* Subframe-like chrome: panels and inspector groups are cards floating on the shell grey. */
+.auvyx-card {
+  background: var(--background);
+  border-radius: 12px;
+  margin-bottom: 6px;
+}
+/* Fields inside a card are filled, borderless boxes; focus brings back the white box and ring. */
+.auvyx-card :is(.cn-input, .cn-textarea, .cn-select-trigger, .cn-native-select, .auvyx-field) {
+  border-color: transparent;
+  background-color: color-mix(in oklch, var(--muted) 70%, transparent);
+}
+.auvyx-card :is(.cn-input, .cn-textarea, .cn-select-trigger, .cn-native-select, .auvyx-field):hover { background-color: var(--muted); }
+.auvyx-card :is(.cn-input, .cn-textarea, .cn-native-select, .auvyx-field):focus-visible,
+.auvyx-card .cn-select-trigger[aria-expanded="true"] {
+  border-color: var(--ring);
+  background-color: var(--background);
+}
+
+/* Chrome buttons (top bar, rail): a pill in a lighter ring. Doubled class: wins over the shadcn pack's button rules. */
+.auvyx-pill.auvyx-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  min-width: 36px;
+  padding: 0 14px;
+  border: 3px solid var(--pill-ring);
+  border-radius: 9999px;
+  corner-shape: round;
+  background: var(--pill);
+  background-clip: padding-box;
+  color: var(--foreground);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: none;
+  transition: background-color 120ms ease, opacity 120ms ease;
+}
+.auvyx-pill.auvyx-pill--icon { width: 36px; padding: 0; }
+.auvyx-pill.auvyx-pill:hover:not(:disabled) { background-color: var(--pill-hover); }
+.auvyx-pill.auvyx-pill.is-on { background-color: var(--background); }
+.auvyx-pill.auvyx-pill--primary { background-color: var(--primary); color: var(--primary-foreground); }
+.auvyx-pill.auvyx-pill--primary:hover:not(:disabled) { background-color: color-mix(in oklch, var(--primary) 88%, var(--background)); }
+.auvyx-pill.auvyx-pill:disabled { opacity: 0.45; }
+.auvyx-pill.auvyx-pill:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+/* A pill that only shows something (the title card): no hover. */
+.auvyx-pill.auvyx-pill.auvyx-pill--label:hover { background-color: var(--pill); }
+
+/* Native bar hidden. ScrollArea draws an overlay thumb so panel width does not jump. */
+.auvyx-scroll-view {
+  scrollbar-width: none;
+}
+.auvyx-scroll-view::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* AI chat: the "working" line. Words with a light passing over them, three dots in turn; both stop for people who ask for less motion. */
+.auvyx-shimmer {
+  background: linear-gradient(90deg, var(--muted-foreground) 0%, var(--muted-foreground) 35%, var(--foreground) 50%, var(--muted-foreground) 65%, var(--muted-foreground) 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: auvyx-shimmer 2.2s linear infinite;
+}
+@keyframes auvyx-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -150% 0; }
+}
+.auvyx-dot { animation: auvyx-dot 1.2s ease-in-out infinite both; }
+.auvyx-dot:nth-child(2) { animation-delay: 0.15s; }
+.auvyx-dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes auvyx-dot {
+  0%, 80%, 100% { opacity: 0.25; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .auvyx-shimmer { animation: none; background: none; color: var(--muted-foreground); }
+  .auvyx-dot { animation: none; opacity: 0.6; }
+}

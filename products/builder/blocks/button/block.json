@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/button",
+  "title": "Auvyx Button",
+  "category": "auvyx-builder",
+  "description": "Link styled as a button, with hover/focus states.",
+  "keywords": ["link", "cta", "call to action"],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "text": {
+      "type": "rich-text",
+      "source": "rich-text",
+      "selector": "a",
+      "role": "content"
+    },
+    "url": { "type": "string", "source": "attribute", "selector": "a", "attribute": "href" },
+    "linkTarget": { "type": "string", "source": "attribute", "selector": "a", "attribute": "target" },
+    "rel": { "type": "string", "source": "attribute", "selector": "a", "attribute": "rel" },
+    "auvyx": { "type": "object" }
+  },
+  "usesContext": ["postId", "postType", "auvyx/item"],
+  "supports": {
+    "anchor": true,
+    "html": false
+  },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks"
+}

@@ -1,0 +1,4 @@
+{"type":"page","title":"Shop","content":[{"id":"s","elType":"section","settings":{},"elements":[{"id":"c","elType":"column","settings":{},"elements":[
+      {"id":"w","elType":"widget","widgetType":"acme-products-grid","settings":{"title":"New arrivals","columns":5,"limit":10,"products":"sale"}},
+      {"id":"w2","elType":"widget","widgetType":"acme-product-carousel","settings":{"columns":4,"limit":12}},
+      {"id":"w3","elType":"widget","widgetType":"acme-products-grid","settings":{"products":"best_selling","orderby":"date","order":"ASC","product_cats":"shoes,bags"}}]}]}]}

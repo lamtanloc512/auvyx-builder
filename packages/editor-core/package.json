@@ -1,0 +1,13 @@
+{
+  "name": "@auvyx/editor-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Auvyx Editor's core in TypeScript: the document model, edits, the Studio::tree() decoder and WordPress block markup (equal to Auvyx Studio's, checked by a parity test).",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@auvyx/style-engine": "workspace:*"
+  }
+}

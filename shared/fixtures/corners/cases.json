@@ -1,0 +1,22 @@
+{
+  "about": "Which border-radius values are drawn as squircles (corner-shape: squircle, where the browser has it). Rounded corners: yes. Circles and pills (the full token, percentages, 999px and more) and square corners: no. Read by Corners.scala (Studio canvas, EzyPlatform) and Styles.php (WordPress).",
+  "cases": [
+    { "value": "var(--wp--custom--radius--md)", "smooth": true },
+    { "value": "var(--wp--custom--radius--sm, 4px)", "smooth": true },
+    { "value": "var(--wp--custom--radius--xl)", "smooth": true },
+    { "value": "12px", "smooth": true },
+    { "value": "1.25rem", "smooth": true },
+    { "value": "16px 16px 0 0", "smooth": true },
+    { "value": "calc(var(--wp--custom--radius--lg) * 2)", "smooth": true },
+    { "value": "var(--wp--custom--radius--full)", "smooth": false },
+    { "value": "var(--wp--custom--radius--full, 999px)", "smooth": false },
+    { "value": "999px", "smooth": false },
+    { "value": "9999px", "smooth": false },
+    { "value": "50%", "smooth": false },
+    { "value": "100%", "smooth": false },
+    { "value": "0", "smooth": false },
+    { "value": "0px", "smooth": false },
+    { "value": "0 0 0 0", "smooth": false },
+    { "value": "", "smooth": false }
+  ]
+}

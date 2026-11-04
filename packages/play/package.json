@@ -1,0 +1,13 @@
+{
+  "name": "@auvyx/play",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Auvyx Play SDK: a game in a sandboxed frame and the page that hosts it, talking through capabilities (docs/play-sandbox.md).",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@auvyx/shared": "workspace:*"
+  }
+}

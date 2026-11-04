@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/divider",
+  "title": "Auvyx Divider",
+  "category": "auvyx-builder",
+  "description": "Horizontal line; style it with border color/width.",
+  "keywords": ["separator", "hr", "line"],
+  "textdomain": "auvyx-builder",
+  "attributes": { "auvyx": { "type": "object" } },
+  "supports": { "anchor": true, "html": false },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks"
+}

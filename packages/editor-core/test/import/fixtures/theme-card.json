@@ -1,0 +1,8 @@
+{"type":"page","title":"Shop","content":[{"id":"s1","elType":"section","settings":{"gap":"extended"},"elements":[
+      {"id":"c1","elType":"column","settings":{"_column_size":50,"_inline_size_mobile":50},"elements":[{"id":"w1","elType":"widget","widgetType":"acme-category-card","settings":{
+        "image":{"url":"https://old.example/wp-content/uploads/phones.jpg"},"title":"Phones","link":{"url":"https://old.example/phones/"},
+        "title_typography_typography":"custom","title_typography_line_height":{"unit":"px","size":30},
+        "content_box_shadow_box_shadow":{"horizontal":0,"vertical":3,"blur":6,"spread":0,"color":"rgba(0, 0, 0, 0.05)"},
+        "content_border_radius":{"unit":"px","top":"12","right":"12","bottom":"12","left":"12"},
+        "children_list":[{"label":"Tablets","sub_link":{"url":"https://old.example/tablets/"}},{"label":"Cases"}]}}]},
+      {"id":"c2","elType":"column","settings":{"_column_size":50,"_inline_size_mobile":50,"padding_mobile":{"unit":"px","top":"0","right":"4","bottom":"0","left":"4"}},"elements":[]}]}]}

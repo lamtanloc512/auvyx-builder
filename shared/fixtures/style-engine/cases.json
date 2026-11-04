@@ -1,0 +1,303 @@
+{
+  "$comment": "Parity fixtures: run by packages/style-engine (bun test) AND products/builder/tests/php (PHP). In expected.css, {{c}} is replaced by expected.className. breakpoints defaults to shared/defaults/design-system.json. \"scoped\" is auvyx.css (compileScopedCss / compile_scoped_css / StyleEngine.compileScoped).",
+  "cases": [
+    {
+      "name": "base only",
+      "styles": {
+        "base": {
+          "default": {
+            "padding-block-start": "2rem",
+            "color": "var(--wp--preset--color--auvyx-primary)"
+          }
+        }
+      },
+      "expected": {
+        "className": "auvyx-1lfx9zh",
+        "css": ".{{c}}{padding-block-start:2rem;color:var(--wp--preset--color--auvyx-primary)}"
+      }
+    },
+    {
+      "name": "responsive with states",
+      "styles": {
+        "base": {
+          "default": {
+            "display": "grid",
+            "grid-template-columns": "repeat(3, 1fr)"
+          },
+          "hover": {
+            "opacity": "0.9"
+          }
+        },
+        "tablet": {
+          "default": {
+            "grid-template-columns": "repeat(2, 1fr)"
+          }
+        },
+        "mobile": {
+          "default": {
+            "grid-template-columns": "1fr"
+          }
+        }
+      },
+      "expected": {
+        "className": "auvyx-gm1k5u",
+        "css": ".{{c}}{display:grid;grid-template-columns:repeat(3, 1fr)}.{{c}}:hover{opacity:0.9}@media (max-width:1024px){.{{c}}{grid-template-columns:repeat(2, 1fr)}}@media (max-width:767px){.{{c}}{grid-template-columns:1fr}}"
+      }
+    },
+    {
+      "name": "output follows breakpoint config order, states follow canonical order",
+      "styles": {
+        "mobile": {
+          "default": {
+            "gap": "1rem"
+          }
+        },
+        "base": {
+          "active": {
+            "transform": "scale(0.98)"
+          },
+          "focus": {
+            "outline": "2px solid currentColor"
+          },
+          "default": {
+            "gap": "2rem"
+          }
+        }
+      },
+      "expected": {
+        "className": "auvyx-1w223k8",
+        "css": ".{{c}}{gap:2rem}.{{c}}:focus-visible{outline:2px solid currentColor}.{{c}}:active{transform:scale(0.98)}@media (max-width:767px){.{{c}}{gap:1rem}}"
+      }
+    },
+    {
+      "name": "sanitizes properties and values",
+      "styles": {
+        "base": {
+          "default": {
+            "behavior": "url(x.htc)",
+            "color": "red;background:url(https://evil.test)",
+            "margin": "0 } body { display:none",
+            "padding": "</style><script>",
+            "background-image": "url(javascript:alert(1))",
+            "width": "expression(alert(1))",
+            "height": "  ",
+            "min-height": "calc(100vh - 4rem)",
+            "background": "url(\"https://example.com/a.png\") center / cover no-repeat",
+            "--auvyx-gap": " 1rem ",
+            "--Bad": "1rem",
+            "font-weight": 600,
+            "opacity": true
+          },
+          "hover": "not-an-object",
+          "unknown-state": {
+            "color": "red"
+          }
+        },
+        "Base": {
+          "default": {
+            "color": "blue"
+          }
+        }
+      },
+      "expected": {
+        "className": "auvyx-1ms3bi3",
+        "css": ".{{c}}{min-height:calc(100vh - 4rem);background:url(\"https://example.com/a.png\") center / cover no-repeat;--auvyx-gap:1rem;font-weight:600}"
+      }
+    },
+    {
+      "name": "unicode and quotes hash identically",
+      "styles": {
+        "base": {
+          "default": {
+            "font-family": "\"Be Vietnam Pro\", sans-serif",
+            "--auvyx-label": "\"Tiếng Việt – 日本語\""
+          }
+        }
+      },
+      "expected": {
+        "className": "auvyx-1mpo7y3",
+        "css": ".{{c}}{font-family:\"Be Vietnam Pro\", sans-serif;--auvyx-label:\"Tiếng Việt – 日本語\"}"
+      }
+    },
+    {
+      "name": "only ASCII whitespace is trimmed; only integers are accepted as numbers",
+      "styles": {
+        "base": {
+          "default": {
+            "gap": " 1rem",
+            "order": 2,
+            "flex-grow": 1.5,
+            "padding": "\t1rem\n"
+          }
+        }
+      },
+      "expected": {
+        "className": "auvyx-1ovhopw",
+        "css": ".{{c}}{gap: 1rem;order:2;padding:1rem}"
+      }
+    },
+    {
+      "name": "custom breakpoints: max-width before min-width",
+      "breakpoints": [
+        {
+          "id": "base",
+          "label": "Desktop"
+        },
+        {
+          "id": "wide",
+          "label": "Wide",
+          "minWidth": 1440
+        },
+        {
+          "id": "mobile",
+          "label": "Mobile",
+          "maxWidth": 767
+        }
+      ],
+      "styles": {
+        "wide": {
+          "default": {
+            "max-width": "1320px"
+          }
+        },
+        "mobile": {
+          "default": {
+            "max-width": "100%"
+          }
+        },
+        "base": {
+          "default": {
+            "max-width": "1140px"
+          }
+        }
+      },
+      "expected": {
+        "className": "auvyx-1p82z8t",
+        "css": ".{{c}}{max-width:1140px}@media (max-width:767px){.{{c}}{max-width:100%}}@media (min-width:1440px){.{{c}}{max-width:1320px}}"
+      }
+    },
+    {
+      "name": "empty styles compile to nothing",
+      "styles": {
+        "base": {
+          "default": {}
+        },
+        "tablet": {}
+      },
+      "expected": null
+    },
+    {
+      "name": "styles only on unknown breakpoints compile to nothing",
+      "styles": {
+        "ultrawide": {
+          "default": {
+            "color": "red"
+          }
+        }
+      },
+      "expected": null
+    },
+    {
+      "name": "non-object input compiles to nothing",
+      "styles": [
+        "base"
+      ],
+      "expected": null
+    }
+  ],
+  "scoped": [
+    {
+      "name": "declarations style the element, rules nest",
+      "css": "opacity: .9;\n&:hover { transform: translateY(-2px) }\n& > p { margin: 0 }",
+      "expected": {
+        "className": "auvyx-x4wh5kz",
+        "css": ".{{c}}{opacity: .9;&:hover { transform: translateY(-2px) }& > p { margin: 0 }}"
+      }
+    },
+    {
+      "name": "keyframes stay at the top, the rest nests",
+      "css": "@keyframes auvyx-float { from { transform: translateY(0) } to { transform: translateY(-8px) } }\nanimation: auvyx-float 4s ease-in-out infinite alternate;\n@media (max-width: 781px) { & { animation: none } }",
+      "expected": {
+        "className": "auvyx-xeoulsv",
+        "css": "@keyframes auvyx-float { from { transform: translateY(0) } to { transform: translateY(-8px) } }.{{c}}{animation: auvyx-float 4s ease-in-out infinite alternate;@media (max-width: 781px) { & { animation: none } }}"
+      }
+    },
+    {
+      "name": "comments are dropped, ascii edges trimmed",
+      "css": "  /* hello */ color: var(--wp--preset--color--auvyx-primary); /* bye */ ",
+      "expected": {
+        "className": "auvyx-x1ketxpa",
+        "css": ".{{c}}{color: var(--wp--preset--color--auvyx-primary);}"
+      }
+    },
+    {
+      "name": "a selector without & is inside the element",
+      "css": ".card { border-radius: var(--wp--custom--radius--md) }",
+      "expected": {
+        "className": "auvyx-x7qollt",
+        "css": ".{{c}}{.card { border-radius: var(--wp--custom--radius--md) }}"
+      }
+    },
+    {
+      "name": "safe url",
+      "css": "background: url(/wp-content/uploads/a.png) center/cover, url('https://a.test/b.png');",
+      "expected": {
+        "className": "auvyx-xz83mbr",
+        "css": ".{{c}}{background: url(/wp-content/uploads/a.png) center/cover, url('https://a.test/b.png');}"
+      }
+    },
+    {
+      "name": "unicode content hashes by utf-8 bytes",
+      "css": "&::before { content: \"→ Việt\" }",
+      "expected": {
+        "className": "auvyx-xjp6d8r",
+        "css": ".{{c}}{&::before { content: \"→ Việt\" }}"
+      }
+    },
+    {
+      "name": "markup is refused",
+      "css": "color: red } </style><script>alert(1)</script>",
+      "expected": null
+    },
+    {
+      "name": "escaping the scope is refused",
+      "css": "} body { display: none } .x {",
+      "expected": null
+    },
+    {
+      "name": "unbalanced braces are refused",
+      "css": "& p { color: red",
+      "expected": null
+    },
+    {
+      "name": "import is refused",
+      "css": "@import url(https://a.test/x.css);",
+      "expected": null
+    },
+    {
+      "name": "backslash escapes are refused",
+      "css": "background: u\\72l(https://a.test)",
+      "expected": null
+    },
+    {
+      "name": "data and javascript urls are refused",
+      "css": "background: url(data:image/png;base64,AAA)",
+      "expected": null
+    },
+    {
+      "name": "an unclosed comment is refused",
+      "css": "color: red; /* open",
+      "expected": null
+    },
+    {
+      "name": "empty after comments compiles to nothing",
+      "css": " /* only a comment */ ",
+      "expected": null
+    },
+    {
+      "name": "non-string compiles to nothing",
+      "css": 42,
+      "expected": null
+    }
+  ]
+}

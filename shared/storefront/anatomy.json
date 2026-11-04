@@ -1,0 +1,957 @@
+{
+  "$comment": "Closed vocabulary of the Auvyx storefront design system (spec §11). Sorted keys. Edited by one task at a time.",
+  "entries": {
+    "accordion": { "kind": "block", "root": "auvyx-sf-accordion", "family": "disclosure", "parts": ["auvyx-sf-accordion-body", "auvyx-sf-accordion-icon", "auvyx-sf-accordion-summary"], "states": ["[open]"], "tokens": ["--auvyx-sf-accordion-bg"], "corners": { "auvyx-sf-accordion": "control", "auvyx-sf-accordion-summary": "control" }, "summary": "<details> tile: 56px summary with a chevron that turns when open; body below. Sets the fill context to the sheet.", "docs": "navigation.html#accordion" },
+    "align": {
+      "kind": "utility",
+      "family": "align",
+      "classes": [
+        "auvyx-sf-justify-start",
+        "auvyx-sf-justify-center",
+        "auvyx-sf-justify-end",
+        "auvyx-sf-justify-between",
+        "auvyx-sf-items-start",
+        "auvyx-sf-items-center",
+        "auvyx-sf-items-end",
+        "auvyx-sf-items-stretch",
+        "auvyx-sf-self-start",
+        "auvyx-sf-self-center",
+        "auvyx-sf-self-end",
+        "auvyx-sf-justify-self-start",
+        "auvyx-sf-justify-self-center",
+        "auvyx-sf-justify-self-end"
+      ],
+      "summary": "Flex and grid alignment; one axis per class.",
+      "docs": "utilities.html#align"
+    },
+    "avatar": { "kind": "block", "root": "auvyx-sf-avatar", "family": "surfaces", "parts": [], "summary": "A person's initial on the accent (or an img inside), round, thumb-m size.", "docs": "layout.html#avatar" },
+    "board": { "kind": "block", "root": "auvyx-sf-board", "family": "commerce", "parts": ["auvyx-sf-board-feature", "auvyx-sf-board-grid"], "summary": "One featured product in the middle of four: four columns with the first product spanning the two centre columns and both rows; under 44rem of its own width two columns with the featured product across the first row. In home.css, after the core.", "docs": "sections.html#board" },
+    "box": {
+      "kind": "composition",
+      "root": "auvyx-sf-box",
+      "config": [],
+      "summary": "Padded box; colour from utilities.",
+      "docs": "layout.html#box"
+    },
+    "brands": { "kind": "block", "root": "auvyx-sf-brands", "family": "sections", "parts": ["auvyx-sf-brands-link", "auvyx-sf-brands-logo"], "corners": { "auvyx-sf-brands-link": "control" }, "summary": "Grid of brand logo links: inline SVG wordmarks in currentColor, muted until hover.", "docs": "sections.html#brands" },
+    "breadcrumb": {
+      "kind": "block",
+      "root": "auvyx-sf-breadcrumb",
+      "family": "navigation",
+      "parts": ["auvyx-sf-breadcrumb-current", "auvyx-sf-breadcrumb-item", "auvyx-sf-breadcrumb-link", "auvyx-sf-breadcrumb-list"],
+      "states": ["aria-current=page (on auvyx-sf-breadcrumb-current)"],
+      "tokens": ["--auvyx-sf-breadcrumb-fg", "--auvyx-sf-breadcrumb-link"],
+      "summary": "Trail of links with / separators drawn by CSS; the current page in the text colour, the links muted (it sits on the page); links keep a 44px hit area.",
+      "docs": "navigation.html#breadcrumb"
+    },
+    "btn": {
+      "kind": "block",
+      "root": "auvyx-sf-btn",
+      "family": "actions",
+      "parts": [
+        "auvyx-sf-btn-icon",
+        "auvyx-sf-btn-label"
+      ],
+      "modifiers": ["block", "ghost", "lg", "link", "muted", "on-media", "outline", "sm", "soft"],
+      "states": [
+        "aria-busy",
+        "aria-pressed",
+        "disabled"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "tokens": [
+        "--auvyx-sf-btn-bg",
+        "--auvyx-sf-btn-bg-hover",
+        "--auvyx-sf-btn-deco",
+        "--auvyx-sf-btn-fg",
+        "--auvyx-sf-btn-fs",
+        "--auvyx-sf-btn-h",
+        "--auvyx-sf-btn-hit",
+        "--auvyx-sf-btn-px",
+        "--auvyx-sf-btn-w"
+      ],
+      "corners": {"auvyx-sf-btn": "pill"},
+      "summary": "Pill action. Default = brand action colour; soft reads the fill context.",
+      "docs": "controls.html#btn"
+    },
+    "buybar": { "kind": "block", "root": "auvyx-sf-buybar", "family": "commerce", "parts": ["auvyx-sf-buybar-action"], "hooks": { "data-auvyx-buy-now": "product: adds the chosen product and goes to the checkout", "data-auvyx-product-root": "swatches, cart-drawer: the element that holds a product's options, price, quantity and add button" }, "summary": "Quantity stepper and the main add button; the button fills the row and wraps below the stepper under 10rem.", "docs": "commerce.html#buybar" },
+    "cart-line": { "kind": "block", "root": "auvyx-sf-cart-line", "family": "commerce", "parts": ["auvyx-sf-cart-line-actions", "auvyx-sf-cart-line-body", "auvyx-sf-cart-line-media", "auvyx-sf-cart-line-meta", "auvyx-sf-cart-line-title"], "corners": { "auvyx-sf-cart-line-media": "control" }, "hooks": { "data-auvyx-cart-empty": "cart-drawer: the empty state; hidden is removed when the cart is empty", "data-auvyx-cart-lines": "cart-drawer: renders the lines into this list", "data-auvyx-qty": "cart-drawer: changes the line quantity by the value (-1 or 1)", "data-auvyx-remove": "cart-drawer, compare: removes the line or product" }, "summary": "Cart row: thumbnail across two rows, title (44px hit area), options, price, then the stepper and remove.", "docs": "commerce.html#cart-line" },
+    "cart-table": { "kind": "block", "root": "auvyx-sf-cart-table", "family": "commerce", "parts": ["auvyx-sf-cart-table-body", "auvyx-sf-cart-table-head", "auvyx-sf-cart-table-price", "auvyx-sf-cart-table-product", "auvyx-sf-cart-table-qty", "auvyx-sf-cart-table-row", "auvyx-sf-cart-table-total"], "summary": "Checkout bag as a table: a header (product, price, quantity, total) and a hairline-separated row per line; the product cell reuses the cart line's picture, title and options. Under 42rem (@container) the header goes and each row stacks: product, then price, quantity and total.", "docs": "commerce.html#cart-table" },
+    "center": {
+      "kind": "composition",
+      "root": "auvyx-sf-center",
+      "config": [
+        "--auvyx-sf-measure"
+      ],
+      "summary": "Centred column with a measure; full width in a flex parent.",
+      "docs": "layout.html#center"
+    },
+    "check": {
+      "kind": "block",
+      "root": "auvyx-sf-check",
+      "family": "selection",
+      "parts": [
+        "auvyx-sf-check-box"
+      ],
+      "modifiers": [
+        "radio"
+      ],
+      "states": [
+        ":checked",
+        ":disabled"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "tokens": [
+        "--auvyx-sf-check-bg",
+        "--auvyx-sf-check-ring",
+        "--auvyx-sf-check-ring-w"
+      ],
+      "corners": {
+        "auvyx-sf-check-box": "control"
+      },
+      "summary": "Label row with a custom checkbox or radio input (auvyx-sf-check-box).",
+      "docs": "controls.html#check"
+    },
+    "chip": {
+      "kind": "block",
+      "root": "auvyx-sf-chip",
+      "family": "selection",
+      "parts": [
+        "auvyx-sf-chip-check",
+        "auvyx-sf-chip-label"
+      ],
+      "states": [
+        "aria-pressed"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "tokens": [
+        "--auvyx-sf-chip-bg",
+        "--auvyx-sf-chip-fg"
+      ],
+      "corners": {
+        "auvyx-sf-chip": "pill"
+      },
+      "summary": "Toggle filter; pressed = action fill with a check.",
+      "docs": "controls.html#chip"
+    },
+    "choice": {
+      "kind": "block",
+      "root": "auvyx-sf-choice",
+      "family": "selection",
+      "parts": [
+        "auvyx-sf-choice-note",
+        "auvyx-sf-choice-title"
+      ],
+      "states": [
+        "aria-pressed"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "tokens": [
+        "--auvyx-sf-choice-bg",
+        "--auvyx-sf-choice-ring-w"
+      ],
+      "corners": {
+        "auvyx-sf-choice": "control"
+      },
+      "summary": "Option tile (storage, plan); pressed = sheet with a 2px ring.",
+      "docs": "controls.html#choice"
+    },
+    "cluster": {
+      "kind": "composition",
+      "root": "auvyx-sf-cluster",
+      "modifiers": [
+        "nowrap"
+      ],
+      "config": [],
+      "summary": "Wrapping row with gap; --nowrap keeps one row and lets children shrink.",
+      "docs": "layout.html#cluster"
+    },
+    "color": {
+      "kind": "utility",
+      "family": "color",
+      "classes": [
+        "auvyx-sf-bg-page",
+        "auvyx-sf-bg-sheet",
+        "auvyx-sf-bg-tile",
+        "auvyx-sf-bg-action",
+        "auvyx-sf-bg-accent",
+        "auvyx-sf-bg-accent-soft",
+        "auvyx-sf-bg-promo-brand",
+        "auvyx-sf-bg-promo-soft",
+        "auvyx-sf-fg-default",
+        "auvyx-sf-fg-muted",
+        "auvyx-sf-fg-accent",
+        "auvyx-sf-fg-sale"
+      ],
+      "summary": "Surface and text colour from semantic tokens; no raw colours.",
+      "docs": "utilities.html#color"
+    },
+    "compare-table": { "kind": "block", "root": "auvyx-sf-compare-table", "family": "commerce", "parts": ["auvyx-sf-compare-table-cell", "auvyx-sf-compare-table-grid", "auvyx-sf-compare-table-head", "auvyx-sf-compare-table-key", "auvyx-sf-compare-table-media", "auvyx-sf-compare-table-row"], "states": ["data-state=same (row)"], "tokens": ["--auvyx-sf-compare-table-bg"], "corners": { "auvyx-sf-compare-table-media": "control" }, "hooks": { "data-auvyx-compare-empty": "compare: the empty state, hidden while the table shows", "data-auvyx-compare-root": "compare: renders the table into this element", "data-auvyx-compare-wrap": "compare: the table's wrapper, hidden while the list is empty" }, "summary": "Horizontal scroller with a sticky key column; rows whose values are all equal are muted.", "docs": "commerce.html#compare-table" },
+    "config": {
+      "kind": "utility",
+      "family": "config",
+      "classes": [
+        "auvyx-sf-min-xs",
+        "auvyx-sf-min-s",
+        "auvyx-sf-min-m",
+        "auvyx-sf-min-l",
+        "auvyx-sf-min-xl",
+        "auvyx-sf-threshold-xs",
+        "auvyx-sf-threshold-s",
+        "auvyx-sf-threshold-m",
+        "auvyx-sf-threshold-l",
+        "auvyx-sf-side-xs",
+        "auvyx-sf-side-s",
+        "auvyx-sf-side-m",
+        "auvyx-sf-side-l",
+        "auvyx-sf-side-xl",
+        "auvyx-sf-ratio-square",
+        "auvyx-sf-ratio-4-3",
+        "auvyx-sf-ratio-3-4",
+        "auvyx-sf-ratio-16-9",
+        "auvyx-sf-fit-contain",
+        "auvyx-sf-measure-s",
+        "auvyx-sf-measure-m",
+        "auvyx-sf-measure-l",
+        "auvyx-sf-reel-item-s",
+        "auvyx-sf-reel-item-m",
+        "auvyx-sf-reel-item-l"
+      ],
+      "summary": "Sets one composition input: --auvyx-sf-min, --auvyx-sf-threshold, --auvyx-sf-side, --auvyx-sf-ratio, --auvyx-sf-fit, --auvyx-sf-measure or --auvyx-sf-reel-item.",
+      "docs": "utilities.html#config"
+    },
+    "container": {
+      "kind": "composition",
+      "root": "auvyx-sf-container",
+      "config": [],
+      "summary": "Page width with fluid gutter, centred.",
+      "docs": "layout.html#container"
+    },
+    "count": {
+      "kind": "block",
+      "root": "auvyx-sf-count",
+      "family": "actions",
+      "corners": {
+        "auvyx-sf-count": "pill"
+      },
+      "guard": {
+        "exempt": [
+          "edge-clearance"
+        ]
+      },
+      "hooks": {
+        "data-auvyx-count": "cart-drawer, wishlist, compare: writes the count (value = cart, wishlist or compare)"
+      },
+      "summary": "18px count badge at the top end of an icon button.",
+      "docs": "controls.html#count"
+    },
+    "countdown": { "kind": "block", "root": "auvyx-sf-countdown", "family": "commerce", "parts": ["auvyx-sf-countdown-label", "auvyx-sf-countdown-unit", "auvyx-sf-countdown-value"], "corners": { "auvyx-sf-countdown-unit": "control" }, "hooks": { "data-auvyx-unit": "countdown: writes the value of this unit (d, h, m or s)" }, "summary": "Deal timer: unit tiles with tabular digits; role=timer with an aria-label the island refreshes every minute.", "docs": "commerce.html#countdown" },
+    "divider": {
+      "kind": "block",
+      "root": "auvyx-sf-divider",
+      "family": "foundations",
+      "summary": "Hairline separator in --auvyx-sf-line.",
+      "docs": "tokens.html#divider"
+    },
+    "drawer": { "kind": "block", "root": "auvyx-sf-drawer", "family": "overlays", "parts": ["auvyx-sf-drawer-body", "auvyx-sf-drawer-foot", "auvyx-sf-drawer-head", "auvyx-sf-drawer-title"], "modifiers": ["bottom", "end", "start"], "states": ["[open]", ":modal"], "tokens": ["--auvyx-sf-drawer-bg", "--auvyx-sf-drawer-size"], "corners": { "auvyx-sf-drawer": "control" }, "hooks": { "data-auvyx-close": "every island: closes the nearest dialog", "data-auvyx-open": "on any button: opens the dialog whose data-auvyx-panel has this name and sets aria-expanded", "data-auvyx-panel": "cart-drawer, mobile-menu, filters: names this dialog; the island calls showModal()" }, "summary": "Side sheet on a native <dialog> (default end; --start, --bottom). Scrim and blur on ::backdrop, slides in with @starting-style; head and foot stay, the body scrolls.", "docs": "overlays.html#drawer" },
+    "empty": {
+      "kind": "block",
+      "root": "auvyx-sf-empty",
+      "family": "feedback",
+      "parts": [
+        "auvyx-sf-empty-text",
+        "auvyx-sf-empty-title"
+      ],
+      "summary": "Centred empty state: icon tile, title, text, action.",
+      "docs": "feedback.html#empty"
+    },
+    "fbt": { "kind": "block", "root": "auvyx-sf-fbt", "family": "commerce", "parts": ["auvyx-sf-fbt-body", "auvyx-sf-fbt-count", "auvyx-sf-fbt-foot", "auvyx-sf-fbt-items", "auvyx-sf-fbt-label", "auvyx-sf-fbt-main", "auvyx-sf-fbt-media", "auvyx-sf-fbt-plus", "auvyx-sf-fbt-total"], "corners": {"auvyx-sf-fbt-media": "surface"}, "hooks": {"data-auvyx-fbt": "fbt: the root; its checked items (auvyx-sf-check inputs with data-auvyx-fbt-item) are summed into the total and added in one request", "data-auvyx-fbt-count": "fbt: the 'N items' line the island keeps in step with the checked items", "data-auvyx-fbt-add": "fbt: adds every checked item, then opens the cart", "data-auvyx-fbt-item": "fbt: one item's check box, with the product id as its value and data-amount its price", "data-auvyx-fbt-total": "fbt: the total the island keeps in step with the checked items"}, "summary": "Frequently bought together: pictures joined by plus signs and a check list on the left; a compact tile with the total, the item count and one add button on the right (stacked when narrow).", "docs": "commerce.html#fbt" },
+    "feature": { "kind": "block", "root": "auvyx-sf-feature", "family": "sections", "parts": ["auvyx-sf-feature-text", "auvyx-sf-feature-title"], "tokens": ["--auvyx-sf-feature-bg"], "corners": { "auvyx-sf-feature": "surface" }, "summary": "Feature tile: an icon tile, a title and a muted text; sets the fill context to the sheet.", "docs": "sections.html#feature" },
+    "field": {
+      "kind": "block",
+      "root": "auvyx-sf-field",
+      "family": "forms",
+      "parts": [
+        "auvyx-sf-field-error",
+        "auvyx-sf-field-hint",
+        "auvyx-sf-field-label"
+      ],
+      "summary": "Label, control and hint or error, stacked.",
+      "docs": "forms.html#field"
+    },
+    "filter": { "kind": "block", "root": "auvyx-sf-filter", "family": "commerce", "parts": ["auvyx-sf-filter-body", "auvyx-sf-filter-count", "auvyx-sf-filter-icon", "auvyx-sf-filter-summary"], "states": ["[open]"], "hooks": { "data-auvyx-clear": "filters: clears the form", "data-auvyx-facet": "filters: writes the option's result count (value = facet:key)", "data-auvyx-filters": "filters: the <form> whose changes re-query the results" }, "summary": "Facet group on <details>: a 44px summary with a chevron, then auvyx-sf-check options with tabular counts at the end.", "docs": "commerce.html#filter" },
+    "footer": {
+      "kind": "block",
+      "root": "auvyx-sf-footer",
+      "family": "navigation",
+      "parts": ["auvyx-sf-footer-bottom", "auvyx-sf-footer-cols", "auvyx-sf-footer-link", "auvyx-sf-footer-list", "auvyx-sf-footer-title"],
+      "markers": ["auvyx-sf-footer-builder", "auvyx-sf-footer-col", "auvyx-sf-footer-divider", "auvyx-sf-footer-row-top", "auvyx-sf-footer-row-main", "auvyx-sf-footer-row-bottom", "auvyx-sf-footer-cols-1", "auvyx-sf-footer-cols-2", "auvyx-sf-footer-cols-3", "auvyx-sf-footer-cols-4", "auvyx-sf-footer-cols-5", "auvyx-sf-footer-cols-6", "auvyx-sf-footer-align-start", "auvyx-sf-footer-align-center", "auvyx-sf-footer-align-end", "auvyx-sf-footer-item-logo", "auvyx-sf-footer-item-about", "auvyx-sf-footer-item-links", "auvyx-sf-footer-item-newsletter", "auvyx-sf-footer-item-social", "auvyx-sf-footer-item-payments", "auvyx-sf-footer-item-contact", "auvyx-sf-footer-item-copyright", "auvyx-sf-footer-item-text", "auvyx-sf-footer-item-html", "auvyx-sf-footer-hide-desktop", "auvyx-sf-footer-hide-tablet", "auvyx-sf-footer-hide-mobile", "auvyx-sf-footer-tone-plain", "auvyx-sf-footer-tone-muted", "auvyx-sf-footer-tone-dark", "auvyx-sf-footer-tone-brand"],
+      "corners": { "auvyx-sf-footer": "surface" },
+      "summary": "Footer sheet: link columns (auto-fill) and a bottom row; links are 44px rows.",
+      "docs": "navigation.html#footer"
+    },
+    "frame": {
+      "kind": "composition",
+      "root": "auvyx-sf-frame",
+      "config": [
+        "--auvyx-sf-ratio",
+        "--auvyx-sf-fit"
+      ],
+      "summary": "Aspect-ratio box; media fills it.",
+      "docs": "layout.html#frame"
+    },
+    "gallery": { "kind": "block", "root": "auvyx-sf-gallery", "family": "commerce", "parts": ["auvyx-sf-gallery-extras", "auvyx-sf-gallery-img", "auvyx-sf-gallery-main", "auvyx-sf-gallery-slide", "auvyx-sf-gallery-thumb", "auvyx-sf-gallery-thumb-img", "auvyx-sf-gallery-thumbs", "auvyx-sf-gallery-track"], "modifiers": ["grid", "landscape", "portrait", "reel", "stack", "thumbs-bottom", "thumbs-inner", "wide"], "states": ["aria-pressed (thumb)", "data-state=zoom (main)"], "tokens": ["--auvyx-sf-gallery-bg", "--auvyx-sf-gallery-ratio", "--auvyx-sf-gallery-thumb"], "dataProps": ["--auvyx-sf-gallery-x", "--auvyx-sf-gallery-y"], "corners": {"auvyx-sf-gallery-main": "surface", "auvyx-sf-gallery-thumb": "control", "auvyx-sf-gallery-slide": "surface"}, "hooks": {"data-auvyx-gallery": "gallery: the root", "data-auvyx-gallery-main": "gallery: swaps the image; sets data-state=zoom and --auvyx-sf-gallery-x/-y (the zoom origin)", "data-auvyx-lightbox": "gallery: the lightbox dialog (auvyx-sf-lightbox); the main image, a slide and View larger open it at the image on show", "data-auvyx-nozoom": "gallery: no hover zoom on this gallery", "data-auvyx-thumb": "gallery: selects this image (aria-pressed)"}, "summary": "Product pictures: one main image with thumbnails at the inline start, below or inside it, or every image at once as a grid, a stack or a reel; a narrow gallery puts its thumbs in a row and turns a grid or stack into a reel.", "docs": "commerce.html#gallery" },
+    "gap": {
+      "kind": "utility",
+      "family": "gap",
+      "classes": [
+        "auvyx-sf-gap-0",
+        "auvyx-sf-gap-3xs",
+        "auvyx-sf-gap-2xs",
+        "auvyx-sf-gap-xs",
+        "auvyx-sf-gap-s",
+        "auvyx-sf-gap-m",
+        "auvyx-sf-gap-l",
+        "auvyx-sf-gap-xl",
+        "auvyx-sf-gap-2xl",
+        "auvyx-sf-gap-page",
+        "auvyx-sf-gap-sheet",
+        "auvyx-sf-gap-grid"
+      ],
+      "summary": "Gap on any flex or grid parent; token steps only.",
+      "docs": "utilities.html#gap"
+    },
+    "grid": {
+      "kind": "composition",
+      "root": "auvyx-sf-grid",
+      "config": [
+        "--auvyx-sf-min"
+      ],
+      "summary": "Auto-fill grid; columns never narrower than --auvyx-sf-min.",
+      "docs": "layout.html#grid"
+    },
+    "header": {
+      "kind": "block", "root": "auvyx-sf-header", "family": "navigation",
+      "parts": ["auvyx-sf-header-actions", "auvyx-sf-header-bar", "auvyx-sf-header-bottom", "auvyx-sf-header-branch", "auvyx-sf-header-brand", "auvyx-sf-header-category", "auvyx-sf-header-extra", "auvyx-sf-header-frame", "auvyx-sf-header-home", "auvyx-sf-header-item", "auvyx-sf-header-link", "auvyx-sf-header-main", "auvyx-sf-header-mega", "auvyx-sf-header-mobile", "auvyx-sf-header-mobile-trigger", "auvyx-sf-header-nav", "auvyx-sf-header-panel", "auvyx-sf-header-promo", "auvyx-sf-header-rail", "auvyx-sf-header-scope", "auvyx-sf-header-search", "auvyx-sf-header-submenu", "auvyx-sf-header-toggle", "auvyx-sf-header-top", "auvyx-sf-header-utility"],
+      "modifiers": ["commerce"],
+      "markers": ["auvyx-sf-header-config-v2", "auvyx-sf-header-layout-marketplace", "auvyx-sf-header-layout-compact", "auvyx-sf-header-layout-centered", "auvyx-sf-header-layout-utility", "auvyx-sf-header-layout-nav-first", "auvyx-sf-header-layout-boutique", "auvyx-sf-header-menu-dropdown", "auvyx-sf-header-menu-flyout", "auvyx-sf-header-menu-mega", "auvyx-sf-header-menu-drawer", "auvyx-sf-header-search-off", "auvyx-sf-header-search-icon", "auvyx-sf-header-search-field", "auvyx-sf-header-has-topbar", "auvyx-sf-header-has-account", "auvyx-sf-header-has-wishlist", "auvyx-sf-header-has-cart", "auvyx-sf-header-is-sticky", "auvyx-sf-header-home-expanded", "auvyx-sf-header-builder", "auvyx-sf-header-divider", "auvyx-sf-header-tablet-desktop", "auvyx-sf-header-tablet-mobile", "auvyx-sf-header-tablet-own", "auvyx-sf-header-bp-desktop", "auvyx-sf-header-bp-tablet", "auvyx-sf-header-bp-mobile", "auvyx-sf-header-row-top", "auvyx-sf-header-row-main", "auvyx-sf-header-row-bottom", "auvyx-sf-header-slot-start", "auvyx-sf-header-slot-center", "auvyx-sf-header-slot-end", "auvyx-sf-header-align-start", "auvyx-sf-header-align-center", "auvyx-sf-header-align-end", "auvyx-sf-header-align-between", "auvyx-sf-header-item-logo", "auvyx-sf-header-item-menu", "auvyx-sf-header-item-category", "auvyx-sf-header-item-search-icon", "auvyx-sf-header-item-search-field", "auvyx-sf-header-item-account", "auvyx-sf-header-item-cart", "auvyx-sf-header-item-wishlist", "auvyx-sf-header-item-compare", "auvyx-sf-header-item-social", "auvyx-sf-header-item-text", "auvyx-sf-header-item-html", "auvyx-sf-header-item-component", "auvyx-sf-header-item-menu-button", "auvyx-sf-header-hide-desktop", "auvyx-sf-header-hide-tablet", "auvyx-sf-header-hide-mobile", "auvyx-sf-header-h-32", "auvyx-sf-header-h-36", "auvyx-sf-header-h-40", "auvyx-sf-header-h-44", "auvyx-sf-header-h-48", "auvyx-sf-header-h-56", "auvyx-sf-header-h-64", "auvyx-sf-header-h-72", "auvyx-sf-header-h-80", "auvyx-sf-header-h-96", "auvyx-sf-header-tone-plain", "auvyx-sf-header-tone-muted", "auvyx-sf-header-tone-dark", "auvyx-sf-header-tone-brand"],
+      "states": ["data-layout=centered", "data-side=start", "data-density=compact", "data-density=stacked", "data-presentation=mega", "data-nav-ready=true", "data-mobile-ready=true", "[open]"],
+      "corners": { "auvyx-sf-header-panel": "control", "auvyx-sf-header-submenu": "control" },
+      "hooks": {
+        "data-auvyx-disclosure": "navigation: a native details disclosure with a stable summary aria-controls and panel id",
+        "data-auvyx-hover": "navigation: opt-in additive hover on fine mouse pointers; click and keyboard still work",
+        "data-auvyx-pinned": "navigation: home category root; its open state reserves the frame's home rail, independently of submenu presentation",
+        "data-auvyx-mobile-menu": "navigation: native mobile details fallback, kept until its content can move into the named dialog",
+        "data-auvyx-mobile-content": "navigation: one mobile menu tree, moved (never cloned) from fallback into the drawer"
+      },
+      "summary": "Legacy sticky glass header, plus opt-in commerce rows sharing the category/logo rail. Commerce collapses strictly below 900px. Native details keep menu links available without JavaScript; navigation enhances one active submenu path and mobile dialog after boot.",
+      "docs": "navigation.html#commerce-header"
+    },
+    "hero": { "kind": "block", "root": "auvyx-sf-hero", "family": "sections", "parts": ["auvyx-sf-hero-meta", "auvyx-sf-hero-sep", "auvyx-sf-hero-text", "auvyx-sf-hero-title", "auvyx-sf-hero-trust"], "summary": "Centred hero (at most 40rem, inline padding): trust row, title, text, meta row and a search. Under 34rem (@container) the meta row stacks and its separators hide. Text colour throughout: it sits on the page glow.", "docs": "sections.html#hero" },
+    "histogram": { "kind": "block", "root": "auvyx-sf-histogram", "family": "commerce", "parts": ["auvyx-sf-histogram-count", "auvyx-sf-histogram-fill", "auvyx-sf-histogram-label", "auvyx-sf-histogram-row", "auvyx-sf-histogram-star", "auvyx-sf-histogram-track"], "dataProps": ["--auvyx-sf-progress"], "corners": { "auvyx-sf-histogram-track": "pill" }, "summary": "Rating distribution: one row per star value; the fill width is --auvyx-sf-progress (0..1, data).", "docs": "commerce.html#histogram" },
+    "home-tiles": { "kind": "block", "root": "auvyx-sf-home-tiles", "family": "home", "parts": ["auvyx-sf-home-tiles-grid"], "summary": "The home page's promo tiles: four equal columns across the column (two when the row is narrow, one on a phone), each tile a auvyx-sf-promo with copy only. Under a header that pins its department menu the section keeps a full section gap below that panel.", "docs": "sections.html#showcase" },
+    "icon": {
+      "kind": "block",
+      "root": "auvyx-sf-icon",
+      "family": "foundations",
+      "modifiers": [
+        "sm",
+        "fill"
+      ],
+      "tokens": [
+        "--auvyx-sf-icon-size"
+      ],
+      "summary": "Lucide icon from the sprite; paint from CSS.",
+      "docs": "tokens.html#icon"
+    },
+    "icon-btn": {
+      "kind": "block",
+      "root": "auvyx-sf-icon-btn",
+      "family": "actions",
+      "modifiers": [
+        "action",
+        "lg",
+        "sm",
+        "soft"
+      ],
+      "states": [
+        "aria-pressed",
+        "disabled"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "tokens": [
+        "--auvyx-sf-icon-btn-bg",
+        "--auvyx-sf-icon-btn-bg-hover",
+        "--auvyx-sf-icon-btn-fg",
+        "--auvyx-sf-icon-btn-hit",
+        "--auvyx-sf-icon-btn-size"
+      ],
+      "corners": {
+        "auvyx-sf-icon-btn": "pill"
+      },
+      "summary": "Round icon-only button; aria-label required.",
+      "docs": "controls.html#icon-btn"
+    },
+    "icon-tile": {
+      "kind": "block",
+      "root": "auvyx-sf-icon-tile",
+      "family": "surfaces",
+      "corners": {
+        "auvyx-sf-icon-tile": "control"
+      },
+      "summary": "40px square icon holder.",
+      "docs": "layout.html#icon-tile"
+    },
+    "input": {
+      "kind": "block",
+      "root": "auvyx-sf-input",
+      "family": "forms",
+      "parts": [
+        "auvyx-sf-input-control",
+        "auvyx-sf-input-icon"
+      ],
+      "modifiers": [
+        "pill"
+      ],
+      "states": [
+        "aria-invalid",
+        ":disabled"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "tokens": [
+        "--auvyx-sf-input-bg",
+        "--auvyx-sf-input-h",
+        "--auvyx-sf-input-r",
+        "--auvyx-sf-input-ring"
+      ],
+      "corners": {
+        "auvyx-sf-input": "control"
+      },
+      "guard": {
+        "group": true
+      },
+      "summary": "Input wrapper: owns border and focus; holds a control, icons, or a trailing button (--pill).",
+      "docs": "forms.html#input"
+    },
+    "kbd": {
+      "kind": "block",
+      "root": "auvyx-sf-kbd",
+      "family": "foundations",
+      "corners": {
+        "auvyx-sf-kbd": "control"
+      },
+      "guard": {
+        "exempt": [
+          "edge-clearance"
+        ]
+      },
+      "summary": "Keyboard key.",
+      "docs": "tokens.html#kbd"
+    },
+    "layers": {
+      "kind": "composition",
+      "root": "auvyx-sf-layers",
+      "config": [],
+      "summary": "Stack children in one grid cell; place with self-alignment utilities.",
+      "docs": "layout.html#layers"
+    },
+    "lightbox": { "kind": "block", "root": "auvyx-sf-lightbox", "family": "commerce", "parts": ["auvyx-sf-lightbox-bar", "auvyx-sf-lightbox-count", "auvyx-sf-lightbox-error", "auvyx-sf-lightbox-img", "auvyx-sf-lightbox-info", "auvyx-sf-lightbox-next", "auvyx-sf-lightbox-pct", "auvyx-sf-lightbox-prev", "auvyx-sf-lightbox-slide", "auvyx-sf-lightbox-spinner", "auvyx-sf-lightbox-stage", "auvyx-sf-lightbox-thumb", "auvyx-sf-lightbox-thumb-img", "auvyx-sf-lightbox-thumbs", "auvyx-sf-lightbox-zoom"], "states": ["data-state=current (slide)", "data-state=zoom|error (stage)", "aria-busy (stage, loading)", "aria-pressed (thumb)", "disabled (zoom and step buttons at their ends)"], "tokens": ["--auvyx-sf-lightbox-bg"], "dataProps": ["--auvyx-sf-lightbox-x", "--auvyx-sf-lightbox-y", "--auvyx-sf-lightbox-zoom"], "corners": { "auvyx-sf-lightbox-thumb": "control" }, "hooks": { "data-auvyx-lightbox-count": "gallery: the n / N line, kept in step", "data-auvyx-lightbox-retry": "gallery: loads the picture on show again", "data-auvyx-lightbox-slide": "gallery: one picture or the video; the one on show has data-state=current", "data-auvyx-lightbox-stage": "gallery: where the picture shows; wheel, double click, pinch zoom it, a drag pans it, a swipe steps, a click on the empty stage closes", "data-auvyx-lightbox-step": "gallery: shows the previous (-1) or next (1) picture", "data-auvyx-lightbox-thumb": "gallery: shows this picture (aria-pressed)", "data-auvyx-lightbox-zoom": "gallery: in, out or reset (the 100% button shows the zoom)" }, "summary": "A product's pictures full screen, one at a time, in a auvyx-sf-modal--full: a bar with the title, the count, zoom and Close; the stage; previous and next over it; a row of thumbnails. Arrows, Home/End and + − 0 work from the keyboard; zoom goes up to 4×.", "docs": "commerce.html#lightbox" },
+    "link": {
+      "kind": "block",
+      "root": "auvyx-sf-link",
+      "family": "foundations",
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "tokens": [
+        "--auvyx-sf-link-fg",
+        "--auvyx-sf-link-line"
+      ],
+      "summary": "Inline text link: accent underline on hover, ring on focus.",
+      "docs": "tokens.html#link"
+    },
+    "listing": { "kind": "block", "root": "auvyx-sf-listing", "family": "commerce", "parts": ["auvyx-sf-listing-filters"], "summary": "The shop listing layout on the auvyx-sf-sidebar composition: the filters dialog (auvyx-sf-listing-filters) docked as the side column while the container fits it (@container 48rem) and the Filters button toggles it in place; below that, and on a closed panel, it is the filters drawer and the results take the full width. In listing.css, after the core, on shop, category and brand pages.", "docs": "commerce.html#listing" },
+    "logo": { "kind": "block", "root": "auvyx-sf-logo", "family": "navigation", "parts": ["auvyx-sf-logo-mark", "auvyx-sf-logo-word"], "corners": { "auvyx-sf-logo-mark": "control" }, "summary": "Brand link: mark and wordmark, at least 44px tall. A long wordmark truncates with an ellipsis.", "docs": "navigation.html#logo" },
+    "menu-fab": { "kind": "block", "root": "auvyx-sf-menu-fab", "family": "navigation", "states": ["aria-expanded", "data-lift", "data-state=compact"], "utilities": ["align", "size"], "tokens": ["--auvyx-sf-menu-fab-bg", "--auvyx-sf-menu-fab-fg", "--auvyx-sf-menu-fab-lift", "--auvyx-sf-menu-fab-size"], "corners": { "auvyx-sf-menu-fab": "control" }, "hooks": { "data-auvyx-fab": "mobile-menu: sets data-state=compact on this button while the page scrolls down", "data-auvyx-open": "mobile-menu: opens the dialog whose data-auvyx-panel is menu" }, "summary": "56px floating menu button at the bottom end, safe-area aware, below 900px only. With several menus it opens one drawer with a section per menu (no bottom dock).", "docs": "navigation.html#menu-fab" },
+    "menu-item": { "kind": "block", "root": "auvyx-sf-menu-item", "family": "overlays", "parts": ["auvyx-sf-menu-item-icon", "auvyx-sf-menu-item-label", "auvyx-sf-menu-item-media", "auvyx-sf-menu-item-meta"], "states": ["aria-current=page", "aria-selected"], "utilities": ["align", "size"], "tokens": ["--auvyx-sf-menu-item-bg"], "corners": { "auvyx-sf-menu-item": "control", "auvyx-sf-menu-item-media": "control" }, "summary": "44px row in a menu, drawer or result list: icon or thumbnail, label (truncates), meta.", "docs": "overlays.html#menu-list" },
+    "menu-list": { "kind": "block", "root": "auvyx-sf-menu-list", "family": "overlays", "hooks": { "data-auvyx-results": "live-search: renders auvyx-sf-menu-item rows (role=option, aria-selected) into this list" }, "summary": "Vertical list of auvyx-sf-menu-item rows; resets its own list styles.", "docs": "overlays.html#menu-list" },
+    "meta": { "kind": "block", "root": "auvyx-sf-meta", "family": "commerce", "parts": ["auvyx-sf-meta-key", "auvyx-sf-meta-link", "auvyx-sf-meta-value"], "summary": "Product facts as a <dl>: a muted label and its value on each line (SKU, categories, tags).", "docs": "commerce.html#meta" },
+    "meter": {
+      "kind": "block",
+      "root": "auvyx-sf-meter",
+      "family": "feedback",
+      "parts": [
+        "auvyx-sf-meter-bar"
+      ],
+      "dataProps": [
+        "--auvyx-sf-progress"
+      ],
+      "corners": {
+        "auvyx-sf-meter": "pill"
+      },
+      "summary": "Progress bar (free-shipping); --auvyx-sf-progress is 0..1.",
+      "docs": "feedback.html#meter"
+    },
+    "modal": { "kind": "block", "root": "auvyx-sf-modal", "family": "overlays", "parts": ["auvyx-sf-modal-body", "auvyx-sf-modal-head", "auvyx-sf-modal-title"], "modifiers": ["full", "search", "wide"], "states": ["[open]", ":modal"], "tokens": ["--auvyx-sf-modal-bg", "--auvyx-sf-modal-size"], "corners": { "auvyx-sf-modal": "control" }, "hooks": { "data-auvyx-address-form": "addresses: the address dialog's form; it fills it, saves it with address.save and draws the page again", "data-auvyx-address-title": "addresses: the dialog's title, Add an address or Edit address", "data-auvyx-quick-modal": "quick-view: renders the product into the body and calls showModal()", "data-auvyx-search-status": "live-search: announces loading, empty and failed searches" }, "summary": "Centred dialog (quick view, confirmations); --search places a narrower panel near the top; --wide is the 360° view; --full fills the window (the lightbox); the body scrolls.", "docs": "overlays.html#modal" },
+    "newsletter": { "kind": "block", "root": "auvyx-sf-newsletter", "family": "sections", "parts": ["auvyx-sf-newsletter-copy", "auvyx-sf-newsletter-form", "auvyx-sf-newsletter-msg", "auvyx-sf-newsletter-text", "auvyx-sf-newsletter-title"], "tokens": ["--auvyx-sf-newsletter-bg"], "corners": { "auvyx-sf-newsletter": "surface" }, "hooks": { "data-auvyx-form-msg": "forms: writes the result message (role=status)", "data-auvyx-newsletter": "forms: the sign-up <form>" }, "summary": "Sign-up band on accent-soft: copy and a pill input with a button; the form wraps under the copy when narrow.", "docs": "sections.html#newsletter" },
+    "offer-list": { "kind": "block", "root": "auvyx-sf-offer-list", "family": "commerce", "parts": ["auvyx-sf-offer-list-icon", "auvyx-sf-offer-list-item"], "summary": "A product's offers as a list, each with an accent tag icon.", "docs": "commerce.html#offer-list" },
+    "padding": {
+      "kind": "utility",
+      "family": "padding",
+      "classes": [
+        "auvyx-sf-p-0",
+        "auvyx-sf-p-3xs",
+        "auvyx-sf-p-2xs",
+        "auvyx-sf-p-xs",
+        "auvyx-sf-p-s",
+        "auvyx-sf-p-m",
+        "auvyx-sf-p-l",
+        "auvyx-sf-p-xl",
+        "auvyx-sf-p-sheet",
+        "auvyx-sf-p-tile",
+        "auvyx-sf-px-0",
+        "auvyx-sf-px-3xs",
+        "auvyx-sf-px-2xs",
+        "auvyx-sf-px-xs",
+        "auvyx-sf-px-s",
+        "auvyx-sf-px-m",
+        "auvyx-sf-px-l",
+        "auvyx-sf-px-xl",
+        "auvyx-sf-py-0",
+        "auvyx-sf-py-3xs",
+        "auvyx-sf-py-2xs",
+        "auvyx-sf-py-xs",
+        "auvyx-sf-py-s",
+        "auvyx-sf-py-m",
+        "auvyx-sf-py-l",
+        "auvyx-sf-py-xl",
+        "auvyx-sf-py-2xl",
+        "auvyx-sf-py-3xl"
+      ],
+      "summary": "Padding on all, inline or block sides; token steps plus sheet and tile padding.",
+      "docs": "utilities.html#padding"
+    },
+    "pagination": {
+      "kind": "block",
+      "root": "auvyx-sf-pagination",
+      "family": "navigation",
+      "parts": ["auvyx-sf-pagination-gap", "auvyx-sf-pagination-icon", "auvyx-sf-pagination-link"],
+      "states": ["aria-current=page", "aria-disabled"],
+      "tokens": ["--auvyx-sf-pagination-bg", "--auvyx-sf-pagination-fg"],
+      "corners": { "auvyx-sf-pagination-link": "pill" },
+      "summary": "44px page links; the current page is filled with the action colour; arrows flip in RTL.",
+      "docs": "navigation.html#pagination"
+    },
+    "pdp": { "kind": "block", "root": "auvyx-sf-pdp", "family": "commerce", "parts": ["auvyx-sf-pdp-aside", "auvyx-sf-pdp-media", "auvyx-sf-pdp-summary"], "modifiers": ["buybox", "carousel", "full", "tile"], "tokens": ["--auvyx-sf-pdp-gap"], "corners": {"auvyx-sf-pdp": "surface", "auvyx-sf-pdp-aside": "surface"}, "summary": "The top of a product page: pictures, details and a framed buy column in one of five frames (classic and stack are the default; buybox, carousel and full are modifiers; tile tints it). Wraps to one column under 48rem of its own width.", "docs": "commerce.html#pdp" },
+    "perk": { "kind": "block", "root": "auvyx-sf-perk", "family": "sections", "parts": ["auvyx-sf-perk-icon", "auvyx-sf-perk-meta", "auvyx-sf-perk-text", "auvyx-sf-perk-title"], "tokens": ["--auvyx-sf-perk-bg"], "corners": { "auvyx-sf-perk": "surface" }, "summary": "Small tile: accent icon, title and meta (delivery, returns).", "docs": "sections.html#perk" },
+    "pill": {
+      "kind": "block",
+      "root": "auvyx-sf-pill",
+      "family": "selection",
+      "parts": [
+        "auvyx-sf-pill-label"
+      ],
+      "states": [
+        "aria-current",
+        "aria-pressed",
+        "aria-selected"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "tokens": [
+        "--auvyx-sf-pill-bg",
+        "--auvyx-sf-pill-fg",
+        "--auvyx-sf-pill-h"
+      ],
+      "corners": {"auvyx-sf-pill": "pill"},
+      "summary": "Tab or segment inside auvyx-sf-pills.",
+      "docs": "controls.html#pills"
+    },
+    "pills": {
+      "kind": "block",
+      "root": "auvyx-sf-pills",
+      "family": "selection",
+      "guard": {"group": true},
+      "summary": "Row of pills; scrolls horizontally; pads so pill hit areas are not clipped.",
+      "docs": "controls.html#pills",
+      "modifiers": ["md"]
+    },
+    "popover": { "kind": "block", "root": "auvyx-sf-popover", "family": "overlays", "modifiers": ["wide"], "states": [":popover-open"], "tokens": ["--auvyx-sf-popover-bg", "--auvyx-sf-popover-size"], "corners": { "auvyx-sf-popover": "control" }, "summary": "[popover] sheet under the header at the inline end (menus, the search sheet); --wide for search. Fades in with @starting-style.", "docs": "overlays.html#popover" },
+    "price": { "kind": "block", "root": "auvyx-sf-price", "family": "commerce", "parts": ["auvyx-sf-price-now", "auvyx-sf-price-was"], "modifiers": ["lg"], "tokens": ["--auvyx-sf-price-fs", "--auvyx-sf-price-weight"], "hooks": { "data-auvyx-price": "swatches: replaces the content with the selected variant's price" }, "summary": "Current price and the struck-through old price (muted, never subtle); --lg on the product page.", "docs": "commerce.html#price" },
+    "product-card": { "kind": "block", "root": "auvyx-sf-product-card", "family": "commerce", "parts": ["auvyx-sf-product-card-body", "auvyx-sf-product-card-brand", "auvyx-sf-product-card-fav", "auvyx-sf-product-card-foot", "auvyx-sf-product-card-img", "auvyx-sf-product-card-link", "auvyx-sf-product-card-media", "auvyx-sf-product-card-placeholder", "auvyx-sf-product-card-tags", "auvyx-sf-product-card-title"], "states": [":hover (media zoom, add button turns)", "data-view=list (on the auvyx-sf-grid)", "data-view=compact (on the auvyx-sf-grid: rows in as many columns as fit)", "data-view=rows (on the auvyx-sf-grid: four columns, two in a narrow panel, whole rows)"], "tokens": ["--auvyx-sf-product-card-bg", "--auvyx-sf-product-card-media-bg", "--auvyx-sf-product-card-pad"], "corners": {"auvyx-sf-product-card": "surface", "auvyx-sf-product-card-media": "surface"}, "hooks": {"data-auvyx-recent-grid": "recent: the grid the recently viewed island fills with cards", "data-auvyx-add": "cart-drawer: adds the product (value = product id) and opens the cart", "data-auvyx-compare": "compare: toggles aria-pressed (at most 4 products)", "data-auvyx-quickview": "quick-view: opens the quick-view modal for this product", "data-auvyx-wishlist": "wishlist: toggles aria-pressed on every button for this product"}, "summary": "Tile card: square media, overlay tags and save button, brand, a 2-line title with a 44px hit area, rating, price row. Sets the fill context to the sheet. data-view=list on the grid makes rows.", "docs": "commerce.html#product-card" },
+    "promo": { "kind": "block", "root": "auvyx-sf-promo", "family": "sections", "parts": ["auvyx-sf-promo-art", "auvyx-sf-promo-copy", "auvyx-sf-promo-photo"], "tokens": ["--auvyx-sf-promo-art", "--auvyx-sf-promo-fade", "--auvyx-sf-promo-photo"], "corners": { "auvyx-sf-promo": "surface" }, "summary": "Banner card: copy at the start; the art sits at the bottom end and bleeds by transform inside the clip; auvyx-sf-promo-photo instead is a photo with its own background: it fills the end of the card (--auvyx-sf-promo-photo) and fades into the card toward the copy (--auvyx-sf-promo-fade); under 24rem (@container) the art or photo moves below the copy. Colour: auvyx-sf-bg-promo-* on the root, auvyx-sf-tone-* on the copy (a tone on the root would recolour its own focus ring).", "docs": "sections.html#promo" },
+    "prose": {
+      "kind": "block",
+      "root": "auvyx-sf-prose",
+      "family": "foundations",
+      "summary": "CMS HTML (descriptions, posts): the only block with type selectors and flow spacing.",
+      "docs": "tokens.html#prose"
+    },
+    "qty": {
+      "kind": "block",
+      "root": "auvyx-sf-qty",
+      "family": "forms",
+      "parts": [
+        "auvyx-sf-qty-value"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "corners": {
+        "auvyx-sf-qty": "pill"
+      },
+      "guard": {
+        "group": true
+      },
+      "hooks": {
+        "data-auvyx-qty": "cart-drawer: changes the quantity by the value (-1 or 1)",
+        "data-auvyx-qty-root": "cart-drawer: the quantity the add button reads"
+      },
+      "summary": "Quantity stepper: two icon buttons and a value.",
+      "docs": "forms.html#qty"
+    },
+    "rating": { "kind": "block", "root": "auvyx-sf-rating", "family": "commerce", "parts": ["auvyx-sf-rating-star", "auvyx-sf-rating-value"], "modifiers": ["sm"], "states": ["data-state=off (on a star)"], "tokens": ["--auvyx-sf-rating-fs", "--auvyx-sf-rating-size"], "summary": "Stars in the rating colour and a muted value; role=img with the sentence in aria-label.", "docs": "commerce.html#rating" },
+    "reel": {
+      "kind": "composition",
+      "root": "auvyx-sf-reel",
+      "config": [
+        "--auvyx-sf-reel-item"
+      ],
+      "summary": "Horizontal snap scroller.",
+      "docs": "layout.html#reel"
+    },
+    "review": { "kind": "block", "root": "auvyx-sf-review", "family": "commerce", "parts": ["auvyx-sf-review-author", "auvyx-sf-review-body", "auvyx-sf-review-date", "auvyx-sf-review-head", "auvyx-sf-review-title"], "tokens": ["--auvyx-sf-review-bg"], "corners": { "auvyx-sf-review": "surface" }, "hooks": { "data-auvyx-review-list": "forms: prepends a newly submitted (pending) review to this list" }, "summary": "Review tile: author, stars, date, title, text, and a Verified buyer tag for paid orders.", "docs": "commerce.html#review" },
+    "row-tile": { "kind": "block", "root": "auvyx-sf-row-tile", "family": "sections", "parts": ["auvyx-sf-row-tile-media", "auvyx-sf-row-tile-meta", "auvyx-sf-row-tile-text", "auvyx-sf-row-tile-title"], "utilities": ["align", "size"], "corners": { "auvyx-sf-row-tile-media": "control" }, "summary": "Category row, used as auvyx-sf-tile auvyx-sf-tile--link auvyx-sf-row-tile: thumbnail, title and meta, chevron (auvyx-sf-tile-icon). Replaces the spike's 8-class row.", "docs": "sections.html#row-tile" },
+    "search": {
+      "kind": "block",
+      "root": "auvyx-sf-search",
+      "family": "forms",
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "tokens": [
+        "--auvyx-sf-search-ring-w"
+      ],
+      "corners": {
+        "auvyx-sf-search": "pill"
+      },
+      "guard": {
+        "group": true
+      },
+      "summary": "Large pill search with icon, control and button.",
+      "docs": "forms.html#search"
+    },
+    "search-trigger": { "kind": "block", "root": "auvyx-sf-search-trigger", "family": "forms", "hooks": {"data-auvyx-search-key": "live-search: platform-specific keyboard shortcut hint"}, "summary": "Field-like button opening the native product search dialog; desktop shortcut keycap.", "docs": "overlays.html#search" },
+    "section-head": { "kind": "block", "root": "auvyx-sf-section-head", "family": "sections", "parts": ["auvyx-sf-section-head-text", "auvyx-sf-section-head-title"], "summary": "Section title (and text) with actions at the end; wraps when there is no room.", "docs": "sections.html#section-head" },
+    "select": {
+      "kind": "block",
+      "root": "auvyx-sf-select",
+      "family": "forms",
+      "parts": [
+        "auvyx-sf-select-option",
+        "auvyx-sf-select-trigger",
+        "auvyx-sf-select-value"
+      ],
+      "modifiers": [
+        "pill",
+        "sm"
+      ],
+      "states": [
+        ":open",
+        ":disabled",
+        "aria-invalid"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "tokens": [
+        "--auvyx-sf-select-bg",
+        "--auvyx-sf-select-h",
+        "--auvyx-sf-select-px",
+        "--auvyx-sf-select-r"
+      ],
+      "corners": {"auvyx-sf-select": "control", "auvyx-sf-select-option": "control"},
+      "summary": "Customisable select (appearance: base-select): styled closed control and picker; OS picker only where base-select is unsupported.",
+      "docs": "forms.html#select"
+    },
+    "shape": {
+      "kind": "utility",
+      "family": "shape",
+      "classes": [
+        "auvyx-sf-r-sheet",
+        "auvyx-sf-r-card",
+        "auvyx-sf-r-tile",
+        "auvyx-sf-r-control",
+        "auvyx-sf-r-small",
+        "auvyx-sf-r-pill",
+        "auvyx-sf-r-round",
+        "auvyx-sf-clip",
+        "auvyx-sf-shadow-float",
+        "auvyx-sf-shadow-pop"
+      ],
+      "summary": "Corner radius per role, shadows and clipping; corner-shape refines where supported.",
+      "docs": "utilities.html#shape"
+    },
+    "sheet": {
+      "kind": "block",
+      "root": "auvyx-sf-sheet",
+      "family": "surfaces",
+      "corners": {
+        "auvyx-sf-sheet": "surface"
+      },
+      "summary": "White page section: stack, sheet padding and gap, sheet radius; sets fill context to tile.",
+      "docs": "layout.html#sheet"
+    },
+    "shop-bar": { "kind": "block", "root": "auvyx-sf-shop-bar", "family": "commerce", "parts": ["auvyx-sf-shop-bar-actions", "auvyx-sf-shop-bar-count", "auvyx-sf-shop-bar-sort"], "hooks": { "data-auvyx-sort": "filters: the sort select", "data-auvyx-total": "filters: writes the result count", "data-auvyx-view": "filters: grid or list (aria-pressed); sets data-view on the results grid" }, "summary": "Toolbar above a product grid: count, sort, view switch and the mobile Filters button; wraps.", "docs": "commerce.html#shop-bar" },
+    "showcase": { "kind": "block", "root": "auvyx-sf-showcase", "family": "sections", "parts": ["auvyx-sf-showcase-depts", "auvyx-sf-showcase-grid", "auvyx-sf-showcase-main"], "states": ["data-rail=header (on the grid: no list of its own; where the header pins its menu the hero takes the second column)"], "summary": "The home's hero row: a list of departments (auvyx-sf-tile) beside the hero slider. The departments take the commerce rail's width and step aside (visibility) where the header pins its own category panel; under 50rem of the row's own width they go and the slider has the row. In home.css, after the core.", "docs": "sections.html#showcase" },
+    "sidebar": {
+      "kind": "composition",
+      "root": "auvyx-sf-sidebar",
+      "modifiers": [
+        "end"
+      ],
+      "config": [
+        "--auvyx-sf-side"
+      ],
+      "summary": "Two children: sidebar of --auvyx-sf-side, main grows; wraps under 50 %.",
+      "docs": "layout.html#sidebar"
+    },
+    "size": {
+      "kind": "utility",
+      "family": "size",
+      "classes": [
+        "auvyx-sf-grow",
+        "auvyx-sf-span-full",
+        "auvyx-sf-w-full",
+        "auvyx-sf-w-half",
+        "auvyx-sf-relative",
+        "auvyx-sf-hidden",
+        "auvyx-sf-sr-only"
+      ],
+      "summary": "Growth, width, visibility and screen-reader-only text.",
+      "docs": "utilities.html#size"
+    },
+    "skeleton": {
+      "kind": "block",
+      "root": "auvyx-sf-skeleton",
+      "family": "feedback",
+      "corners": {
+        "auvyx-sf-skeleton": "control"
+      },
+      "summary": "Loading placeholder with a shimmer; static under reduced motion.",
+      "docs": "feedback.html#skeleton"
+    },
+    "slider": { "kind": "block", "root": "auvyx-sf-slider", "family": "sections", "parts": ["auvyx-sf-slider-dot", "auvyx-sf-slider-dots", "auvyx-sf-slider-nav", "auvyx-sf-slider-slide", "auvyx-sf-slider-track"], "modifiers": ["cards", "hero"], "tokens": ["--auvyx-sf-slider-item"], "states": ["aria-current=true (on auvyx-sf-slider-dot)", "[hidden] (on auvyx-sf-slider-nav until the island runs)"], "utilities": [], "hooks": {"data-auvyx-slider-nav": "slider: the controls, hidden until the island runs", "data-auvyx-slide-step": "slider: moves by the value (-1 or 1) slides", "data-auvyx-slide-to": "slider: goes to the slide at this index (the dot)", "data-auvyx-slides": "slider: the snap scroller holding the slides"}, "summary": "Slides in a snap scroller (swipe and scroll work without JavaScript); the slider island adds previous/next buttons and dots (44px targets), and for --hero turns itself every few seconds unless reduced motion, hover or focus says no. --hero sets the promo height of its slides, --cards sizes the slides as product cards. In home.css, after the core.", "docs": "sections.html#slider" },
+    "spec-table": { "kind": "block", "root": "auvyx-sf-spec-table", "family": "commerce", "parts": ["auvyx-sf-spec-table-caption", "auvyx-sf-spec-table-key", "auvyx-sf-spec-table-value"], "summary": "Key and value rows with hairlines (inset shadows); one table per spec group.", "docs": "commerce.html#spec-table" },
+    "spin": { "kind": "block", "root": "auvyx-sf-spin", "family": "commerce", "parts": ["auvyx-sf-spin-img"], "states": ["data-state=dragging"], "tokens": ["--auvyx-sf-spin-bg"], "corners": { "auvyx-sf-spin": "surface" }, "hooks": { "data-auvyx-spin": "spin: the stage; data-frames is its frames (JSON), the island turns through them", "data-auvyx-spin-step": "spin: turns by the value (-1 or 1)" }, "summary": "A 360° view: one frame of a turning product on a tile; drag, the arrow keys or the turn buttons change the frame. Without JavaScript the first frame shows.", "docs": "commerce.html#spin" },
+    "spinner": {
+      "kind": "block",
+      "root": "auvyx-sf-spinner",
+      "family": "feedback",
+      "summary": "Inline spinner; role=status with a label.",
+      "docs": "feedback.html#spinner"
+    },
+    "stack": {
+      "kind": "composition",
+      "root": "auvyx-sf-stack",
+      "config": [],
+      "summary": "Column with gap.",
+      "docs": "layout.html#stack"
+    },
+    "steps": { "kind": "block", "root": "auvyx-sf-steps", "family": "commerce", "parts": ["auvyx-sf-steps-body", "auvyx-sf-steps-item", "auvyx-sf-steps-marker", "auvyx-sf-steps-meta", "auvyx-sf-steps-title"], "states": ["data-state=done", "aria-current=step"], "corners": { "auvyx-sf-steps-marker": "pill" }, "hooks": { "data-auvyx-track-result": "order-track: renders the steps into this element" }, "summary": "Vertical timeline (order tracking, checkout): done, current and upcoming steps joined by a line; icons in the markers, no text.", "docs": "commerce.html#steps" },
+    "sticky-buy": { "kind": "block", "root": "auvyx-sf-sticky-buy", "family": "commerce", "parts": ["auvyx-sf-sticky-buy-title"], "states": ["data-state=shown"], "hooks": {"data-auvyx-sticky-buy": "product: shows the bar (data-state=shown) while the buy box is out of view"}, "summary": "A bar along the bottom of the viewport with the product's name, price and add button while the buy box is scrolled away; never shown without JavaScript.", "docs": "commerce.html#sticky-buy" },
+    "sticky-side": { "kind": "block", "root": "auvyx-sf-sticky-side", "family": "navigation", "summary": "A page's side column (the account's menu) that stays just under the sticky header while the page scrolls; below 900px it scrolls with the page.", "docs": "navigation.html#sticky-side" },
+    "stock": { "kind": "block", "root": "auvyx-sf-stock", "family": "commerce", "parts": ["auvyx-sf-stock-fill", "auvyx-sf-stock-text", "auvyx-sf-stock-track"], "modifiers": ["low"], "tokens": ["--auvyx-sf-stock-fill"], "dataProps": ["--auvyx-sf-progress"], "corners": {"auvyx-sf-stock-track": "pill"}, "summary": "How many are left: a line of text and a bar whose fill is --auvyx-sf-progress (0..1, data); low turns the fill to the sale ink.", "docs": "commerce.html#stock" },
+    "summary": { "kind": "block", "root": "auvyx-sf-summary", "family": "commerce", "parts": ["auvyx-sf-summary-label", "auvyx-sf-summary-row", "auvyx-sf-summary-total", "auvyx-sf-summary-value"], "hooks": { "data-auvyx-cart-subtotal": "cart-drawer: writes the subtotal", "data-auvyx-cart-total": "cart-drawer: writes the total", "data-auvyx-checkout": "cart-drawer: the checkout link (aria-disabled while the cart is empty)" }, "summary": "Order summary (<dl>): label and value rows; the total row is larger with a hairline above.", "docs": "commerce.html#summary" },
+    "swatch": {
+      "kind": "block",
+      "root": "auvyx-sf-swatch",
+      "family": "selection",
+      "states": [
+        "aria-pressed"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "dataProps": [
+        "--auvyx-sf-swatch-color"
+      ],
+      "tokens": [
+        "--auvyx-sf-swatch-ring-w"
+      ],
+      "corners": {
+        "auvyx-sf-swatch": "pill"
+      },
+      "hooks": {
+        "data-auvyx-option": "swatches: an option group (value = attribute key)",
+        "data-auvyx-option-value": "swatches: writes the label of the selected value"
+      },
+      "summary": "Colour option; colour from --auvyx-sf-swatch-color (data).",
+      "docs": "controls.html#swatch"
+    },
+    "switch": {
+      "kind": "block",
+      "root": "auvyx-sf-switch",
+      "family": "selection",
+      "states": [
+        ":checked",
+        ":disabled"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "tokens": [
+        "--auvyx-sf-switch-bg"
+      ],
+      "corners": {
+        "auvyx-sf-switch": "pill"
+      },
+      "summary": "On/off switch on an input type=checkbox role=switch.",
+      "docs": "controls.html#switch"
+    },
+    "switcher": {
+      "kind": "composition",
+      "root": "auvyx-sf-switcher",
+      "config": [
+        "--auvyx-sf-threshold"
+      ],
+      "summary": "All side by side above the threshold, all stacked below, never in between.",
+      "docs": "layout.html#switcher"
+    },
+    "table": { "kind": "block", "root": "auvyx-sf-table", "family": "commerce", "parts": ["auvyx-sf-table-action", "auvyx-sf-table-cell", "auvyx-sf-table-head", "auvyx-sf-table-num", "auvyx-sf-table-opt", "auvyx-sf-table-row", "auvyx-sf-table-wrap"], "states": [":hover (a row with an action)", ":focus-visible on the action rings the row"], "summary": "Data rows with hairlines in a horizontal scroller; one action per row covers the row (opens a dialog); optional cells hide when the table is narrow.", "docs": "commerce.html#table" },
+    "tabs": { "kind": "block", "root": "auvyx-sf-tabs", "family": "disclosure", "parts": ["auvyx-sf-tabs-panel"], "states": ["aria-selected (on auvyx-sf-pill role=tab)", "hidden (on the panel)"], "summary": "A auvyx-sf-pills tablist above its panels. Without JavaScript every panel shows; the tabs island hides the others.", "docs": "navigation.html#tabs" },
+    "tag": {
+      "kind": "block",
+      "root": "auvyx-sf-tag",
+      "family": "feedback",
+      "modifiers": ["hot", "low", "new", "out", "outline", "sale"],
+      "tokens": [
+        "--auvyx-sf-tag-bg",
+        "--auvyx-sf-tag-fg"
+      ],
+      "corners": {
+        "auvyx-sf-tag": "pill"
+      },
+      "guard": {
+        "exempt": [
+          "edge-clearance"
+        ]
+      },
+      "summary": "Small pill label; at most 3 per card.",
+      "docs": "feedback.html#tag"
+    },
+    "textarea": {
+      "kind": "block",
+      "root": "auvyx-sf-textarea",
+      "family": "forms",
+      "states": [
+        "aria-invalid",
+        ":disabled"
+      ],
+      "utilities": [
+        "align",
+        "size"
+      ],
+      "corners": {
+        "auvyx-sf-textarea": "control"
+      },
+      "summary": "Multi-line text; same look as auvyx-sf-input.",
+      "docs": "forms.html#textarea"
+    },
+    "tile": {
+      "kind": "block",
+      "root": "auvyx-sf-tile",
+      "family": "surfaces",
+      "parts": [
+        "auvyx-sf-tile-icon"
+      ],
+      "modifiers": [
+        "link"
+      ],
+      "tokens": [
+        "--auvyx-sf-tile-bg"
+      ],
+      "corners": {"auvyx-sf-tile": "surface"},
+      "hooks": {"data-auvyx-address": "addresses: the saved address (its JSON) a tile shows, read to fill the edit form", "data-auvyx-address-default": "addresses: makes this address the default (address.save with isDefault)", "data-auvyx-address-delete": "addresses: deletes this address (address.delete) after a confirmation", "data-auvyx-address-edit": "addresses: opens the address dialog for this address, or empty to add one", "data-auvyx-account-panel": "account-nav: the server-rendered active account domain, replaced on same-origin navigation"},
+      "summary": "Filled surface on a sheet; --link adds hover and press; sets fill context to sheet.",
+      "docs": "layout.html#tile"
+    },
+    "toast": {
+      "kind": "block",
+      "root": "auvyx-sf-toast",
+      "family": "feedback",
+      "parts": [
+        "auvyx-sf-toast-text"
+      ],
+      "corners": {
+        "auvyx-sf-toast": "pill"
+      },
+      "summary": "Action-colour pill message; re-assigns fill context so a soft button reads on it.",
+      "docs": "feedback.html#toast"
+    },
+    "tone": {
+      "kind": "utility",
+      "family": "tone",
+      "classes": [
+        "auvyx-sf-tone-accent",
+        "auvyx-sf-tone-brand",
+        "auvyx-sf-tone-dark"
+      ],
+      "summary": "Subtree on a coloured surface: re-assigns tier-1 inputs; derived tokens recompute.",
+      "docs": "utilities.html#tone"
+    },
+    "trust": { "kind": "block", "root": "auvyx-sf-trust", "family": "sections", "parts": ["auvyx-sf-trust-icon", "auvyx-sf-trust-item"], "summary": "Centred row of reassurance items with accent icons; text colour, because it sits on the page.", "docs": "sections.html#trust" },
+    "type": {
+      "kind": "utility",
+      "family": "type",
+      "classes": [
+        "auvyx-sf-type-xs",
+        "auvyx-sf-type-sm",
+        "auvyx-sf-type-md",
+        "auvyx-sf-type-lg",
+        "auvyx-sf-type-xl",
+        "auvyx-sf-type-2xl",
+        "auvyx-sf-type-3xl",
+        "auvyx-sf-type-hero",
+        "auvyx-sf-weight-regular",
+        "auvyx-sf-weight-medium",
+        "auvyx-sf-weight-semibold",
+        "auvyx-sf-weight-bold",
+        "auvyx-sf-text-center",
+        "auvyx-sf-text-start",
+        "auvyx-sf-truncate",
+        "auvyx-sf-clamp-2",
+        "auvyx-sf-tabular",
+        "auvyx-sf-nowrap"
+      ],
+      "summary": "Type scale, weight, text alignment and truncation.",
+      "docs": "utilities.html#type"
+    }
+  }
+}

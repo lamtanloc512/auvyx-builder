@@ -1,0 +1,1 @@
+{"version":1,"roots":["t1"],"nodes":{"t1":{"id":"t1","kind":"Nav","styles":{"base":{"default":{"flex":"1","font-size":"0.9375rem","font-weight":"500","position":"static"}},"mobile":{"default":{"flex":"0"}}},"src":"pages","alt":"tablet","label":"Menu"}}}

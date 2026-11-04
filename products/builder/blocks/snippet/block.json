@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "auvyx/snippet",
+  "title": "Auvyx Code",
+  "category": "auvyx-builder",
+  "description": "Syntax-highlighted code sample with copy button.",
+  "keywords": ["code", "snippet", "pre"],
+  "textdomain": "auvyx-builder",
+  "attributes": {
+    "code": { "type": "string", "default": "" },
+    "language": { "type": "string", "default": "sql" },
+    "theme": { "type": "string", "default": "dark", "enum": ["dark", "light"] },
+    "auvyx": { "type": "object" }
+  },
+  "usesContext": ["postId", "postType", "auvyx/item"],
+  "supports": {
+    "anchor": true,
+    "html": false
+  },
+  "editorScript": "auvyx-builder-editor",
+  "style": "auvyx-builder-blocks",
+  "viewScript": "auvyx-snippet"
+}

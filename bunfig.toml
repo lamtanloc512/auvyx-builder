@@ -1,0 +1,6 @@
+[install]
+# Hoisted keeps @wordpress/* resolvable from every workspace (types, webpack), like npm.
+linker = "hoisted"
+
+[test]
+preload = ["./tools/test-dom.ts"]

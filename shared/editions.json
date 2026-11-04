@@ -1,0 +1,21 @@
+{
+  "$comment": "What Auvyx Builder Pro adds (docs/editions.md). PHP reads generated/editions.php, Auvyx Studio Generated.scala. Templates of a kit not in freeKits, and the ids in proTemplates, are Pro. Site templates are never Pro.",
+  "upgradeUrl": "https://yb-cloud.auvyx.org/pro",
+  "plans": ["pro", "pro-3", "agency", "theme"],
+  "features": {
+    "popup": { "title": "Popups", "description": "Any section as a popup: on load, exit intent, scroll or a link; modal, bar, corner or side panel." },
+    "display-rules": { "title": "Display rules", "description": "Show components on archives, categories, search, 404; leave pages out; by audience, role and dates." },
+    "form-actions": { "title": "Form actions", "description": "Send visitors to a page after a form, and post every message to a webhook (Zapier, Make, n8n, a CRM)." },
+    "site-code": { "title": "Site code", "description": "Code in the head and footer of every page: analytics, pixels, chat widgets." },
+    "custom-code": { "title": "Custom CSS and code", "description": "CSS of your own on any element, and code elements with your HTML, CSS and JavaScript." },
+    "role-manager": { "title": "Role manager", "description": "Choose which roles may open Auvyx Studio and change the design." },
+    "pro-data": { "title": "More data", "description": "Author, dates, comments, reading time and terms in any heading, text, button or image." },
+    "pro-blocks": { "title": "Pro blocks", "description": "Popup, flip box, before/after, marquee, countdown, hotspots, sliders, table of contents, share buttons and more." },
+    "pro-templates": { "title": "Every section kit", "description": "All the ready-made section kits: stores, hotels, schools, real estate and more." }
+  },
+  "freeKits": ["Starter", "Skeleton", "Serene", "Appoint", "EzyPlatform"],
+  "proTemplates": [
+    "popup", "flip-box", "before-after", "marquee", "countdown", "hotspot", "shop-the-look", "banner-slider",
+    "banner-left", "banner-right", "banner-boxed", "banner-huge", "toc", "share"
+  ]
+}

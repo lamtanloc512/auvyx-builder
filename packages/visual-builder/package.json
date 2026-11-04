@@ -1,0 +1,17 @@
+{
+  "name": "@auvyx/visual-builder",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Full-screen visual page builder (ADR 0018): own canvas, layers, inspector. Edits the same native block tree.",
+  "exports": {
+    ".": "./src/index.tsx"
+  },
+  "dependencies": {
+    "@auvyx/block-kit": "workspace:*",
+    "@auvyx/block-ops": "workspace:*",
+    "@auvyx/canvas-tools": "workspace:*",
+    "@auvyx/controls": "workspace:*",
+    "@auvyx/style-engine": "workspace:*"
+  }
+}

@@ -1,0 +1,15 @@
+:root { --ink: #fff; --accent: #ffd84d; --panel: rgb(10 12 30 / 0.72); font-family: ui-rounded, system-ui, sans-serif; color: var(--ink); }
+.stage { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hud { position: absolute; inset: 12px 16px auto; display: flex; gap: 20px; font-weight: 800; font-size: clamp(14px, 2.2vmin, 20px); text-shadow: 0 2px 0 rgb(0 0 0 / 0.4); pointer-events: none; }
+.hud b { color: var(--accent); }
+.hud .lives { margin-left: auto; color: #ff5d73; letter-spacing: 2px; }
+.overlay { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 24px; text-align: center; background: radial-gradient(circle at 50% 40%, rgb(40 30 90 / 0.65), rgb(5 5 20 / 0.85)); }
+.overlay[hidden] { display: none; }
+.overlay h1 { margin: 0; font-size: clamp(32px, 8vmin, 72px); letter-spacing: -0.02em; text-shadow: 0 4px 0 rgb(0 0 0 / 0.35); }
+.overlay p { margin: 0; max-width: 34ch; opacity: 0.85; font-size: clamp(14px, 2.4vmin, 18px); }
+.overlay button { font: inherit; font-weight: 800; font-size: 18px; padding: 12px 28px; border: 0; border-radius: 999px; background: var(--accent); color: #1a1030; cursor: pointer; box-shadow: 0 6px 0 rgb(0 0 0 / 0.3); transition: transform 0.12s; }
+.overlay button:hover { transform: translateY(-2px) scale(1.04); }
+.touch { position: absolute; inset: auto 14px 14px; display: flex; justify-content: space-between; pointer-events: none; }
+.touch[hidden] { display: none; }
+.touch .pad { display: flex; gap: 12px; }
+.touch button { pointer-events: auto; width: 64px; height: 64px; border-radius: 50%; border: 2px solid rgb(255 255 255 / 0.5); background: rgb(255 255 255 / 0.16); color: #fff; font-size: 22px; touch-action: none; }
