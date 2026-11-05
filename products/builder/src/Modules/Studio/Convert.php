@@ -159,8 +159,8 @@ final class Convert {
 				$align  = isset( $attrs['align'] ) && in_array( $attrs['align'], array( 'wide', 'full' ), true ) ? array( 'align' => $attrs['align'] ) : array();
 				$tag    = in_array( $attrs['tagName'] ?? 'div', array( 'section', 'div', 'header', 'footer', 'main', 'article', 'aside', 'nav' ), true ) ? (string) ( $attrs['tagName'] ?? 'div' ) : 'div';
 				if ( in_array( $type, array( 'constrained', 'default', 'grid' ), true ) ) {
-					// WordPress's own layout classes keep their meaning (the theme's global styles style them): a constrained
-					// group keeps content and wide widths and the root padding; a flow group spaces its children.
+					// A flow group keeps WordPress's layout class (the theme's global styles space its children); a constrained
+					// one becomes a flow group whose content and wide widths and root padding are Auvyx styles (below).
 					if ( 'grid' === $type ) {
 						$count   = (int) ( $layout['columnCount'] ?? 0 );
 						$min     = (string) ( $layout['minimumColumnWidth'] ?? '' );
@@ -177,7 +177,24 @@ final class Convert {
 						$styles = array( 'display' => 'block' );
 						$class  = 'constrained' === $type ? 'is-layout-constrained has-global-padding' : 'is-layout-flow';
 					}
-					$node          = self::section( self::blocks( $block['innerBlocks'] ?? array() ), array_merge( $styles, $base ) );
+					$children = self::blocks( $block['innerBlocks'] ?? array() );
+					if ( 'constrained' === $type ) {
+						// The theme caps a constrained group's children through `.is-layout-constrained > *`, a rule no
+						// Auvyx style can undo. Written as the children's own max-width and centring, the cap shows in the
+						// inspector and can be changed; the flow class keeps the theme's spacing between them.
+						$children = array_map(
+							static function ( array $child ) use ( $layout ): array {
+								return self::constrain( $child, $layout );
+							},
+							$children
+						);
+						$styles  += array(
+							'padding-inline-start' => 'var(--wp--style--root--padding-left)',
+							'padding-inline-end'   => 'var(--wp--style--root--padding-right)',
+						);
+						$class    = 'is-layout-flow';
+					}
+					$node          = self::section( $children, array_merge( $styles, $base ) );
 					$node['attrs'] = array_merge( $node['attrs'], array( 'tagName' => $tag ), $align, '' !== $class ? array( 'className' => $class ) : array() );
 					return $node;
 				}
@@ -252,6 +269,48 @@ final class Convert {
 			'innerHTML'    => '<div></div>',
 			'innerContent' => array( '<div></div>' ),
 		);
+	}
+
+	/**
+	 * A converted child of a constrained group with the width that layout gave it, as its own styles (styles it already
+	 * has win): the content width, the wide width for `align: wide`, none for `align: full` (which reaches past the root
+	 * padding instead), centred unless the layout is justified left or right. A block that is still WordPress's is wrapped
+	 * in a section that carries the width: its own markup is never rewritten.
+	 *
+	 * @param array<string, mixed> $child  Parsed block.
+	 * @param array<string, mixed> $layout The group's layout attribute.
+	 * @return array<string, mixed>
+	 */
+	private static function constrain( array $child, array $layout ): array {
+		$align = (string) ( $child['attrs']['align'] ?? '' );
+		if ( 0 !== strpos( (string) ( $child['blockName'] ?? '' ), 'auvyx/' ) ) {
+			$child = self::section( array( $child ), array( 'display' => 'block' ) );
+			if ( in_array( $align, array( 'wide', 'full' ), true ) ) {
+				$child['attrs']['align'] = $align;
+			}
+		}
+		$justify = (string) ( $layout['justifyContent'] ?? '' );
+		if ( 'full' === $align ) {
+			$width = array(
+				'margin-inline-start' => 'calc(var(--wp--style--root--padding-left) * -1)',
+				'margin-inline-end'   => 'calc(var(--wp--style--root--padding-right) * -1)',
+			);
+		} else {
+			$size  = 'wide' === $align ? (string) ( $layout['wideSize'] ?? '' ) : (string) ( $layout['contentSize'] ?? '' );
+			$width = array(
+				'max-width'           => '' !== $size ? self::value( $size ) : ( 'wide' === $align ? 'var(--wp--style--global--wide-size)' : 'var(--wp--style--global--content-size)' ),
+				'margin-inline-start' => 'left' === $justify ? '0' : 'auto',
+				'margin-inline-end'   => 'right' === $justify ? '0' : 'auto',
+			);
+		}
+		$own = (array) ( $child['attrs']['auvyx']['styles']['base']['default'] ?? array() );
+
+		$child['attrs']['auvyx'] = array_merge(
+			array( 'v' => 1 ),
+			(array) ( $child['attrs']['auvyx'] ?? array() ),
+			array( 'styles' => array_merge( (array) ( $child['attrs']['auvyx']['styles'] ?? array() ), array( 'base' => array( 'default' => $own + $width ) ) ) )
+		);
+		return $child;
 	}
 
 	private static function inner( string $html, string $tag ): string {
