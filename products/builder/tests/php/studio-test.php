@@ -214,10 +214,12 @@ auvyx_test(
 		$band = $tree[0];
 		auvyx_assert_same( array( 'auvyx/section', 'full' ), array( $band['block'], $band['align'] ) );
 		auvyx_assert_contains( 'auvyx-band', $band['className'], 'its own class' );
-		auvyx_assert_contains( 'is-layout-constrained', $band['className'], 'WordPress\'s layout class' );
+		auvyx_assert_contains( 'is-layout-flow', $band['className'], 'the theme still spaces its children' );
+		auvyx_assert_not_contains( 'is-layout-constrained', $band['className'], 'no theme rule caps its children' );
 		$grid = $band['children'][0];
 		auvyx_assert_same( 'wide', $grid['align'] );
 		auvyx_assert_same( 'grid', $grid['styles']->base['default']['display'] );
+		auvyx_assert_same( 'var(--wp--style--global--wide-size)', $grid['styles']->base['default']['max-width'], 'a wide child is capped at the wide width' );
 		auvyx_assert_contains( 'auto-fill', $grid['styles']->base['default']['grid-template-columns'] );
 		auvyx_assert_same( 'core/pattern', $tree[1]['block'] );
 		$listed = wp_list_pluck( Auvyx\Builder\Modules\Studio\Studio::patterns(), 'slug' );
@@ -225,6 +227,32 @@ auvyx_test(
 		unregister_block_pattern( 'auvyx-test/band' );
 		$presets = Auvyx\Builder\Modules\Studio\Studio::theme_presets();
 		auvyx_assert_same( true, is_array( $presets['colors'] ) && is_array( $presets['fontSizes'] ), 'theme presets' );
+	}
+);
+
+auvyx_test(
+	'convert: a constrained group\'s widths become its children\'s own styles, so each can be made wider or full',
+	static function () {
+		$markup = '<!-- wp:group {"align":"full","layout":{"type":"constrained","contentSize":"780px","justifyContent":"left"}} --><div class="wp-block-group alignfull">'
+			. '<!-- wp:columns --><div class="wp-block-columns"><!-- wp:column --><div class="wp-block-column"><!-- wp:paragraph --><p>A</p><!-- /wp:paragraph --></div><!-- /wp:column --></div><!-- /wp:columns -->'
+			. '<!-- wp:heading {"style":{"spacing":{"margin":{"left":"40px"}}}} --><h2 class="wp-block-heading" style="margin-left:40px">B</h2><!-- /wp:heading -->'
+			. '<!-- wp:embed {"url":"https://www.youtube.com/watch?v=x","type":"video","providerNameSlug":"youtube"} --><figure class="wp-block-embed is-type-video is-provider-youtube"><div class="wp-block-embed__wrapper">https://www.youtube.com/watch?v=x</div></figure><!-- /wp:embed -->'
+			. '<!-- wp:paragraph {"align":"full"} --><p class="alignfull">C</p><!-- /wp:paragraph -->'
+			. '</div><!-- /wp:group -->';
+		$blocks = Auvyx\Builder\Modules\Studio\Convert::blocks( parse_blocks( $markup ) );
+		$tree   = Auvyx\Builder\Modules\Studio\Studio::tree( $blocks );
+		$band   = $tree[0];
+		auvyx_assert_not_contains( 'is-layout-constrained', (string) $band['className'] );
+		auvyx_assert_same( 'var(--wp--style--root--padding-left)', $band['styles']->base['default']['padding-inline-start'], 'the root padding is a style' );
+		list( $row, $heading, $embed, $full ) = $band['children'];
+		$width = $row['styles']->base['default'];
+		auvyx_assert_same( array( '780px', '0', 'auto' ), array( $width['max-width'], $width['margin-inline-start'], $width['margin-inline-end'] ), 'the group\'s own content width, justified left' );
+		auvyx_assert_same( '40px', $heading['styles']->base['default']['margin-inline-start'], 'a margin of its own wins' );
+		auvyx_assert_same( array( 'auvyx/section', 'core/embed' ), array( $embed['block'], $embed['children'][0]['block'] ), 'a WordPress block is wrapped, its markup as it was' );
+		auvyx_assert_same( '780px', $embed['styles']->base['default']['max-width'], 'the wrapper carries its width' );
+		auvyx_assert_same( 'full', $full['align'] );
+		auvyx_assert_same( false, isset( $full['styles']->base['default']['max-width'] ), 'a full child is not capped' );
+		auvyx_assert_contains( 'is-provider-youtube', (string) $embed['children'][0]['raw'], 'the embed keeps its own markup' );
 	}
 );
 
